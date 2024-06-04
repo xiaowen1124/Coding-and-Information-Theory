@@ -1,0 +1,225 @@
+\section{线性码的对偶码}
+\subsection{对偶码的定义}
+\begin{definition}[内积]
+    设 $ x=x_{1} x_{2} \cdots x_{n}, y=y_{1} y_{2} \cdots y_{n} \in V(n, q) $,
+称 $ x \cdot y=x_{1} y_{1}+x_{2} y_{2}+\cdots+x_{n} y_{n} $ 为 $ x $ 与 $ y $ 的内积, 记为 $ x \cdot y $ 或 $ \langle x, y\rangle $, 当 $ x \cdot y=0 $ 时,称 $ x $ 与 $ y $ 是正交的.
+\end{definition}
+
+
+\begin{example}
+    $ x=10111, y=11101 \in V(5,2) $,
+则 $ x \cdot y=1 \times 1+0 \times 1+1 \times 1+1 \times 0+1 \times 1 \equiv 1(\bmod 2) $
+\end{example}
+
+\begin{definition}[对偶码]
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码,称
+$$
+L^{\perp}=\{x \in V(n, q) \mid \text { 对 } \forall c \in L, x \cdot c=0\}
+$$
+为 $ L $ 的对偶码, 即 $ \forall x \in L^{\perp}, x $ 与 $ L $ 中的任一个码字都正交.
+\end{definition}
+
+\subsection{对偶码的性质}
+\begin{theorem}
+ 设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, 下面性质成立.
+ 
+(1) 若 $ G $ 是线性码 $ L $ 的生成矩阵, 则
+$$
+L^{\perp}=\left\{x \in V(n, q) \mid x G^{T}=0\right\} .
+$$
+(2) $ L $ 的对偶码 $ L^{\perp} $ 是一个 $ q $ 元 $ [n, n-k] $ 线性码.
+
+(3)$\left(L^{\perp}\right)^{\perp}=L \text {. }$
+\end{theorem}
+\begin{proof}
+(1) 设 $ G $ 为线性码 $ L $ 的生成阵. $
+\text { 记 } G=\left(\begin{array}{c}
+\alpha_{1} \\
+\alpha_{2} \\
+\vdots \\
+\alpha_{k}
+\end{array}\right), \alpha_{1}, \cdots, \alpha_{k} \text { 为 } L \text { 的基. }$
+
+$ \forall x \in L^{\perp}, x $ 与 $ L $ 的每一个码字都正交 $ \Leftrightarrow x $ 与 $ G $ 的每一行都正交即可
+即有 $ x \alpha_{1}^{T}=0, x \alpha_{2}^{T}=0, \cdots, x \alpha_{k}^{T}=0 $
+即 $ x\left(\alpha_{1}^{T}, \alpha_{2}^{T}, \cdots, \alpha_{k}^{T}\right)=0 \Rightarrow x G^{T}=0 $
+
+(2) 由(1) 可知 $ L^{\perp}=\left\{x \in V(n, q) \mid x G^{T}=0\right\} $,而秩 $ G=k $,则 $ \operatorname{dim} L^{\perp}=n-k $,故 $ L^{\perp} $ 是 $ q $ 元 $ [n, n-k] $ 码.
+
+(3) 因为对 $ \forall x \in L, \forall y \in L^{\perp} $ 有 $ x \cdot y=0 $, 故 $ x \in\left(L^{\perp}\right)^{\perp} $, 从而 $ L \subseteq\left(L^{\perp}\right)^{\perp} $, 又
+$$
+\operatorname{dim}\left(L^{\perp}\right)^{\perp}=n-\operatorname{dim}\left(L^{\perp}\right)=n-(n-k)=k=\operatorname{dim}(L)
+$$
+所以有 $ \left(L^{\perp}\right)^{\perp}=L $.
+\end{proof}
+
+\begin{example}
+ 对于二元 $ [4,2] $ 线性码 $ L=\{0000,1100,0011,1111\} $.\\
+(1) $ L $ 是线性码, 易证码中任意两个码字的线性组合（在二元情况下，等同于按位异或）仍然在码中.(封闭性成立).\\
+(2) $ L $ 的生成矩阵为 $ G=\left(\begin{array}{llll}1 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1\end{array}\right) $.\\
+(3) $ L^{\perp}=\left\{x G^{T}=0 \mid x \in V(n, q)\right\} $.
+即 $ \left\{\begin{array}{l}x_{1}+x_{2}=0 \\ x_{3}+x_{4}=0\end{array}\right. $
+解得 $ \xi_{1}=(1,1,0,0), \xi_{2}=(0,0,1,1) $.
+$ L^{\perp}=L, L^{\perp} $ 也是 $ [4,2] $ 线性码.\\
+(4)若 $ L \subseteq L^{\perp} $,则称 $ L $ 是自正交的.
+若 $ L=L^{\perp} $,则称 $ L $ 是自对偶的.
+\end{example}
+
+\begin{remark}
+实数域 $ R $ 上的线性空间 $ W \cap W^{\perp}=\{0\} $, 而有限域上的线性空间性质不同, 如上例中 $ L=L^{\perp} $.
+\end{remark}
+
+\begin{example}
+$\text { 设 } L=\{000,110,011,101\}, L \text { 是一个 }[3,2] \text { 码. } $
+$$
+\begin{array}{l}
+\left(\begin{array}{lll}
+1 & 1 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1
+\end{array}\right) \rightarrow\left(\begin{array}{lll}
+1 & 1 & 0 \\
+0 & 1 & 1 \\
+0 & 1 & 1
+\end{array}\right) \rightarrow\left(\begin{array}{lll}
+1 & 1 & 0 \\
+0 & 1 & 1 \\
+0 & 0 & 0
+\end{array}\right)
+\end{array}
+$$
+生成阵为 $ G=\left(\begin{array}{lll}1 & 1 & 0 \\ 0 & 1 & 1\end{array}\right), L^{\perp}=\{000,111\} $,
+$ L^{\perp} $ 是二元 $ [3,1] $ 线性码.
+\end{example}
+
+\subsection{线性码的校验矩阵}
+\begin{definition}
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ L^{\perp} $ 的生成矩阵 $ H $ 称为线性码 $ L $ 的校验矩阵.
+\end{definition}
+\begin{remark}
+
+    (1)线性码 $ L $ 的校验阵不唯一, 但 $ \operatorname{rank}(H)=n-k $
+    
+(2)设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ G $ 为其生成矩阵, $ H $ 为其校验矩阵, 则 $ x \in L \Leftrightarrow x H^{T}=0 $
+\begin{proof}
+    $ \Rightarrow: \forall x \in L, x=\left(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{k}\right) G $,
+$$
+x H^{T}=\left(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{k}\right) G H^{T}=\left(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{k}\right)\left(G H^{T}\right)=0
+$$
+故 $ \forall x \in L, x H^{T}=0 $
+
+$ \Leftarrow: $ 当 $ x H^{T}=0 $ 时, 则 $ x \in\left(L^{\perp}\right)^{\perp} $, 由对偶码的性质知 $ \left(L^{\perp}\right)^{\perp}=L $, 故有 $ x \in L $.
+\end{proof}
+
+(3)若 $ G=\left(I_{k} \mid A\right) $ 为线性码 $ L $ 的标准生成矩阵,则 $ L $ 的校验阵为 $ H=\left(-A^{T} \mid I_{n-k}\right) $.
+
+\begin{proof}
+     $ G H^{T}=\left(I_{k} \mid A\right)\left(\begin{array}{c}-A \\ I_{n-k}\end{array}\right)=-A+A=0 $,因此 $ H $ 的每一行与 $ G $ 的每一行都正交，又 $ \operatorname{rank}(H)=n-k=\operatorname{dim}\left(L^{\perp}\right) $, 故 $ H $ 是 $ L $ 的校验矩阵.
+\end{proof}
+
+(4)对于二元线性码$L$,如果其标准型生成矩阵为$ G=\left(I_{k} \mid A\right) $，则其校验矩阵为$ H=\left(A^{T} \mid I_{n-k}\right) $.
+\end{remark}
+
+
+\begin{theorem}
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, 其校验阵为 $ H $, 则 $ d(L)=d $的充要条件为 $ H $ 的任意 $ d-1 $ 列线性无关, 存在 $ d $ 列线性相关.
+\end{theorem}
+\begin{proof}
+设 $ H=\left(H_{1}, H_{2}, \cdots, H_{n}\right) $, 其 中 $ H_{1}, H_{2}, \cdots, H_{n} $ 为 $ H $ 的 $ n $ 个列向量, $ x=x_{1} x_{2} \cdots x_{n} \in V(n, q) $
+$$
+x \in L \Leftrightarrow x H^{T}=0 \Leftrightarrow x_{1} H_{1}+\cdots+x_{n} H_{n}=0
+$$
+$ \Rightarrow $ : 因为 $ d(L)=\omega(L) $, 存在 $ x=x_{1} x_{2} \cdots x_{n}, \omega(x)=d $. 不妨设 $ x_{1}, x_{2}, \cdots, x_{d} $ 不为 0 , 则有
+$$
+x H^{T}=x_{1} x_{2} \cdots x_{d} x_{d+1} \cdots x_{n}\left(\begin{array}{c}
+H_{1} \\
+H_{2} \\
+\vdots \\
+H_{n}
+\end{array}\right)=x_{1} H_{1}+\cdots+x_{d} H_{d}=0
+$$
+从而 $ H_{1}, H_{2}, \cdots, H_{d} $ 线性相关.
+
+下面证明 $ H $ 的任意 $ d-1 $ 列线性无关, 假设 $ H $ 中存在 $ d-1 $ 列线性相关. 设为 $ H_{i 1}, H_{i 2}, \cdots, H_{i d-1} $, 则存在不全为 0 的 $ x_{i 1}, x_{i 2}, \cdots, x_{i d} \in F_{q} $, 使得$x_{i 1} H_{i 1}+x_{i 2} H_{i 2}+\cdots+x_{i d-1} H_{i d-1}=0$.
+
+令$x=\left(0, \cdots, 0, x_{i 1}, 0, \cdots, 0, x_{i 2}, 0, \cdots, x_{i d-1}, 0, \cdots, 0\right)$,则有$ x H^{T}=x_{i 1} H_{i 1}+x_{i 2} H_{i 2}+\cdots+x_{i d-1} H_{i d-1}=0 $,即$ x \in L$.而 
+$\omega(x)=d-1<d$与$d(L)=d $ 矛盾. 因此 $ H $ 任意 $ d-1 $ 列线性无关.
+
+$ \Leftarrow: $ 设 $ H $ 中存在 $ d $ 列线性相关，而任意 $ d-1 $ 列线性无关.设 $ H_{i 1}, H_{i 2}, \cdots, H_{i d} $ 线性相关, 则存在不全为 0 的 $ x_{i 1}, x_{i 2}, \cdots, x_{i d} $,使得 $ x_{i 1} H_{i 1}+x_{i 2} H_{i 2}+\cdots+x_{i d} H_{i d}=0 $. 因为 $ H $ 的任意 $ d-1 $ 列线性无关, 则 $ x_{i j} \neq 0,(j=1, \cdots, d) $ (否则若某一 $ x_{i j}=0 $, 不妨设 $ x_{i 1}=0 $, 则 $ x_{i 2} H_{i 2}+x_{i 3} H_{i 3}+\cdots+x_{i d} H_{i d}=0 $, 而 $ H_{i 2}, H_{i 3}, \cdots, H_{i d} $ 线性无关,故 $ x_{i 2}=\cdots=x_{i d}=0 $ 矛盾).
+令 $x=\left(0, \cdots, 0, x_{i 1}, 0, \cdots, 0, x_{i 2}, 0, \cdots, 0, x_{i d}, 0, \cdots, 0\right)$, 则有 $ x H^{T}=0 $, 故 $ x \in L, \omega(x)=d $.
+又 $ H $ 的任意 $ d-1 $ 列线性无关, 故 $ L $ 中不存在重量小于 $ d $ 的非零码字. 
+
+(事实上令
+$x=\left(x_{1}, \cdots, x_{d-1}, 0, \cdots, 0\right)$, 则 $ x H^{T}=x_{i 1} H_{i 1}+x_{i 2} H_{i 2}+\cdots+x_{i d-1} H_{i d-1}=0 \left. \Rightarrow x_{1}=\cdots=x_{d-1}=0 \Rightarrow x=0\right)$. 
+因此 $ d(L)=d $.
+\end{proof}
+
+\begin{example}
+    虑线性码Hamming码Ham(3,2)的生成阵$
+G=\left(\begin{array}{lllllll}
+1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1
+\end{array}\right)
+$
+从而Hamming码 $ \operatorname{Ham}(3,2) $ 的校验阵为
+$
+H=\left(\begin{array}{ccccccc}
+0 & 1 & 1 & 1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+\alpha_{1} & \alpha_{2} & \alpha_{3} & & & &
+\end{array}\right)
+$.
+容易看出 $ H $ 的任意两列线性无关.
+$ \alpha_{3}=\alpha_{1}+\alpha_{2} $, 故前3列 $ \alpha_{1}, \alpha_{2}, \alpha_{3} $ 线性相关.
+从而 $ d(C)=3, C $ 是一个二元 $ [7,4,3] $ 码.
+\end{example}
+
+\subsection{线性码的界}
+\begin{theorem}[$ G-V $ 界]
+    设 $ q $ 是一个素数的方幂, 如果 $ n, k, d $ 满足
+\begin{equation}\label{7.2.1}
+    \sum_{i=0}^{d-2}\left(\begin{array}{c}
+n-1 \\
+i
+\end{array}\right)(q-1)^{i}<q^{n-k}
+\end{equation}
+则一定存在一个最小距离是 $ d $ 的 $ q $ 元 $ [n, k] $ 线性码. 因此
+$$
+A_{q}(n, d) \geq q^{k}
+$$
+其中 $ k $ 为使不等式(\ref{7.2.1})成立的最大整数.
+\end{theorem}
+\begin{proof}
+    假设参数 $ n, k, d $ 满足不等式(\ref{7.2.1}), 由最小距离 $ d $ 满足的条件, 若我们能构造出一个 $ (n-k) \times n $ 阶校验矩阵 $ H $, 使得 $ H $ 的任意 $ d-1 $ 列线性无关,则定理成立.
+
+    首先在 $ V(n-k, q) $ 中任取一个非零向量 $ h_{1} $ 作为 $ H $ 的第 1 列, 然后在 $ V(n-k, q) $ 中任取 $ h_{2}, h_{2} \neq \lambda h_{1}\left(\lambda \in F_{q}\right) $ 作为 $ H $ 的第 2 列.
+一般地, 取 $ H $ 的第 $ i $ 列 $ h_{i} $ 为 $ V(n-k, q) $ 中的一个非零向量, 并且 $ h_{i} $ 不是前面已选取的 $ i-1 $ 个向量 $ h_{1}, h_{2}, \cdots, h_{i-1} $ 中的任意不多于 $ d-2 $ 个向量的线性组合（保证任意 $ d-1 $ 列线性无关）. 我们用 $ N_{i} $ 表示 $ h_{1}, h_{2}, \cdots, h_{i-1} $ 中的任意不多于 $ d-2 $ 个向量的不同的线性组合的个数, 则
+$$
+N_{i} \leq 1+\left(\begin{array}{c}
+i-1 \\
+1
+\end{array}\right)(q-1)+\left(\begin{array}{c}
+i-1 \\
+2
+\end{array}\right)(q-1)^{2}+\cdots+\left(\begin{array}{c}
+i-1 \\
+d-2
+\end{array}\right)(q-1)^{d-2}
+$$
+于是, $ h_{i} $ 有 $ q^{n-k}-N_{i} $ 种取法, 因此只要不等式(\ref{7.2.1})成立,一定可以构造出校验矩阵 $ H $, 从而得到一个最小距离至少是 $ d $ 的 $ q $ 元 $ [n, k] $ 码.
+\end{proof}
+
+
+
+\begin{theorem}
+ 设 $ L $ 是一个 $ q $ 元 $ [n, k, d] $ 线性码, 则 $ d \leq n-k+1 $.
+\end{theorem}
+\begin{proof}
+$ L $ 是一个 $ q $ 元 $ [n, k, d] $ 线性码,其对偶码 $ L^{\perp} $ 是一个 $ q $ 元 $ [n, n-k] $ 线性码, 线性码 $ L $ 的校验阵 $ H $ 是一个 $ (n-k) \times n $ 阶矩阵, 并且它的 $ n-k $ 行线性无关. $ H $ 的任意 $ n-k+1 $ 列一定线性相关（行秩与列秩相等）, 故 $ d \leq n-k+1 $
+\end{proof}
+\begin{remark}
+对于一个 $ q $ 元 $ [n, k, d] $ 线性码 $ L $, 如果 $ d=n-k+1 $, 则称 $ L $ 为最大距离可分码, 简称为 MDS 码.
+\end{remark}

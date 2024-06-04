@@ -1,0 +1,93 @@
+\chapter{循环码}
+\section{ 循环码的定义}
+$$
+\begin{array}{l}
+F_{q}[x]=\left\{a_{0}+a_{1} x+\cdots+a_{m} x^{m} \mid a_{i} \in F_{q}\right\} \\
+p(x)=a_{0}+a_{1} x+\cdots+a_{m} x^{m} \in F_{q}[x]
+\end{array}
+$$
+若 $ a_{m} \neq 0 $, 则称 $ m $ 为 $ p(x) $ 的次数, 记为 $ \operatorname{deg}(p(x)) ; a_{m} $ 称为 $ p(x) $ 的首项系数; 如果 $ a_{m}=1, p(x) $ 称为首 1 多项式. $ F_{q}[x] $ 在通常的多项式的加法和乘法运算下构成一个交换环(有单位元).
+
+设 $ p(x) \in F_{q}[x],\langle p(x)\rangle $ 表示由 $ p(x) $ 生成的 $ F_{q}[x] $ 的主理想，则 
+$$ \langle p(x)\rangle=\left\{f(x) p(x) \mid f(x) \in F_{q}[x]\right\}. $$
+
+设$f(x),g(x)\in F_{q}[x]$, 商环 $ F_{q}[x] /\langle p(x)\rangle $ 上的加法和乘法运算:
+$$
+\begin{array}{l}
+(f(x)+\langle p(x)\rangle)+(g(x)+\langle p(x)\rangle)=(f(x)+g(x))+\langle p(x)\rangle \\
+(f(x)+\langle p(x)\rangle)(g(x)+\langle p(x)\rangle)=f(x) g(x)+\langle p(x)\rangle
+\end{array}
+$$
+则 $ F_{q}[x] /\langle p(x)\rangle $ 在上述运算下构成一个交换环.
+
+$$
+\begin{array}{l}
+F_{q}[x] /\langle p(x)\rangle=\left\{f(x)+\langle p(x)\rangle \mid f(x) \in F_{q}[x]\right\} \\
+p(x)=a_{0}+a_{1} x+\cdots+a_{m} x^{m} \\
+f(x)=p(x) q(x)+r(x) ; \operatorname{deg}(r(x))<m
+\end{array}
+$$
+所以
+$$
+\begin{array}{l}
+F_{q}[x] /\langle p(x)\rangle=\left\{r(x)+\langle p(x)\rangle \mid r(x) \in F_{q}[x],  \operatorname{deg}(r(x))<m\right\} \\
+r(x)=b_{0}+b_{1} x+\cdots+b_{m-1} x^{m-1}, b_{i} \in F_{q} , i=0,1 \cdots, m-1 
+\end{array}
+$$
+ 故 $\left|F_{q}[x] /\langle p(x)\rangle\right|=q^{m}$ .
+
+\begin{theorem}
+    $ F_{q}[x] /\langle p(x)\rangle $ 是域的充分必要条件是 $ p(x) $ 为 $ F_{q}[x] $ 中的不可约多项式.
+\end{theorem}
+
+\begin{definition}[循环码]
+ 设 $ L \subseteq V(n, q), L $ 是一个线性码, 对 $ \forall c \in L $, 如果 $ c $ 的循环移位仍是一个码字, 即若 $ c_{0} c_{1} c_{2} \cdots c_{n-1} \in L $, 则 $ c_{n-1} c_{0} c_{1} c_{2} \cdots c_{n-2} $ $ \in L $,则称 $ L $ 为循环码.
+\end{definition}
+
+记 $ R_{n}=F_{q}[x] /\left\langle x^{n}-1\right\rangle $,
+定义 $ \varphi: V(n, q) \rightarrow R_{n} $
+$$
+c_{0} c_{1} \cdots c_{n-1} \mapsto c_{0}+c_{1} x+\cdots+c_{n-1} x^{n-1}
+$$
+$ \varphi $ 是一一映射.
+在此对应下,线性码 $ L $ 可看作 $ R_{n} $ 的子集, $ L \subseteq R_{n} $,
+$$
+\begin{aligned}
+\text { 对 } \forall a(x) & =a_{0}+a_{1} x+a_{2} x^{2}+\cdots+a_{n-1} x^{n-1} \in L \\
+x a(x) & =\left(a_{0} x+a_{1} x^{2}+\cdots+a_{n-1} x^{n}\right)\left(\bmod \left(x^{n}-1\right)\right) \\
+& =a_{n-1}+a_{0} x+a_{1} x^{2}+\cdots+a_{n-2} x^{n-1}
+\end{aligned}
+$$
+$ a_{0} a_{1} \cdots a_{n-1} \rightarrow a_{n-1} a_{0} a_{1} \cdots a_{n-2} $ 循环移位.
+
+\begin{theorem}\label{theorem9.1.2}
+一个码 $ L \subseteq R_{n} $ 是循环码的充分必要条件为 $ L $ 满足下列两个条件.\\
+(1) 如果 $ a(x), b(x) \in L $, 则 $ a(x)+b(x) \in L $.\\
+(2) 如果 $ a(x) \in L, r(x) \in R_{n} $, 则 $ r(x) a(x) \in L $.
+\end{theorem}
+\begin{proof}
+ 必要性. 设 $ L $ 是循环码, 则 $ L $ 是线性码. 因此,(1)显然成立.设 $ a(x) \in L $,
+$$
+r(x)=r_{0}+r_{1} x+r_{2} x^{2}+\cdots+r_{n-1} x^{n-1} \in R_{n} .
+$$
+因为 $ x^{i} a(x) $ 等价于将码字循环右移 $ i $ 位, $ 1 \leq i \leq n-1 $, 所以
+$$
+r(x) a(x)=r_{0} a(x)+r_{1} x a(x)+\cdots+r_{n-1} x^{n-1} a(x) \in L .
+$$
+
+充分性. 设(1)和(2)成立. 令 $ r(x)=r_{0} \in F_{q} $, 则由(1)和(2)知, $ L $ 是线性码.取 $ r(x)=x $, 则由(2)知,知 $ L $ 是循环码.
+
+显然, 定理\ref{theorem9.1.2}等价于说, 一个码 $ L \subseteq R_{n} $ 是循环码的充分必要条件为 $ L $ 是 $ R_{n} $ 的理想.
+设 $ p(x) \in R_{n} $, 我们知道
+$$
+\langle p(x)\rangle=\left\{p(x) f(x) \mid f(x) \in R_{n}\right\}
+$$
+是 $ R_{n} $ 的理想.于是,根据定理\ref{theorem9.1.2}, 可得下面的结论.
+
+\end{proof}
+\begin{theorem}
+对于任意 $ p(x) \in R_{n},\langle p(x)\rangle $ 是一个循环码.
+\end{theorem}
+\begin{remark}
+ 在本章, 关于多项式的加法和乘法运算,若没有特别声明,均指在 $ R_{n} $ 中的加法和乘法. 即模$x^n-1$的加法和乘法
+\end{remark}

@@ -1,0 +1,168 @@
+
+\section{循环码的性质}
+\begin{theorem}\label{theorem9.2.1}
+    设 $ \{0\} \neq C \subseteq R_{n} $ 是一个循环码, 则
+    
+(1) $ C $ 中存在唯一一个具有最低次数的首1多项式 $ g(x) $ 生成 $ C $, 即 $ C=\langle g(x)\rangle $.
+
+(2) $ g(x) \mid x^{n}-1 $.
+
+(3) 如果 $ \operatorname{deg}(g(x))=r $, 则 $ \operatorname{dim} C=n-r $. 事实上
+$$
+C=\langle g(x)\rangle=\left\{r(x) g(x) \mid \operatorname{deg}(r(x))<n-r, r(x) \in R_{n}\right\} .
+$$
+
+(4) 如果 $ g(x)=g_{0}+g_{1} x+g_{2} x^{2}+\cdots+g_{r} x^{r} $, 则 $ g_{0} \neq 0 $, 并且 $ C $ 的生成矩阵为
+$$
+G=\left(\begin{array}{ccccccccc}
+g_{0} & g_{1} & g_{2} & \cdots & g_{r} & 0 & 0 & \cdots & 0 \\
+0 & g_{0} & g_{1} & g_{2} & \cdots & g_{r} & 0 & \cdots & 0 \\
+0 & 0 & g_{0} & g_{1} & g_{2} & \cdots & g_{r} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+0 & 0 & \cdots & 0 & g_{0} & g_{1} & g_{2} & \cdots & g_{r}
+\end{array}\right),
+$$
+其中 $ G $ 的每一行都是前一行的循环移位.
+\end{theorem}
+
+
+\begin{proof}
+  (1) 先证明次数最低的首1多项式是唯一的.
+  
+设 $ g_{1}(x), g_{2}(x) $ 是 $ C $ 中的两个不同的具有最低次数 $ r $ 的首 1 多项式,则 $ g_{1}(x)-g_{2}(x) \neq 0, \operatorname{deg}\left(g_{1}(x)-g_{2}(x)\right)<r $,而 $ g_{1}(x)-g_{2}(x) \in C $, 与 $ g_{1}(x), g_{2}(x) $ 次数最低矛盾, 因此 $ C $ 中只有一个次数最低的首1多项式, 设为 $ g(x), g(x) \in C $, 故 $ \langle g(x)\rangle \subseteq C $, $ \left(\langle g(x)\rangle\right. $ 为包含 $ g(x) $ 的最小理想, $ g(x) \in C, C $ 也是 $ R_{n} $ 的理想,故 $ \langle g(x)\rangle \subseteq C $.)
+
+另一方面, 设 $ \forall p(x) \in C, p(x)=g(x) q(x)+r(x) $, 其中 $ \operatorname{deg}(r(x))<\operatorname{deg}(g(x)) $, 于是 $ r(x)=p(x)-q(x) g(x) \in C $,与 $ g(x) $ 次数最低矛盾, 故 $ r(x)=0 $,即 $ p(x)=g(x) q(x) \in\langle g(x)\rangle, C \subseteq\langle g(x)\rangle $, 故 $ C=\langle g(x)\rangle $.
+
+(2) 设 $ \operatorname{deg}(g(x))=r $, 用 $ g(x) $ 去除 $ x^{n}-1 $, 可得: $ x^{n}-1=q(x) g(x)+r(x) $, 其中 $ \operatorname{deg}(r(x))=r $,在 $ R_{n} $ 中, $ x^{n}-1 \equiv 0\left(\bmod \left(x^{n}-1\right)\right) \in C $,所以 $ r(x)=-q(x) g(x) \in C $,因为 $ g(x) $ 为 $ C $ 中唯一的具有最低次数的首 1 多项式,所以有 $ r(x)=0 $, 于是有 $ g(x) \mid x^{n}-1 $.
+
+(3) $ g(x) $ 生成的理想为
+$$
+\langle g(x)\rangle=\left\{f(x) g(x) \mid f(x) \in R_{n}\right\},
+$$
+现在我们来证明
+$$
+\langle g(x)\rangle=\left\{r(x) g(x) \mid \operatorname{deg}(r(x))<n-r, r(x) \in R_{n}\right\} .
+$$
+因为 $ g(x) \mid x^{n}-1 $, 所以 $ x^{n}-1=g(x) h(x), h(x) \in R_{n} $, $ \operatorname{deg}(h(x))=n-r, \forall f(x) \in R_{n} $, 用 $ h(x) $ 去除 $ f(x) $ 可得
+$$
+f(x)=q(x) h(x)+r(x), \operatorname{deg}(r(x))<\operatorname{deg}(h(x))=n-r
+$$
+于是 $ f(x) g(x)=q(x) h(x) g(x)+r(x) g(x)=q(x)\left(x^{n}-1\right)+r(x) g(x)$
+因此在 $ R_{n} $ 中, $ f(x) g(x)=r(x) g(x) $, 即
+$$
+\langle g(x)\rangle=\left\{r(x) g(x) \mid \operatorname{deg}(r(x))<n-r, r(x) \in R_{n}\right\}
+$$
+于是有 $ \left\{g(x), x g(x), \cdots x^{n-r-1} g(x)\right\} $ 生成 $ C $. 由于它们线性无关,故它们是 $ C $ 的一组基, $ \operatorname{dim}(C)=n-r $.
+
+(4)假设 $ g_{0}=0 $, 则 $ g(x)=x g_{1}(x) $ ，其中
+$$g_{1}(x)=g_{1}+g_{2} x+g_{3} x^{3}+\cdots+g_{r} x^{r-1}, \operatorname{deg}\left(g_{1}(x)\right)<r $$
+$\text { 于是 } g_{1}(x)=1 \cdot g_{1}(x)=x^{n} g_{1}(x) \bmod \left(x^{n}-1\right),
+=x^{n-1} g(x) \in C(\text { 因 } C \text { 是循环码 }),$
+与 $ g(x) $ 次数最低矛盾, 因此 $ g_{0} \neq 0 $,
+因为 $ \left\{g(x), x g(x), \cdots, x^{n-r-1} g(x)\right\} $ 是 $ C $ 的一组基,故 $ G $ 是 $ C $ 的生成矩阵.
+\end{proof}
+\begin{remark}
+ 次数最低的首项系数为 1 的多项式 $ g(x) $, 若 $ C=\langle g(x)\rangle $,则称 $ g(x) $ 为 $ C $ 的生成多项式.
+\end{remark}
+
+\begin{example}
+ 考虑码长为 $ 3(n=3) $ 的二元循环码, $ C=\langle 1+x\rangle $,$C \subseteq R_{3}, R_{3}=F_{2}[x] /\left\langle x^{3}-1\right\rangle$.
+ $g(x)=1+x, \quad r=\operatorname{deg}(g(x))=1$,$\operatorname{dim}(C)=n-r=3-1=2$, 并且$C$中含有下列码字:
+$$
+\begin{array}{l}
+\langle 1+x\rangle=\{r(x) g(x) \mid \operatorname{deg}(r(x))<n-r=2\} \\
+0,1+x, x(1+x)=x+x^{2},(1+x)(1+x)=1+x^{2} 
+\end{array}
+$$
+ 于是 $ C=\left\{0,1+x, x+x^{2}, 1+x^{2}\right\}=\{000,110,011,101\}$.
+事实上, 我们还可以验证
+$$
+\left\langle 1+x^{2}\right\rangle=\left\{f(x)\left(1+x^{2}\right) \mid f(x) \in R_{3}\right\}=C .
+$$
+这说明循环码 $ C $ 也可由 $ 1+x^{2} $ 来生成.
+\end{example}
+
+
+\begin{theorem}
+$ R_{n} $ 中首1多项式 $ p(x) $ 是循环码 $ C=\langle p(x)\rangle $ 的生成多项式的充要条件为 $ p(x) \mid x^{n}-1 $.
+\end{theorem}
+\begin{proof}
+ 只证明充分性.
+ 
+设 $ p(x) \mid x^{n}-1, g(x) $ 是循环码, $ C=\langle p(x)\rangle $ 的生成多项式. 假设 $ p(x) \neq g(x) $. 由于 $ g(x), p(x) $ 都是首 1 的,则有 $ \operatorname{deg}(p(x))>\operatorname{deg}(g(x)) $
+
+因为 $ p(x) \mid x^{n}-1 $, 故存在 $ f(x) \in R_{n} $, 使得 $ x^{n}-1=f(x) p(x) $, 又 $ g(x) \in\langle p(x)\rangle $, 所以有
+$$
+g(x) \equiv a(x) p(x)\left(\bmod \left(x^{n}-1\right)\right),
+$$
+其中 $ a(x) \in R_{n} $. 由此可得
+$$
+g(x) f(x) \equiv a(x) p(x) f(x) \equiv a(x)\left(x^{n}-1\right) \equiv 0\left(\bmod \left(x^{n}-1\right)\right),
+$$
+但 $ \operatorname{deg}(f(x) g(x))<\operatorname{deg}(f(x) p(x))=n $, 从而 $ f(x) g(x)=0 $, 不可能, 因此 $ p(x)=g(x) $.
+\end{proof}
+
+因此,只需将 $ x^{n}-1 $ 分解为 $ F_{q} $ 上的首1不可约多项式的乘积就可构造出码长为 $ n $ 的所有 $ q $ 元循环码.
+ 
+\begin{example}
+    试找出 $ R_{3} $ 中的所有二元循环码.
+
+    解: 二元域 $ F_{2} $ 中 $ x^{3}-1=(x+1)\left(x^{2}+x+1\right) $,其中 $ x+1 $ 和 $ x^{2}+x+1 $ 都是 $ F_{2} $ 上的不可约多项式.
+    \begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 生成多项式 & $ R_{3} $ 中的码 & $ V(3,2) $ 中的码 \\
+\hline 1 & $ R_{3} $ & $ V(3,2) $ \\
+\hline $ 1+x $ & $ \left\{0,1+x, x+x^{2}, 1+x^{2}\right\} $ & $ \{000,110,011,101\} $ \\
+\hline $ 1+x+x^{2} $ & $ \left\{0,1+x+x^{2}\right\} $ & $ \{000,111\} $ \\
+\hline$ x^{3}-1 $ & $ \{0\} $ & $ \{000\} $ \\
+\hline
+\end{tabular}
+ \end{center}
+\end{example}
+
+\begin{example}\label{example9.2.3}
+写出 $ R_{4} $ 中的码长为 4 的所有三元循环码.
+
+解: 在三元域 $ F_{3} $ 上
+$$
+x^{4}-1=(x-1)(x+1)\left(1+x^{2}\right)=(x+2)(x+1)\left(1+x^{2}\right) \text {, }
+$$
+其中 $ x+2, x+1, x^{2}+1 $ 在 $ F_{3} $ 上不可约.
+
+列表:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 生成多项式 & $ R_{4} $ 中的码 & $ V(4,3) $ 中的码 \\
+\hline 1 & $ R_{4} $ & $ V(4,3) $ \\
+\hline \multirow{3}{*}{$ 2+x $} & $ 3^{3}=27 $ 个元 & \begin{tabular}{l}
+$ \{0000,2100,0210,0021,1002 $, \\
+$ 1200,0120,0012,2001,1020 $, \\
+$ 0102,2010,0201,1110,0111 $, \\
+$ 1011,1101,2220,0222,2022 $, \\
+$ 2202,2211,1221,1122,2112 $, \\
+$ 2121,1212\} $
+\end{tabular} \\
+\hline $ 1+x $ & $ 3^{3}=27 $ 个元 & \begin{tabular}{l}
+$ \{0000,1100,0110,0011,1001 $, \\
+$ 2200,0220,0022,2002,1020 $, \\
+$ 0102,2010,0201,1210,0121 $, \\
+$ 1012,2101,2120,0212,2021 $, \\
+$ 1202,2112,2211,1221,1122 $, \\
+$ 1111,2222\} $
+\end{tabular} \\
+\hline $ 1+x^{2} $ & $ 3^{2}=9 $ 个元 & \begin{tabular}{l}
+$ \{0000,1010,0101,2020,0202 $, \\
+$ 1212,2121,1111,2222\} $
+\end{tabular} \\
+\hline $ 2+x^{2} $ & $ 3^{2}=9 $ 个元 & \begin{tabular}{l}
+$ \{0000,2010,0201,1020,0102 $, \\
+$ 1122,2112,2211,1221\} $
+\end{tabular} \\
+\hline $ 2+x+2 x^{2}+x^{3} $ & $ 3^{1}=3 $ 个元 & $ \{0000,2121,1212\} $ \\
+\hline $ 1+x+x^{2}+x^{3} $ & $ 3^{1}=3 $ 个元 & $ \{0000,1111,2222\} $ \\
+\hline$ x^{4}-1 $ & $ \{0\} $ & $ \{000\} $ \\
+\hline
+\end{tabular}
+\end{center}
+$$ \begin{array}{l}\left(a+b x+c x^{2}\right)(2+x), a, b, c \in F_{3}, 3^{3}=27 \text { 个元; } \\ (a+b x)\left(1+x^{2}\right), a, b \in F_{3}, 3^{2}=9 \text { 个元; } \\ a\left(2+x+2 x^{2}+x^{3}\right), a \in F_{3}, 3^{1}=3 \text { 个元. }\end{array} $$
+\end{example}

@@ -1,0 +1,633 @@
+\section{习题课}
+
+\subsection{本章小结}
+1. 基本概念\\
+线性码, 生成矩阵, 校验阵, 标准阵（列）译码，伴随式，对偶码, 重量分布多项式, MDS码.
+
+2. 基本结论\\
+(1) 校验阵与最小距离的关系\\
+(2) 线性码的 $ G-V $ 界. $ d \leq n-k+1 $\\
+(3) 标准阵译码方法\\
+(4) Mac Williams恒等式（二元情形）
+
+\subsection{课后习题}
+\begin{exercise}
+    一个二元 $ (11,24,5) $ 码会是线性码吗? 为什么?
+\end{exercise}
+\begin{solution}
+    二元 $ (11,24,5) $ 码不会是线性码. 二元线性码的码字个数应该是 $ 2^{k} $,而 24 不是 2 的幂.
+\end{solution}
+
+
+\begin{exercise}
+ 设 $ E_{n} $ 是 $ V(n, 2) $ 中所有具有偶数重量的向量的集合. 证明: $ E_{n} $ 是线性码, 确定 $ E_{n} $ 的参数 $ [n, k, d] $ 以及其标准型的生成矩阵.
+\end{exercise}
+\begin{solution}
+    证明: $ \forall x, y \in E_{n}, d(x, y)=\omega(x-y) $,
+$ \omega(x-y)=\omega(x)+\omega(y)-2 \omega(x \cap y) $. 故 $ \omega(x+y) $ 为偶数, $ x+y=x-y, x+y \in E_{n}, E_{n} $ 是线性码.
+由上一章课后题知 $ E_{n} $ 是一个 $ [n, n-1,2] $ 线性码, 标准生成阵为
+$$
+G=\left(\begin{array}{cccccc}
+1 & 0 & 0 & \cdots & 0 & 1 \\
+0 & 1 & 0 & \cdots & 0 & 1 \\
+\vdots & \vdots & \vdots & & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 1
+\end{array}\right)
+$$
+设 $ L=\{x G \mid \forall x \in V(n-1, q)\} $, 对 $ n $ 用归纳法证明, 则 $ L $ 中的元均具有偶重量, 从而 $ L \subseteq E_{n} $.
+又 $ \operatorname{dim} L=\operatorname{dim} E_{n}=n-1 $, 故 $ L=E_{n} $.
+
+$ \left(\forall x \in L, x=v_{j 1}+v_{j 2}+\cdots+v_{j k}\right. $, 系数取在 $ F_{2} $ 中 $ \{0,1\}, k= 2$ 时, $ x=v_{j 1}+v_{j 2}, \omega(x)=\omega\left(v_{j 1}\right)+\omega\left(v_{j 2}\right)-2 \omega\left(v_{j 1} \cap v_{j 2}\right) $ 为偶数
+容易用归纳法证得)
+\end{solution}
+
+
+
+\begin{exercise}
+证明: 对于任意一个二元线性码 $ L $, 一定满足下列条件之一.\\
+(1) L中所有码字都具有偶数重量;\\
+(2) $ L $ 中一半码字具有偶数重量, 另一半码字具有奇数重量.
+\end{exercise}
+\begin{solution}
+    证明: 设 $ L $ 是一个二元 $ [n, k] $ 线性码, 且 $ L $ 中存在码字 $ x_{0} $, 使得 $ \omega\left(x_{0}\right) $ 为奇数.
+令 $ L_{1}=\{x \in L \mid \omega(x) $ 是偶数 $ \} $,
+$ L_{2}=\{x \in L \mid \omega(x) $ 是奇数 $ \} $,
+$ x_{0}+L_{1}=\left\{x_{0}+x \mid \forall x \in L_{1}\right\} , x_{0}+L_{1} $ 中元素重量为奇数, $ x_{0}+L_{1} \subseteq L_{2} $
+同理 $ x_{0}+L_{2} \subseteq L_{1} $.
+$$
+\left|L_{2}\right| \geq\left|x_{0}+L_{1}\right|=\left|L_{1}\right| \geq\left|x_{0}+L_{2}\right|=\left|L_{2}\right| \Rightarrow\left|L_{1}\right|=\left|L_{2}\right| .
+$$
+(否定一个证另一个)
+
+（方法二）令
+$$
+\begin{array}{l}
+E=\{\boldsymbol{x} \in L \mid W(\boldsymbol{x}) \text { 为偶数 }\}, \\
+O=\{\boldsymbol{y} \in L \mid W(\boldsymbol{y}) \text { 为奇数 }\} .
+\end{array}
+$$
+因为零向量属于 $ E $, 所以 $ E \neq \emptyset $. 假设 $ E \neq L $, 则 $ O \neq \emptyset $. 于是存在 $ \boldsymbol{y} \in O $. 令
+$$
+\boldsymbol{y}+E=\{\boldsymbol{y}+\boldsymbol{x} \mid \boldsymbol{x} \in E\} .
+$$
+显然, $ \boldsymbol{y}+E \subseteq C $, 并且 $ |\boldsymbol{y}+E|=|E| $. 因为
+$$
+W(\boldsymbol{y}+\boldsymbol{x})=W(\boldsymbol{y})+W(\boldsymbol{x})-2 W(\boldsymbol{y} \cap \boldsymbol{x}),
+$$
+所以 $ \boldsymbol{y}+E $ 中的每个码字都具有奇数重量, 即 $ \boldsymbol{y}+E \subseteq O $. 因此, $ |E|=|\boldsymbol{y}+E| \leq|O| $.今
+$$
+\boldsymbol{y}+O=\{\boldsymbol{y}+u \mid u \in O\} .
+$$
+显然, $ \boldsymbol{y}+O \subseteq E $. 丁是, $ |O|=|\boldsymbol{y}+O| \leq|E| $. 由 $ |E| \leq|O| $ 和 $ |O| \leq|E| $ 立即可得 $ |E|=|O|=\frac{1}{2}|L| $.
+
+\end{solution}
+
+
+
+\begin{exercise}
+    设 $ L $ 是一个二元 $ [n, k] $ 线性码, 并且对于所有码字, 任一位置的分量不全为零, $ L_{1} $ 是 $ L $ 在某一固定位置上取 0 的码字构成的集合. 证明: $ L_{1} $ 是一个二元 $ [n, k-1] $ 线性码.
+\end{exercise}
+\begin{solution}
+    设 $ L $ 是一个二元 $ [n, k] $ 线性码.
+$$
+\begin{array}{l}
+L_{1}=\left\{x_{1} x_{2} \cdots x_{i} \cdots x_{n} \in L \mid x_{i}=0\right\}, \\
+L_{2}=\left\{x_{1} x_{2} \cdots x_{i} \cdots x_{n} \in L \mid x_{i}=1\right\} .
+\end{array}
+$$
+$ L_{1} \cup L_{2}=L, \quad L_{1} \cap L_{2}=\emptyset $, 由条件 $ L_{2} \neq \emptyset $.
+设 $ x_{0} \in L_{2} $, 当 $ x \in L_{1} $ 时, $ x_{0}+x \in L $. $ x_{0}+x $ 的第 $ i $ 个分量为 1 . $ x_{0}+x \in L_{2}, x_{0}+L_{1} \subseteq L_{2} $. 同理 $ x_{0}+L_{2} \subseteq L_{1} $.
+故 $ \left|L_{1}\right|=\left|L_{2}\right|=2^{k-1} $.
+故 $ L_{1} $ 是一个 $ [n, k-1] $ 线性码.
+
+（方法二）
+ 设 $ C_{0} $ 是 $ C $ 中第 $ i $ 个分量为 0 的码字所构成的集合, $ C_{1} $ 是 $ C $ 中第 $ i $ 个分量为 1 的码字所构成的集合. 由前提假设可知, $ C_{0} \neq \emptyset, C_{1} \neq \emptyset $. 因为对任意 $ \boldsymbol{x}, \boldsymbol{y} \in C_{0}, \boldsymbol{x}+\boldsymbol{y} $的第 $ i $ 个分量还是 0 , 所以 $ \boldsymbol{x}+\boldsymbol{y} \in C_{0} $. 因此, $ C_{0} $ 是 $ V(n, 2) $ 的一个子空间, 即 $ C_{0} $是一个二元线性码. 设 $ u \in C_{1} $, 令
+$$
+\begin{array}{l}
+\boldsymbol{u}+C_{0}=\left\{\boldsymbol{u}+\boldsymbol{x} \mid \boldsymbol{x} \in C_{0}\right\}, \\
+\boldsymbol{u}+C_{1}=\left\{\boldsymbol{u}+\boldsymbol{v} \mid \boldsymbol{v} \in C_{1}\right\} .
+\end{array}
+$$
+不难看出, $ \boldsymbol{u}+C_{0} \subseteq C_{1}, \boldsymbol{u}+C_{1} \subseteq C_{0} $. 于是,
+$$
+\begin{array}{l}
+\left|C_{0}\right|=\left|\boldsymbol{u}+C_{0}\right| \leq\left|C_{1}\right|, \\
+\left|C_{1}\right|=\left|\boldsymbol{u}+C_{1}\right| \leq\left|C_{0}\right| .
+\end{array}
+$$
+由 $ \left|C_{0}\right| \leq\left|C_{1}\right| $ 和 $ \left|C_{1}\right| \leq\left|C_{0}\right| $ 立即得到
+$$
+\left|C_{0}\right|=\left|C_{1}\right|=\frac{1}{2}|C|=2^{k-1} .
+$$
+因此, $ C_{0} $ 是一个二元 $ [n, k-1] $ 线性码.
+\end{solution}
+
+
+\begin{exercise}
+设 $ L $ 是一个二元 $ [n, k] $ 线性码, 并且其生成矩阵的列向量中不包含零向量.证明: $ L $ 中所有码字的重量之和为 $ n 2^{k-1} $.
+\end{exercise}
+\begin{solution}
+    证明: 设 $ C_{i, 1} $ 是 $ L $ 中第 $ i $ 个分量为 1 的码字所构成的集合, $ 1 \leq i \leq n $.由上题的解题过程可知
+$$
+\left|C_{i, 1}\right|=\frac{1}{2}|L|=2^{k-1} .
+$$
+将 $ L $ 中所有码字排成一个 $ 2^{k} \times n $ 阶矩阵, 其中每一行是一个码字, 则每一列中 1 的个数为 $ 2^{k-1} $. 因此, $ L $ 中所有码字的重量之和为 $ n 2^{k-1} $.
+\end{solution}
+
+
+
+\begin{exercise}
+ 设二元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 & 1
+\end{array}\right)
+$$
+试求 $ L $ 的最小距离.
+\end{exercise}
+\begin{solution}
+对矩阵 $ G $ 进行行初等变换
+$$
+\begin{array}{l}
+G=\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 & 1
+\end{array}\right) \rightarrow\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 1 \\
+0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 1 & 0 & 1
+\end{array}\right) \rightarrow 
+\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 1 & 0 \\
+0 & 0 & 1 & 0 & 1
+\end{array}\right)=G^{\prime}
+\end{array}
+$$
+$ G^{\prime} $ 是 $ L $ 的标准型生成矩阵, 那么 $ L $ 的标准型校验矩阵是
+$$
+H=\left(\begin{array}{lllll}
+1 & 1 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 & 1
+\end{array}\right) .
+$$
+$ H $ 的任意一列线性无关, 存在两列线性相关. 因此, $ L $ 的最小距离是2.
+\end{solution}
+\begin{exercise}
+设三元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{llll}
+1 & 0 & 1 & 1 \\
+0 & 1 & 1 & 2
+\end{array}\right)
+$$
+试求 $ L $ 的最小距离, 并证明 $ L $ 是完备码.
+\end{exercise}
+\begin{solution}
+$ G=\left(\begin{array}{ll|ll}1 & 0 & 1 & 1 \\ 0 & 1 & 1 & 2\end{array}\right)=(I_2|A) $, 
+故 $ L $ 的校验阵为 $ (-A^T|I_2)=\left(\begin{array}{llll}2 & 2 & 1 & 0 \\ 2 & 1 & 0 & 1\end{array}\right)=H $.(三元码中加法和乘法遵循模3的规则)
+$ H $ 中任意两列线性无关，第1.2.4列线性相关 $ \left(2 H_{1}+H_{2}=2 H_{4}\right) $,故 $ d(L)=3 $.
+由于
+$$
+3^{2}\left(\left(\begin{array}{l}
+4 \\
+0
+\end{array}\right)+\left(\begin{array}{l}
+4 \\
+1
+\end{array}\right)(3-1)\right)=3^{4}
+$$
+因此, $ L $ 是完备码.
+
+(方法二)
+通过生成矩阵 \(G\) 生成的三元线性码 \(L\) 包含以下码字：
+\[ L = \{(0, 0, 0, 0), (0, 1, 1, 2), (0, 2, 2, 1), (1, 0, 1, 1), (1, 1, 2, 0), (1, 2, 0, 2), (2, 0, 2, 2), (2, 1, 0, 1), (2, 2, 1, 0)\} \]
+这些码字是通过 \(G\) 的行的所有可能的线性组合生成的，其中的加法和乘法都是在 \(GF(3)\)（即模 \(3\) 的运算）下进行的.这个线性码 \(L\) 完全展示了由 \(G\) 定义的线性空间的结构.$d(L)=w(L)=3$.$L$是一个三元 $[4,2,3]$线性码.
+
+
+\end{solution}
+
+
+\begin{exercise}
+ 设二元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{lllll}
+1 & 1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 & 0
+\end{array}\right) .
+$$
+试求 $ L $ 的标准阵,并对信道接收端接收到的字11111和10000分别进行译码.
+\end{exercise}
+\begin{solution}
+我们首先要从给定的生成矩阵 \(G\) 生成所有可能的码字.然后，我们将使用这些码字来确定接收到的字的最近邻码字，即通过汉明距离最小的码字来译码.对于二元情况，我们只有 \(0\) 和 \(1\) 作为系数：
+\begin{itemize}
+    \item 使用 \(0\) 倍的每行（不使用基向量）生成码字 \(00000\).
+    \item 使用 \(1\) 倍的第一行生成码字 \(11010\).
+    \item 使用 \(1\) 倍的第二行生成码字 \(01010\).
+    \item 使用 \(1\) 倍的第二行生成码字 \(01010\).
+\end{itemize}
+因此，由 \(G\) 生成的码字集合为 \(L = \{00000, 11010, 01010, 10000\}\).
+为了译码接收到的字，我们需要计算它们与 \(L\) 中所有码字的汉明距离，并找到距离最小的码字.
+
+ 译码 \(11111\)的最小汉明距离为 \(2\)，因此接收到的字 \(11111\) 最接近的码字是 \(11010\).译码 \(10000\)的最小汉明距离为 \(0\)，意味着接收到的字 \(10000\) 已经是码 \(L\) 中的一个码字.这表明 \(10000\) 是正确传输的，没有发生错误.
+
+
+
+    $ L $ 的标准阵为
+    \begin{center}
+\begin{tabular}{llll}
+00000 & $ \underline{10000} $ & 01010 & 11010 \\
+01000 & 11000 & 00010 & 10010 \\
+00100 & 10100 & 01110 & 11110 \\
+00001 & 10001 & 01011 & 11011 \\
+01100 & 11100 & 00110 & 10110 \\
+01001 & 11001 & 00011 & 10011 \\
+00101 & 10101 & 01111 & $ \underline{11111} $ \\
+01101 & 11101 & 00111 & 10111
+\end{tabular}
+\end{center}
+因此把 11111 译为 11010,10000 译为 10000 .
+\end{solution}
+
+\begin{exercise}
+设 $ L $ 是一个二元线性码, $ x $ 是在信道接收端收到的字, $ H $ 为 $ L $ 的校验矩阵. 证明: $ H x^{T} $ 恰好是 $ x $ 发生错误位置所对应的 $ H $ 的列向量的和.
+\end{exercise}
+\begin{solution}
+    证明: 设 $ c $ 是发送的码字, $ e=x-c, e=\left(e_{1}, e_{2}, \cdots, e_{n}\right), e $ 中不为零的位置恰好是发生错误的位置.
+$$
+\begin{array}{l}
+H(x-c)^{T}=H x^{T}-H c^{T}=H x^{T}, \\
+\text { 即 } H x^{T}=H e^{T}=\sum\limits_{i=1}^{n} e_{i} H_{i} .
+\end{array}
+$$
+\end{solution}
+
+\begin{exercise}
+设三元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+2 & 0 & 1 & 1
+\end{array}\right) .
+$$
+(1) 试求 $ L $ 的标准型的生成矩阵.\\
+(2) 试求 $ L $ 的标准型的校验矩阵.\\
+(3) 试利用伴随式译码方法对信道接收端接收到的字2121、 1201、2222分别进行译码.
+\end{exercise}
+\begin{solution}
+$$
+\begin{aligned}
+(1) G= & \left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+2 & 0 & 1 & 1
+\end{array}\right) \rightarrow\left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+0 & 1 & 2 & 1
+\end{array}\right) \rightarrow 
+& \left(\begin{array}{llll}
+1 & 0 & 2 & 2 \\
+0 & 1 & 2 & 1
+\end{array}\right)=\left(\begin{array}{ll|ll}
+1 & 0 & 2 & 2 \\
+0 & 1 & 2 & 1
+\end{array}\right)=G^{\prime}
+\end{aligned}
+$$
+$ G^{\prime} $ 为 $ L $ 的标准型的生成矩阵.
+
+(2) $ L $ 的标准型的校验矩阵为
+$$
+H=\left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+1 & 2 & 0 & 1
+\end{array}\right)
+$$
+
+(3)
+$C=\{0000,2011,1022,1110,0121,2102,2220,1201,0212\} .$
+要对接收到的字 2121、1201、2222 进行译码，我们需要计算它们与 $ H $ 的乘积 $ H x^{T} $ ，以找到对应的综合校验向量.
+
+$$ \begin{array}{ll}x_{1} H^{T}=22, & a_{1}=2000, a_{1} H^{T}=22, x_{1}-a_{1}=0121 \\ x_{2} H^{T}=00, & a_{2}=0000, a_{2} H^{T}=00, x_{2}-a_{2}=1201 . \\ x_{3} H^{T}=02, & a_{3}=0002, a_{3} H^{T}=02, x_{3}-a_{3}=2220 .\end{array} $$
+
+因为 $ d(C)=W(C)=3 $, 码 $ C $ 至多可以纠正一个错误, 所以 $ V(4,3) $ 中的 9 个重量不大于 1 的向量都是陪集代表元. 由于共有 $ \frac{3^{4}}{3^{2}}=9 $ 个陪集, 所以 $ V(4,3) $ 中的 9 个重量不大于 1 的向量恰好是所有陪集的代表元. 码 $ C $ 的伴随式列表为
+\begin{center}
+\begin{tabular}{cc}
+\hline 陪集代表元 & 伴随 \\
+\hline 0000 & 00 \\
+1000 & 11 \\
+2000 & 22 \\
+0100 & 12 \\
+0200 & 21 \\
+0010 & 10 \\
+0020 & 20 \\
+0001 & 01 \\
+0002 & 02 \\
+\hline
+\end{tabular}
+\end{center}
+$ S(2121)=22,2121 $ 译码为 $ 2121-2000=0121 . S(1201)=00,1201 $ 译码为 $ 1201-0000=1201 . S(2222)=02,2222 $ 译码为 $ 2222-0002=2220 $.
+\end{solution}
+\begin{exercise}
+  设二元线性码 $ L $ 的校验矩阵为 $ H, \widehat{L} $ 是由 $ L $ 增加一个奇偶校验位得到的扩充码.证明: $ \widehat{L} $ 是线性码, 并且其校验矩阵为
+$$
+\hat{H} = \left(
+\begin{array}{c|c}
+H & \begin{matrix} 0 \\ 0 \\ \vdots \\ 0 \end{matrix} \\
+\hline
+\begin{matrix} 1 & 1 & \cdots & 1 \end{matrix} & 1
+\end{array}
+\right).
+$$
+
+\end{exercise}
+\begin{solution}
+    证明: 对任意 $ x=x_{1} x_{2} \cdots x_{n} x_{n+1} \in \widehat{L}, y=y_{1} y_{2} \cdots y_{n} y_{n+1} \in $ $ \widehat{L} $, 设 $ z=x+y=z_{1} z_{2} \cdots z_{n} z_{n+1} $.
+因为 $ x_{1} x_{2} \cdots x_{n}+y_{1} y_{2} \cdots y_{n} \in L $, 所以 $ z_{1} z_{2} \cdots z_{n} \in L $,而 $ \sum\limits_{i=1}^{n+1} x_{i} \equiv \sum\limits_{i=1}^{n+1} y_{i} \equiv 0(\bmod 2) $,因此有
+$$
+\sum_{i=1}^{n+1} z_{i}=\sum_{i=1}^{n+1}\left(x_{i}+y_{i}\right) \equiv 0(\bmod 2)
+$$
+从而 $ z \in \widehat{L} $, 即 $ \widehat{L} $ 是线性码.
+对于任意 $ \widehat{x}=x x_{n+1} \in \widehat{L} $, 其中 $ x=x_{1} x_{2} \cdots x_{n} \in L $
+$$
+\overline{H} \widehat{x}^{T}=\left(\begin{array}{c}
+H x^{T} \\
+\sum\limits_{i=1}^{n+1} x_{i}
+\end{array}\right)=\left(\begin{array}{c}
+0 \\
+\vdots \\
+0 \\
+0
+\end{array}\right) .
+$$
+若 $ L $ 是 $ [n, k] $ 线性码, 则 $ \widehat{L} $ 是 $ [n+1, k] $ 线性码, $ \operatorname{rank}(H)=n-k $, 从而 $ \operatorname{rank}(\overline{H})=n-k+1=(n+1)-k $, 因此 $ \overline{H} $ 是 $ \widehat{L} $ 的校验矩阵.
+\end{solution}
+
+
+\begin{exercise}
+设二元线性码 $ L $ 的生成矩阵为
+$$
+G = \left(
+\begin{array}{c|c}
+I_7 & \begin{matrix}
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 1 & 1 & 1 \\
+1 & 1 & 0 & 1 \\
+0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1
+\end{matrix}
+\end{array}
+\right).
+$$
+试求 $ L $ 的校验矩阵, 并求其最小距离.
+\end{exercise}
+\begin{solution}
+ $ L $ 的校验矩阵为
+$$
+H=\left(\begin{array}{lllllll|llll}
+1 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 1
+\end{array}\right)
+$$
+$ H $ 的任意两列线性无关, 前三列线性相关(第一列是第二、三列的加和). 因此 $ L $ 的最小距离为 3 .
+\end{solution}
+
+\begin{exercise}
+设 5 元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{lllll}
+1 & 2 & 4 & 0 & 3 \\
+0 & 2 & 1 & 4 & 1 \\
+2 & 0 & 3 & 1 & 4
+\end{array}\right)
+$$
+(1) 试求 $ L $ 的标准型的生成矩阵.\\
+(2) 试求 $ L $ 的标准型的校验矩阵.\\
+(3) 试求 $ L $ 的最小距离.
+\end{exercise}
+\begin{solution}
+(1)
+$$
+\begin{array}{l}
+ G=\left(\begin{array}{lllll}
+1 & 2 & 4 & 0 & 3 \\
+0 & 2 & 1 & 4 & 1 \\
+2 & 0 & 3 & 1 & 4
+\end{array}\right) \rightarrow\left(\begin{array}{lllll}
+1 & 2 & 4 & 0 & 3 \\
+0 & 2 & 1 & 4 & 1 \\
+0 & 1 & 0 & 1 & 3
+\end{array}\right) \rightarrow 
+\left(\begin{array}{lllll}
+1 & 2 & 4 & 0 & 3 \\
+0 & 1 & 0 & 1 & 3 \\
+0 & 2 & 1 & 4 & 1
+\end{array}\right) \rightarrow\left(\begin{array}{lllll}
+1 & 2 & 4 & 0 & 3 \\
+0 & 1 & 0 & 1 & 3 \\
+0 & 0 & 1 & 2 & 0
+\end{array}\right) \rightarrow \\
+\left(\begin{array}{lllll}
+1 & 2 & 0 & 2 & 3 \\
+0 & 1 & 0 & 1 & 3 \\
+0 & 0 & 1 & 2 & 0
+\end{array}\right) \rightarrow\left(\begin{array}{lllll}
+1 & 0 & 0 & 0 & 2 \\
+0 & 1 & 0 & 1 & 3 \\
+0 & 0 & 1 & 2 & 0
+\end{array}\right)=G^{\prime}
+\end{array}
+$$
+$ G^{\prime} $ 为 $ L $ 的标准型的生成矩阵.
+
+(2) $ L $ 的标准型的校验矩阵为
+$$
+H=\left(\begin{array}{lllll}
+0 & 4 & 3 & 1 & 0 \\
+3 & 2 & 0 & 0 & 1
+\end{array}\right)
+$$
+
+(3) $ L $ 的校验矩阵 $ H $ 中存在两列线性相关(第一列是第五列的三倍，注意是5元),任意一列线性无关. 因此 $ L $ 的最小距离为 2 .
+\end{solution}
+
+
+\begin{exercise}
+设 $ H $ 是一个 $ q $ 元 $ [n, k] $ 线性码 $ L $ 的校验矩阵, $ K $ 是 $ F_{q} $ 上的一个 $ n-k $ 阶可逆方阵. 证明: $ K H $ 仍然是 $ L $ 的校验矩阵.
+\end{exercise}
+\begin{solution}
+ 我们知道, $ L=\left\{\boldsymbol{x} \in V(n, q) \mid \boldsymbol{x} \boldsymbol{H}^{\mathrm{T}}=\mathbf{0}\right\} $. 显然, 对任意 $ \boldsymbol{x} \in L $,
+$$
+\boldsymbol{x}(\boldsymbol{K} \boldsymbol{H})^{\mathrm{T}}=\boldsymbol{x} \boldsymbol{H}^{\mathrm{T}} \boldsymbol{K}^{\mathrm{T}}=\mathbf{0} \boldsymbol{K}^{\mathrm{T}}=\mathbf{0} .
+$$
+反过来, 对任意 $ \boldsymbol{y} \in V(n, q) $, 如果 $ \boldsymbol{y}(\boldsymbol{K} \boldsymbol{H})^{\mathrm{T}}=\mathbf{0} $, 则由于 $ \boldsymbol{K} $ 可逆, 所以 $ \boldsymbol{x} \boldsymbol{H}^{\mathrm{T}}=\mathbf{0} $.于是, $ \boldsymbol{y} \in L $. 因此, $ L=\left\{\boldsymbol{x} \in V(n, q) \mid \boldsymbol{x}(\boldsymbol{K} \boldsymbol{H})^{\mathrm{T}}=\mathbf{0}\right\}, \boldsymbol{K} \boldsymbol{H} $ 还是线性码 $ L $ 的校验矩阵.
+
+另一种证明方法: 因为 $ \boldsymbol{K} $ 可逆, 所以 $ \operatorname{Rank}(\boldsymbol{K} \boldsymbol{H})=\operatorname{Rank}(\boldsymbol{H})=n-k= $ $ \operatorname{dim}\left(L^{\perp}\right) $. 由于 $ \boldsymbol{K} \boldsymbol{H} $ 的每个行向量都是 $ \boldsymbol{H} $ 的行向量的一个线性组合，所以 $ \boldsymbol{K} \boldsymbol{H} $ 的每个行向量都是 $ L^{\perp} $ 的一个码字. 因此, $ \boldsymbol{K} \boldsymbol{H} $ 还是 $ L^{\perp} $ 的一个生成矩阵, 即 $ \boldsymbol{K} \boldsymbol{H} $ 为 $ L $ 的校验矩阵.
+
+\end{solution}
+
+
+
+\begin{exercise}
+   对于一个 $ q $ 线性码 $ L $, 如果对任意 $ x, y \in L $, 都有 $ x \cdot y=0 $, 则称 $ L $ 是自正交的.假设 $ L $ 是一个自正交的二元线性码.证明: $ L $ 中的所有码字都具有偶数重量, 并且分量全为 1 的向量 $ 11 \cdots 1 \in L^{\perp} $.
+\end{exercise}
+\begin{solution}
+    证明: 因为 $ L $ 是二元自正交的, 所以对 $ \forall x=x_{1} x_{2} \cdots x_{n} \in L $ 有
+$$
+x \cdot x=\sum_{i=1}^{n} x_{i}^{2}=\left(x_{1}+x_{2}+\cdots+x_{n}\right)^{2}=0 .
+$$
+因此 $ x_{1}+x_{2}+\cdots+x_{n}=0 $, 且 $ \boldsymbol{1} \cdot x=x_{1}+x_{2}+\cdots+x_{n}=0 $.所以 $ L $ 中的所有码字都具有偶数重量, 并且分量全为 1 的向量 $ 11 \cdots 1 \in L^{\perp} $.
+\end{solution}
+
+
+
+\begin{exercise}
+ 证明: $ q $ 元 $ [n, k] $ 线性码 $ L $ 是自对偶的充分必要条件为 $ L $ 是自正交的,并且 $ k=n / 2 $.
+\end{exercise}
+\begin{solution}
+    证明: 必要性. 由 $ L=L ^\perp $ 可知 $ L $ 是自正交的, $ k=\operatorname{dim} L=\operatorname{dim} L^{\perp}=n-k, k=n / 2, n $ 为偶数.
+
+充分性. 由 $ L $ 是自正交的可知 $ L \subseteq L^{\perp} $, 再由 $ k=n / 2=\operatorname{dim} L $ 可得 $ \operatorname{dim} L^{\perp}=n-k=n / 2 $, 因此 $ L=L^{\perp} $.
+\end{solution}
+
+
+
+
+\begin{exercise}
+设 $ L $ 是一个二元 $ [n, k] $ 线性码,并且分量全为 1 的向量 $ 11 \cdots 1 \in L $. 证明：对于 $ i=0,1, \cdots, n $, 我们有
+$$
+A_{i}=A_{n-i}
+$$
+其中 $ A_{i} $ 表示 $ L $ 中重量为 $ i $ 的码字的数目.
+\end{exercise}
+\begin{solution}
+    证明: 令 $ L_{i}=\{\boldsymbol{x} \in L \mid \omega(x)=i\} $, 由于当 $ \boldsymbol{x }\in L $ 时, $ \boldsymbol{x}+11 \cdots 1 \in L $, 所以 $ \boldsymbol{x} \longmapsto x+11 \cdots 1 $ 是 $ L_{i} $ 到 $ L_{n-i} $ 间的一个一一对应. 于是$|L_{i}|=|L_{n-i}|$,从而 $ A_{i}=A_{n-i} $.
+\end{solution}
+
+
+
+\begin{exercise}
+ 设二元线性码 $ L $ 的生成矩阵为
+$$
+G=\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 & 1
+\end{array}\right) .
+$$
+试求 $ L $ 的重量分布.
+\end{exercise}
+\begin{solution}
+$ L $ 的校验矩阵为
+$$
+H=\left(\begin{array}{lllll}
+1 & 0 & 0 & 1 & 0 \\
+1 & 1 & 1 & 0 & 1
+\end{array}\right) .
+$$
+$ L $ 的对偶码 $ L^{\perp}=\{00000,10010,11101,01111\} $
+$$
+W_{L^{\perp}}(z)=1+z^{2}+2 z^{4}
+$$
+由二元线性码的Mac Williams恒等式知
+$$
+\begin{aligned}
+W_{L}(z) & =\frac{1}{2^{2}}(1+z)^{5} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) \\
+& =\frac{1}{4}(1+z)^{5}\left[1+\left(\frac{1-z}{1+z}\right)^{2}+2\left(\frac{1-z}{1+z}\right)^{4}\right] \\
+& =1+3 z^{2}+3 z^{3}+z^{5} .
+\end{aligned}
+$$
+因此线性码 $ L $ 的重量分布为
+$$
+A_{0}=1, A_{1}=0, A_{2}=3, A_{3}=3, A_{4}=0, A_{5}=1 .
+$$
+\end{solution}
+
+
+\begin{exercise}
+ 设二元 $ [9,7] $ 线性码 $ L $ 的生成矩阵为
+$$
+G = \left[
+\begin{array}{c|cc}
+I_7 & \begin{matrix}
+0 & 1 \\
+0 & 1 \\
+1 & 0 \\
+1 & 0 \\
+1 & 1 \\
+1 & 1 \\
+1 & 1
+\end{matrix}
+\end{array}
+\right].
+$$
+试利用二元线性码的Mac Williams恒等式确定 $ A_{0}, A_{1}, A_{2}, A_{3} $ 的值, 并证明分量全为 1 的向量 $ 11 \cdots 1 \in L $. 进一步, 确定 $ L $ 的重量分布多项式
+$$
+W_{L}(z)=\sum_{i=0}^{9} A_{i} z^{i}
+$$
+\end{exercise}
+\begin{solution}
+ $ L $ 的校验矩阵为
+$$
+H=\left(\begin{array}{lllllll|ll}
+0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\
+1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 1
+\end{array}\right) .
+$$
+$ L $ 的对偶码$L^{\perp}=\{000000000,001111110,110011101,111100011\}$,
+$$
+W_{L^{\perp}}(z)=1+3 z^{6} .
+$$
+由二元线性码的Mac Williams恒等式知
+$$
+\begin{aligned}
+W_{L}(z)&=\frac{1}{2^{2}}(1+z)^{9} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) \\
+&=\frac{1}{2^{2}}(1+z)^{9}\left[1+3\left(\frac{1-z}{1+z}\right)^{6}\right]\\
+&=\frac{1}{2^{2}}\left[(1+z)^{9}+3(1-z)^{6}(1+z)^{3}\right] \\
+&=1+9 z^{2}+27 z^{3}+27 z^{4}+27 z^{5}+27 z^{6}+9 z^{7}+z^{9} .
+\end{aligned}
+$$
+由此可知 $ A_{0}=1, A_{1}=0, A_{2}=9, A_{3}=27 $, 再由 $ A_{9}=1 $ 知向量 $ 11 \cdots 1 \in L $.
+\end{solution}
+
+
+\begin{exercise}
+设 $ L $ 是一个二元线性码, $ L_{0} $ 是 $ L $ 中所有具有偶数重量的码字构成的码.证明:
+$$
+W_{L_{0}}(z)=\frac{1}{2}\left(W_{L}(z)+W_{L}(-z)\right) .
+$$
+\end{exercise}
+\begin{solution}
+    证明:
+$$
+\begin{aligned}
+&\frac{1}{2}\left(W_{L}(z)+W_{L}(-z)\right)\\
+&=\frac{1}{2}\left[\left(A_{0}+A_{1} z+\cdots+A_{n} z^{n}\right)+\left(A_{0}+A_{1}(-) z+\cdots+A_{n}(-z)^{n}\right)\right] \\
+&=A_{0}+A_{2} z^{2}+\cdots+A_{\left\lfloor\frac{n}{2}\right\rfloor} z^{\left\lfloor\frac{n}{2}\right\rfloor}=W_{L_{0}}(z) .
+\end{aligned}
+$$
+\end{solution}
+
+\begin{exercise}
+    设 $ L $ 是一个二元线性码, $ \widehat{L} $ 是由 $ L $ 增加一个奇偶校验位构成的扩充码.证明:
+$$
+W_{\hat{L}}(z)=\frac{1}{2}\left[(1+z) W_{L}(z)+(1-z) W_{L}(-z)\right] .
+$$
+\end{exercise}
+\begin{solution}
+证明: 设 $ W_{L}(z)=\sum\limits_{i=0}^{n} A_{i} z^{i} $, 则
+$$
+\begin{aligned}
+W_{\widehat{L}}(z)&=\sum_{0 \leq i \leq n+1, i \text { 是偶数 }}\left(A_{i}+A_{i-1}\right) z^{i} \\
+&=\sum_{0 \leq i \leq n+1, i \text { 是偶数 }} A_{i} z^{i}+\sum_{0 \leq i \leq n, i \text { 是奇数 }} A_{j} z^{j+1} \\
+&=\frac{1}{2}\left(W_{L}(z)+W_{L}(-z)\right)+\frac{1}{2} z\left(W_{L}(z)-W_{L}(-z)\right) \\
+&=\frac{1}{2}\left[(1+z) W_{L}(z)+(1-z) W_{L}(-z)\right] .
+\end{aligned}
+$$
+\end{solution}

@@ -1,0 +1,393 @@
+\section{ 编码理论的基本问题}
+
+对于一个 $ q $ 元 $ (n, M , d) $ 码, 码率和码字个数以及码的最小距离都是衡量码的重要指标.
+
+(1)码率大,意味着冗余小,码字的传输效率高.
+
+(2)码字个数多, 意味着可以多发送信息.
+
+(3)最小距离大, 意味着可以多纠正错误.
+
+但是, 我们做不到同时让码率和码字个数以及最小距离都达到眼优. 因此, 我们通常是固定其中的两个参数, 而让另外一个参数达到最优. 通常我们固定码长和最小距离, 而让码字个数达到最优.
+
+
+\textbf{编码理论的基本问题:} 固定 $ n, d $, 考虑 $ M $ 的最大值(此时码率也大), 记 $ A_{q}(n, d) $ 为所有 $ q $ 元 $ (n, M, d) $ 码中 $ M $ 的最大值, 编码理论的基本问题之一就是求出 $ A_{q}(n, d) $, 并构造相应的 $ q $ 元 $ (n, M, d) $ 码.对于简单的情形，我们有下面的结论.
+
+\begin{theorem}
+    定理: 对 $ \forall n \geq 1, A_{q}(n, 1)=q^{n}, A_{q}(n, n)=q $
+\end{theorem}
+\begin{proof}
+    令 $ C=V(n, q) $, 则 $ C $ 是 $ q $ 元 $ \left(n, q^{n}, 1\right) $ 码. 事实上, 至少可找到两个码字最小距离为 1 ,
+如: $ (1,2, \cdots, q-1) $ 和 $ (2,2, \cdots, q-1) $.
+
+$$
+A_{q}(n, d) \geq q^{n}(C \subseteq V(n, q)) \text {, 而 }|C|=q^{n} \text {, 故 } A_{q}(n, 1)=q^{n} \text {. }
+$$
+设 $ C $ 是一个 $ q $ 元 $ (n, M, n) $ 码, 则 $ \forall x, y \in C, x=\left(x_{1}, \cdots, x_{n}\right) $, $ y=\left(y_{1}, \cdots, y_{n}\right), x_{i} \neq y_{i}, i=1, \cdots, n $, 因此, 所有码字在一个固定分量位置上出现的字符一定互不相同, 于是 $ M \leq q $. 由此可知 $ A_{q}(n, n) \leq q $, 又码长为 $ n $ 的 $ q $ 元重复码是一个 $ q $ 元 $ (n, q, n) $ 码,故 $ A_{q}(n, n)=q $.
+\end{proof}
+
+\subsection{码的等价变换}
+为了进一步讨论码的基本问题,我们先介绍码的等价变换.
+
+设 $ A=\left\{a_{1}, a_{2}, \cdots, a_{n}\right\} $ 为一个有限集合,称 $ A \longrightarrow A $ 的一一映射为 $ A $ 上的一个置换.
+$$
+\begin{array}{l}
+\sigma: A \longrightarrow A \\
+a_{i} \longmapsto \sigma\left(a_{i}\right) \quad i=1, \cdots, n \\
+\end{array}
+$$
+ 即 $\sigma=\left(\begin{array}{cccc}
+a_{1} & a_{2} & \cdots & a_{n} \\
+\downarrow & \downarrow & \cdots & \downarrow \\
+\sigma\left(a_{1}\right) & \sigma\left(a_{2}\right) & \cdots & \sigma\left(a_{n}\right)
+\end{array}\right) $.
+$A=\left\{a_{1}, a_{2}, \cdots, a_{n}\right\}=\left\{\sigma\left(a_{1}\right), \cdots, \sigma\left(a_{n}\right)\right\} .$
+
+
+码的换位型置换与换元型置换码
+
+\begin{definition}[换位型置换码]
+    设 $ C $ 为 $ q $ 元 $ (n, M, d) $ 码，记 $ \sigma_{1}=\left(\begin{array}{cccc}1 & 2 & \cdots & n \\ \downarrow & \downarrow & \cdots & \downarrow \\ \sigma_{1}(1) & \sigma_{1}(2) & \cdots & \sigma_{1}(n)\end{array}\right) $ 称其为换位型置换. 对 $ \forall x \in C $, 对 $ x $ 的分量坐标进行换位型置换,即对 $ \forall x=\left(x_{1}, \cdots, x_{n}\right) $,
+$$
+\sigma_{1}(x)=\left(\begin{array}{cccc}
+x_{1} & x_{2} & \cdots & x_{n} \\
+\downarrow & \downarrow & \cdots & \downarrow \\
+x_{\sigma_{1}(1)} & x_{\sigma_{1}(2)} & \cdots & x_{\sigma_{1}(n)}
+\end{array}\right) \text { (一个置换) }
+$$
+
+记 $ C_{1}=\sigma_{1}(C)=\left\{\sigma_{1}(x) \mid x \in C\right\} $, 称之为码 $ C $ 的换位型置换码.
+\end{definition}
+
+\begin{definition}[ 换元型置换码]
+ 记 $ \sigma_{2}=\left(\begin{array}{cccc}0 & 1 & \cdots & q-1 \\ \downarrow & \downarrow & \cdots & \downarrow \\ \sigma_{2}(0) & \sigma_{2}(1) & \cdots & \sigma_{2}(q-1)\end{array}\right) $, 称 $ \sigma_{2} $ 为换元型置换, 记 $ \bar{\sigma}_{2}=\left(\sigma_{21}, \sigma_{22}, \cdots, \sigma_{2 n}\right) $ 其中 $ \sigma_{2 j}(1 \leq j \leq n) $ 是换元型置换, 对 $ \forall x=\left(x_{1}, x_{2}, \cdots, x_{n}\right) \in C $,令 $ \sigma_{2}(x)=\left(\begin{array}{cccc}x_{1} & x_{2} & \cdots & x_{n} \\ \downarrow & \downarrow & \cdots & \downarrow \\ \sigma_{21}\left(x_{1}\right) & \sigma_{22}\left(x_{2}\right) & \cdots & \sigma_{2 n}\left(x_{n}\right)\end{array}\right) $,  $ \sigma_{2 j}: F_{q} \longrightarrow F_{q} $
+( $ n $ 个置换), 每个位置上对应一个置换记 $ C_{2}=\overline{\sigma}_{2}(C)=\left\{\overline{\sigma}_{2}(x) \mid x \in C\right\} $, 称之为码 $ C $ 的换元型置换码.
+\end{definition}
+
+\begin{example}
+三元 $ (3,3,3) $ 码 $ C=\{012,120,201\} $,
+令 $ \sigma_{2 j}=\left(\begin{array}{lll}0 & 1 & 2 \\ \downarrow & \downarrow & \downarrow \\ 1 & 2 & 0\end{array}\right) $, 其中 $ j=1,2,3 $, 则 $ \sigma_{21}=\sigma_{22}=\sigma_{23} $ ， $ \overline{\sigma}_{2}=\left(\sigma_{21}, \sigma_{22}, \sigma_{23}\right) $, 则 $ \boldsymbol{C} $ 的换元型置换码 $ C_{2}=\{120,201,012\} $, 再
+$$
+\text { 令 } \sigma_{2 j}^{\prime}=\left(\begin{array}{ccc}
+0 & 1 & 2 \\
+\downarrow & \downarrow & \downarrow \\
+2 & 1 & 0
+\end{array}\right), \overline{\sigma}_{2}^{\prime}=\left(\sigma_{21}^{\prime}, \sigma_{22}^{\prime}, \sigma_{23}^{\prime}\right), \sigma_{21}^{\prime}=\sigma_{22}^{\prime}=\sigma_{23}^{\prime} \text {, }
+$$
+则有 $ C $ 的换元型置换码为 $ C_{2}^{\prime}=\{210,102,021\} $. 若令 $ C= \left(\begin{array}{lll}
+0 & 1 & 2 \\
+1 & 2 & 0 \\
+2 & 0 & 1
+\end{array}\right)$, 则
+$$
+C_{2}=\left(\begin{array}{lll}
+1 & 2 & 0 \\
+2 & 0 & 1 \\
+0 & 1 & 2
+\end{array}\right), C_{2}^{\prime}=\left(\begin{array}{lll}
+2 & 1 & 0 \\
+1 & 0 & 2 \\
+0 & 2 & 1
+\end{array}\right)
+$$
+\end{example}
+
+\begin{example}
+$ C=\{010,101\}, \overline{\sigma}_{2}=\left(\sigma_{21}, \sigma_{22}, \sigma_{23}\right) $
+$$
+\sigma_{21}=\left(\begin{array}{cc}
+0 & 1 \\
+\downarrow & \downarrow \\
+1 & 0
+\end{array}\right) \quad \sigma_{22}=\left(\begin{array}{ll}
+0 & 1 \\
+\downarrow & \downarrow \\
+0 & 1
+\end{array}\right) \sigma_{23}=\left(\begin{array}{cc}
+0 & 1 \\
+\downarrow & \downarrow \\
+1 & 0
+\end{array}\right)
+$$
+于是 $ C $ 的换元型置换码 $ C_{2}=\{111,000\} $, 可看出 $ C $ 与 $ C_{2} $ 的最小距离相同.
+\end{example}
+
+\begin{example}
+设 $ C=\{012,210,010\}, \sigma_{1}=\left(\begin{array}{lll}1 & 2 & 3 \\ \downarrow & \downarrow & \downarrow \\ 2 & 3 & 1\end{array}\right) $, 则码 $ C $ 的换位型置换码 $ C_{1}=\{201,021,001\} $. 设 $ \sigma_{1}^{\prime}=\left(\begin{array}{lll}1 & 2 & 3 \\ \downarrow & \downarrow & \downarrow \\ 3 & 1 & 2\end{array}\right) $, 则码 $ C $ 的换位型置换码 $ C_{1}^{\prime}=\{120,102,100\} $, 若记$C=\left(\begin{array}{lll}
+0 & 1 & 2 \\
+2 & 1 & 0 \\
+0 & 1 & 0
+\end{array}\right) $, 则
+$$
+ C_{1}=\left(\begin{array}{lll}
+2 & 0 & 1 \\
+0 & 2 & 1 \\
+0 & 0 & 1
+\end{array}\right), C_{1}^{\prime}=\left(\begin{array}{lll}
+1 & 2 & 0 \\
+1 & 0 & 2 \\
+1 & 0 & 0
+\end{array}\right)
+$$
+可以看出 $ C $ 与 $ C_{1}, C_{1}^{\prime} $ 的最小距离相同, 且它们是列的置换.
+\end{example}
+
+\begin{remark}
+
+    (1) 若设 $ \sigma_{1}^{-1} $ 与 $ \overline{\sigma}_{2}^{-1} $ 分别是 $ \sigma_{1} $ 和 $ \overline{\sigma}_{2} $ 的逆置换,则有 $ \sigma_{1}^{-1}\left(C_{1}\right)=C, \overline{\sigma}_{2}^{-1}\left(C_{2}\right)=C $.
+    
+(2) 将 $ q $ 元 $ (n, M) $ 码排成一个 $ M \times n $ 矩阵, 每个码字为一行
+$$
+C=\left(\begin{array}{cccc}
+x_{11} & x_{12} & \cdots & x_{1 n} \\
+x_{21} & x_{22} & \cdots & x_{2 n} \\
+\vdots & \vdots & & \vdots \\
+x_{M 1} & x_{M 2} & \cdots & x_{M n}
+\end{array}\right)_{M \times n},
+$$
+则码 $ C $ 的换位置换等价于矩阵的列的置换. 码 $ C $ 的换元置换等价于矩阵每一列中字符的置换.
+\end{remark}
+
+结论：\textbf{码的换位置换和换元置换不会改变码的码长, 码字个数和最小距离.}
+
+\begin{definition}
+    称换位型置换和换元型置换为码的等价变换.对于两个 $ q $ 元码,如果其中一个可以经过等价变换转化为另一个,则称这两个 $ q $ 元码是等价的.
+\end{definition}
+
+\begin{lemma}
+任意一个 $ q $ 元 $ (n, M, d) $ 码 $ C $ 都等价于一个包含零码字 $ \underbrace{00 \cdots 0}_{n \text { 个 }} $ 的 $ q $ 元 $ (n, M, d) $ 码.
+\end{lemma}
+\begin{proof}
+将 $ C $ 中的所有码字排成一个 $ M \times n $ 矩阵, 每个码字一行, 对矩阵的每列分别做换元型置换,总可以将矩阵的第一行变为零向
+量.事实上, $ C=\left\{\begin{array}{l}x_{11} \\ \vdots \\ x_{i-1,1} \\ 0 \\ x_{i+1,1} \\ \vdots \\ x_{M 1}\end{array}\right. $ 令 $ \sigma_{21}=\left\{\begin{array}{l}x_{11} \\ \downarrow \\ 0\end{array}\right. $
+\end{proof}
+
+\begin{example}
+ 设 $ C $ 和 $ C^{\prime} $ 为两个二元 $ (5,4,3) $ 码.
+$$
+C=\left(\begin{array}{lllll}
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 1 \\
+1 & 1 & 1 & 1 & 1 \\
+1 & 1 & 0 & 0 & 0
+\end{array}\right) \quad C^{\prime}=\left(\begin{array}{lllll}
+0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 1 & 1
+\end{array}\right)
+$$
+证明: $ C $ 与 $ C^{\prime} $ 等价.
+
+证明: 对码 $ C $ 的第3个坐标做换元置换, $ \sigma_{23}=\left(\begin{array}{cc}0 & 1 \\ \downarrow & \downarrow \\ 1 & 0\end{array}\right) $,
+$
+C_{2}=\left(\begin{array}{lllll}
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 1 \\
+1 & 1 & 0 & 1 & 1 \\
+1 & 1 & 1 & 0 & 0
+\end{array}\right)
+$,
+再交换3,4两行（码字的位置改变,码字不变）得
+到 $ C_{2}^{\prime}=\left(\begin{array}{lllll}0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 1 & 1 \\ 1 & 1 & 1 & 0 & 0 \\ 1 & 1 & 0 & 1 & 1\end{array}\right) $
+再交换2,4列, 得 $ C^{\prime}=\left(\begin{array}{lllll}0 & 0 & 0 & 0 & 0 \\ 0 & 1 & 1 & 0 & 1 \\ 1 & 0 & 1 & 1 & 0 \\ 1 & 1 & 0 & 1 & 1\end{array}\right) $
+\end{example}
+
+
+ \subsection{$ A_{q}(n, d) $ 的性质}
+ 
+主要讨论关于 $ A_{q}(n, d) $ 的性质.
+\begin{definition}[码 $ C $ 的最小重量: ]
+    设 $ C \subset V(n, q) $, 是一个 $ q $ 元码, 码 $ C $ 的最小重量(简称为重量) 定义为码 $ C $ 中非零码字重量的最小值, 记
+为 $ \omega(C) $, 即 $ \omega(C)=\min \{\omega(x) \mid x \in C, x \neq 0\} $.
+\end{definition}
+\begin{example}
+    $ C=\{1100,1000,0110\}, \omega(C)=1 $.
+\end{example}
+\begin{definition}
+    设 $ x=x_{1} x_{2} \cdots x_{n} \in V(n, 2), y=y_{1}y_2 \cdots y_{n} \in V(n, 2), x $ 与 $ y $ 的交定义为 $ x \cap y=\left(x_{1} y_{1}, x_{2} y_{2}, \cdots, x_{n} y_{n}\right) $
+\end{definition}
+\begin{example}
+    $ x=1010, y=0111, x \cap y=(0,0,1,0)=0010 $.
+\end{example}
+
+\textbf{Hamming距离和Hamming重量的关系:}
+\begin{lemma}
+    关于两个向量之间的Hamming距离和Hamming重量, 有如下关系:
+    
+(1) 对 $ \forall x, y \in V(n, q), d(x, y)=\omega(x-y) $
+
+(2)对 $ \forall x, y \in V(n, 2), d(x, y)=\omega(x)+\omega(y)-2 \omega(x \cap y) $
+\end{lemma}
+\begin{proof}
+    (1)当我们从向量 $ x $ 减去向量 $ y $ 时，结果向量 $ x-y $ 在任何位置上的元素要么是零 (如果 $ x $ 和 $ y $ 在该位置上的元素相同)，要么是非零（如果 $ x $ 和 $ y $ 在该位置上的元素不同) .因此， $ x-y $ 中非零元素的数量正好等于 $ x $ 和 $ y $ 之间不同元素的数量，即 $ d(x, y) $ .这意味着 $ d(x, y) $ 等于 $ x-y $ 的Hamming重量 $ \omega(x-y) $ .
+
+(2)在二进制向量中，Hamming重量 $ \omega(x) $ 和 $ \omega(y) $ 分别是 $ x $ 和 $ y $ 中 1 的数量.交集 $ x \cap y $ 表示 $ x $ 和 $ y $ 同时为 1 的位置，其Hamming重量 $ \omega(x \cap y) $ 表示这些共有的 1 的数量.因此， $ d(x, y) $ 实际上是 $ x $ 中独有的 1 加上 $ y $ 中独有的 1 的总数.可以表示为 $ \omega(x)+\omega(y) $ 减去两倍的共有 1 的数量（因为共有的 1 在 $ \omega(x) $ 和 $ \omega(y) $ 中各被计算了一次）,即 $ d(x, y)=\omega(x)+\omega(y)-2 \omega(x \cap y) $
+    
+ 或者$ d(x, y)=\omega(x-y) $, 当 $ x_{i} \neq 0, y_{i} \neq 0 $ 时, $ x_{i} y_{i} \neq 0 $,故
+$$
+d(x, y)=\omega(x-y)=\omega(x)+\omega(y)-2 \omega(x \cap y) .
+$$
+\end{proof} 
+\begin{example}
+    $ x=01100, y=10110 $.
+$
+d(x, y)=\omega(x)+\omega(y)-2=2+3-2=3
+$
+\end{example}
+
+\begin{theorem}
+    设 $ d $ 为奇数, 二元 $ (n, M, d) $ 码存在的充分必要条件为存在二元 $ (n+1, M, d+1) $ 码.
+\end{theorem}
+\begin{proof}
+     $ \Rightarrow $ : 设 $ C $ 为一个二元 $ (n, M, d) $ 码, 对于 $ \forall x=x_{1} x_{2} \cdots x_{n} \in C $, 定义 $$ \widehat{x}=\left\{\begin{array}{ll}x_{1} x_{2} \cdots x_{n} 0, & \text { 如果 } \omega(x) \text { 是偶数 } \\ x_{1} x_{2} \cdots x_{n} 1, & \text { 如果 } \omega(x) \text { 是奇数 }\end{array}\right. $$
+     于是有 $ \widehat{x}=x_{1} x_{2} \cdots x_{n} x_{n+1} $, 其中
+$ x_{n+1}=\sum\limits_{i=1}^{n} x_{i}(\bmod 2) $ 或 $ \sum\limits_{i=1}^{n+1} x_{i} \equiv 0(\bmod 2) $. 令 $ \widehat{C}=\{\widehat{x} \mid x \in C\} $, 对于 $ \forall \widehat{x}, \widehat{y} \in \widehat{C} $, 由于 $ \omega(\widehat{x}) $ 和 $ \omega(\widehat{y}) $ 都是偶数, 故 $ d(\widehat{x}, \widehat{y})=\omega(\widehat{x})+\omega(\widehat{y})-2 \omega(\widehat{x} \cap \widehat{y}) $ 也是偶数, 因此 $ d(\widehat{C}) $ 是偶数.
+
+因为 $ d $ 是奇数, 又 $ d(C) \leq d(\widehat{C}) $, 故有 $ d<d(\widehat{C}) \leq d+1 $ (由构造知最小距离至多多1), 于是有 $ d(\widehat{C})=d+1 $, 于是 $ \widehat{C} $ 是一个二元 $ (n+1, M, d+1) $ 码. 称由 $ C $ 到 $ \widehat{C} $ 的构造方法为对码 $ C $ 增加一个奇偶校验位.
+
+$ \Leftarrow $ : 设 $ D $ 是一个二元 $ (n+1, M, d+1) $ 码, 则存在 $ x, y \in D $, 使得 $ d(x, y)=d+1 $, 令 $ x=x_{1} \cdots x_{i-1} 1 x_{i+1} \cdots x_{n+1}, y= $ $ y_{1} \cdots y_{i-1} 0 y_{i+1} \cdots y_{n+1} $. $D$中所有码字第 $ i $ 个位置的元素去掉则得到 $ M $ 个长度为 $ n $ 的码字, $\text { 且 } \widehat{x}=x_{1} \cdots x_{i-1} x_{i+1} \cdots x_{n+1}, \widehat{y}=y_{1} \cdots y_{i-1} y_{i+1} \cdots y_{n+1} \text {, }$
+$ d(\widehat{x}, \widehat{y})=d $, 且对其它得到的新的长度为 $ n $ 的码字, 其距离必 $ \geq d $.故得到的新码为 $ (n, M, d) $ 码.
+\end{proof}
+
+\begin{corollary}
+    如果 $ d $ 是奇数, 则 $ A_{2}(n+1, d+1)=A_{2}(n, d) $. 它等价于如果 $ d $ 是偶数, 则 $ A_{2}(n, d)=A_{2}(n-1, d-1) $.
+\end{corollary}
+\begin{example}
+    确定 $ A_{2}(5,3) $. 设 $ C $ 是一个二元 $ (5, M, 3) $ 码,我们来求最大的 $ M $.
+
+假设 $ 00 \cdots 0 \in C $, 由于 $ d(C)=3 $, 故 $ C $ 中任意码字 $ x, x \neq 0 $, 必有 $ \omega(x) \geq 3 $, 另外, $ C $ 中重量为 4 或 5 的码字至多有 1 个,否则, 若 $ C $中存在两个重量为 4 或 5 的码字 $ x $ 和 $ y $, 则 $ x $ 和 $ y $ 中为零的分量至多各有1个. 因此 $ d(x, y) \leq 2 $, 这与 $ d(C)=3 $ 矛盾.
+
+故 $ C $ 中至少含有 $ M-2 $ 个重量为 3 的码字, 不妨设 $ 11100 \in C $,因 $ d(C)=3 $, 不难验证另外重量为3的码字只能为 $ 10011,01011,00111 $ 中的一个. 事实上
+$$
+\begin{aligned}
+3 \leq d(x, y)&=\omega(x)+  \omega(y)-2 \omega(x \cap y) \\
+& =3+3-2 \omega(x, y)=6-2 \omega(x \cap y) \\
+& \Rightarrow \omega(x \cap y)=1
+\end{aligned}
+$$
+因 $ 11100 \in C $, 故对 $ y, d(x, y)=4, \omega(x \cap y)=1 $. 
+$ y $ 可能为 $ 10011,01011,00111 $, 又任两个的距离均 $ \leq 2 $, 故由 $ d(C)=3 $ 知, $ y $ 只可能为上述 3 个码字中的一个. 不妨取 $ 00111 \in C $, 于是有 $ A(3,5) \leq 1+1+2=4 $, 最后对于重量是4或5的码字进行讨论知 11011 是 $ C $ 中的一个码字.
+
+因此 $ A_{2}(5,3)=4, \quad C=\left(\begin{array}{lllll}0 & 0 & 0 & 0 & 0 \\ 1 & 1 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 & 1 \\ 1 & 1 & 0 & 1 & 1\end{array}\right) $
+故由推论知 $ A_{2}(6,4)=4 $
+
+$$ (5,4,3)\text{码}\left(\begin{array}{lllll}0 & 0 & 0 & 0 & 0 \\ 1 & 1 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 & 1 \\ 1 & 1 & 0 & 1 & 1\end{array}\right) \underset{\text { 奇偶验验位 }}{\stackrel{\text { 增加 }}{\longrightarrow}}\left(\begin{array}{llllll}0 & 0 & 0 & 0 & 0 & 0 \\ 1 & 1 & 1 & 0 & 0 & 1 \\ 0 & 0 & 1 & 1 & 1 & 1 \\ 1 & 1 & 0 & 1 & 1 & 0\end{array}\right)(6,4,4)\text{码} $$
+\end{example}
+\subsection{ $A_{q}(n, d) $ 的界}
+\begin{definition}
+    设 $ x \in V(n, q), r $ 是非负整数, 以 $ x $ 为中心, 以 $ r $ 为半径的球定义为
+$$
+S_{q}(x, r)=\{y \in V(n, q) \mid d(x, y) \leq r\}
+$$
+\end{definition}
+\begin{lemma}
+    对于 $ \forall x \in V(n, q) $, 球 $ S_{q}(x, r) $ 中所含 $ V(n, q) $ 中向量的个数为 
+    
+    $ \left(\begin{array}{c}n \\ 0\end{array}\right)+\left(\begin{array}{c}n \\ 1\end{array}\right)(q-1)+\left(\begin{array}{c}n \\ 2\end{array}\right)(q-1)^{2}+\cdots+\left(\begin{array}{c}n \\ r\end{array}\right)(q-1)^{r} $.
+\end{lemma}
+\begin{proof}
+     因为与 $ x $ 距离为 $ i $ 的向量共有 $ \left(\begin{array}{c}n \\ i\end{array}\right)(q-1)^{i} $
+(共 $ n $ 个位置, $ n-i $ 个位置对应分量相同,故固定,其余 $ i $ 个位置 $ x $ 中一个位置的分量取定, 则 $ y \in V(n, q), d(x, y) \leq i, y $ 在这个位置有 $ q-1 $ 种取法，与 $ x $ 取定的不同, 故对于 $ x $ 的 $ i $ 个位置 $ y $ 有 $ (q-1)^{i} $ 种取法, 故共有 $ \left(\begin{array}{c}n \\ i\end{array}\right)(q-1)^{i} $ 个),从而引理得证.即 $ \sum\limits_{i=0}^{r}\left(\begin{array}{c}n \\ i\end{array}\right)(q-1)^{i} $.
+\end{proof}
+
+\begin{theorem}[Hamming界]
+对任意 $ q $ 元 $ (n, M, 2 t+1) $ 码, 我们有
+$$
+M\left\{\left(\begin{array}{c}
+n \\
+0
+\end{array}\right)+\left(\begin{array}{c}
+n \\
+1
+\end{array}\right)(q-1)+\left(\begin{array}{c}
+n \\
+2
+\end{array}\right)(q-1)^{2}+\cdots+\left(\begin{array}{c}
+n \\
+t
+\end{array}\right)(q-1)^{t}\right\} \leq q^{n} \text {. }
+$$
+\end{theorem}
+\begin{proof}
+设 $ C $ 是一个 $ q $ 元 $ (n, M, 2 t+1) $ 码, 以 $ C $ 中的码字为中心，以 $ t $ 为半径的球必定互不相交 (事实上, $ \exists x_{1}, x_{2} \in C $ 使得 $ y \in S_{q}\left(x_{1}, t\right) \cap S_{q}\left(x_{2}, t\right) $, 则 $ d\left(x_{1}, y\right) \leq t, d\left(x_{2}, y\right) \leq t $,从而 $ d\left(x_{1}, x_{2}\right) \leq d\left(x_{1}, t\right)+d\left(x_{2}, t\right) \leq t+t=2 t $ 与码 $ C $ 的最小距离为 $ 2 t+1 $ 矛盾 $ ) $
+由于每个球中含有 $ \sum\limits_{i=0}^{t}\left(\begin{array}{c}n \\ i\end{array}\right)(q-1)^{i} $ 个 $ V(n, q) $ 中的向量且 $ |V(n, q)|=q^{n} $, 故 $ M \sum\limits_{i=0}^{t}\left(\begin{array}{c}n \\ i\end{array}\right)(q-1)^{i} \leq q^{n} $.
+\end{proof}
+
+\begin{remark}
+
+(1)对于任意二元 $ (n, M, 2 t+1) $ 码,我们有
+$$
+M\left\{1+\left(\begin{array}{c}
+n \\
+1
+\end{array}\right)+\left(\begin{array}{c}
+n \\
+2
+\end{array}\right)+\cdots+\left(\begin{array}{c}
+n \\
+t
+\end{array}\right)\right\} \leq 2^{n}
+$$
+
+(2) Hamming界给出了 $ A_{q}(n, d) $ 的一个上界, 如二元 $ (5, M, 3) $ 码
+$$
+M(1+5) \leq 2^{5}=32 \Rightarrow M \leq 5
+$$
+故 $ A_{2}(5,3) \leq 5 $. 当然，对于满足Hamming界中的不等式的$n,M,d$并不意味着一定存在具有此参数的码.事实上，$A_2(5,3)=4$.因此，不存在二元$(5,5,3)$ 码.
+\end{remark}
+\begin{definition}
+    设 $ C $ 是一个 $ q $ 元 $ (n, M, 2 t+1) $ 码,如果
+$$
+M\left\{\left(\begin{array}{c}
+n \\
+0
+\end{array}\right)+\left(\begin{array}{c}
+n \\
+1
+\end{array}\right)(q-1)+\left(\begin{array}{c}
+n \\
+2
+\end{array}\right)(q-1)^{2}+\cdots+\left(\begin{array}{c}
+n \\
+t
+\end{array}\right)(q-1)^{t}\right\}=q^{n}
+$$
+则称 $ C $ 为完备码.
+\end{definition}
+
+对于二元重复码 $ C=\{00 \cdots 0,11 \cdots 1\} $, 它是一个二元 $ (n, 2, n) $ 码, 当 $ n $ 为奇数时, $ C $ 是完备码. 另外, 不难验证, 只含一个码字的码以及由 $ V(n, q) $ 构成的 $ q $ 元 $ \left(n, q^{n}, 1\right) $ 码都是完备码. 这三种完备码称为平凡的完备码.
+\begin{theorem}[Gilbert-Varshamov界]
+    $$
+A_q(n, d) \geq \frac{q^n}{\sum\limits_{i=0}^{d-1} \binom{n}{i} (q-1)^i}.
+$$
+\end{theorem}
+\begin{proof}
+ 设 $ M=A_{q}(n, d), C $ 是一个 $ q $ 元 $ (n, M, d) $ 码, 则
+$$
+V(n, q) \subseteq \bigcup_{x \in C} S_{q}(x, d-1)
+$$
+用反证法, 若 $ \exists y \in V(n, q), y \notin \bigcup_{x \in C} S_{q}(x, d-1) $, 则对 $ \forall x \in C, d(x, y) \geq d $, 则可得到一个 $ q $ 元 $ \left(n, M^{\prime}, d\right) $ 码, $ C^{\prime}=C \cup\{y\}, M^{\prime}=M+1>M $. 这与 $ M=A_{q}(n, d) $ 矛盾, 因此
+$$
+M\left\{\left(\begin{array}{l}
+n \\
+0
+\end{array}\right)+\left(\begin{array}{c}
+n \\
+1
+\end{array}\right)(q-1)+\cdots+\left(\begin{array}{c}
+n \\
+d-1
+\end{array}\right)(q-1)^{d-1}\right\} \geq q^{n} .
+$$
+\end{proof}
+
+\begin{theorem}[Singleton界]
+    $$
+A_{q}(n, d) \leq q^{n-d+1} .
+$$
+\end{theorem}
+\begin{proof}
+    设 $ M=A_{q}(n, d), C $ 是一个 $ q $ 元 $ (n, M, d) $ 码.将码 $ C $ 中所有码字都去掉最后 $ d-1 $ 个分量, 则得到的 $ V(n-d+1, q) $ 中的 $ M $ 个向量一定互不相同. 否则就会有 $ d(C) \leq d-1 $, 这与 $ C $ 的最小距离为 $ d $矛盾,而 $ V(n-d+1, q) $ 中有 $ q^{n-d+1} $ 个元素,故 $ M \leq q^{n-d+1} $.
+\end{proof}
+

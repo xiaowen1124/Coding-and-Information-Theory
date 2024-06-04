@@ -1,0 +1,250 @@
+\section{信道的正编码定理和反编码定理}
+在前几节中, 我们已给出了信道序列的最大可达速率与信道容量的定义.我们现在讨论它们的相互关系问题.这就是信道编码定理.
+
+\begin{theorem}[信道编码的正编码定理]
+    如果 $ C $ 是一个离散无记忆信道 $ \mathscr{C} $ 的信道容量, 那么 $ C $ 必是该离散无记忆信道序列的一个可达速率.
+\end{theorem}
+\begin{proof}
+    关于信道编码定理的证明有许多种方法,较为精确的证明方法为组合法, 但它涉及许多排列组合的计算. 另外, 还可以利用 $ \epsilon $ 专线的方法给以证明, 该方法是编码定理的经典证明方法, 很为直观. 在本书中我们采用随机码的方法给以证明, 这是一种很为巧妙的证明方法,在信息论中广为使用. 对此我们分以下几步给出证明思路.
+
+    1. 随机码的定义
+
+因为 $ \mathscr{C}^{n} $ 是离散无记忆信道序列，所以它的转移概率分布为
+$$
+p^{(n)}\left(v^{(n)} \mid u^{(n)}\right)=\prod_{i=1}^{n} p\left(v_{i} \mid u_{i}\right)
+$$
+它由 $ \mathscr{C}=\{\mathscr{U}, P(v \mid u), \mathscr{V}\} $ 决定. 记 $ p_{0}(u) $ 是信道的入口分布,使 $ I\left(p_{0}(u) ; p(v \mid u)\right)=C $ 成立. 设 $ \mathscr{S} $ 为具有均匀分布的信源,
+\begin{equation}
+    \mathscr{X}^{n}=\left\{1,2, \cdots, M_{n}\right\}, P^{(n)}(i)=\frac{1}{M_{n}}
+\end{equation}
+那么随机码的定义为 $ \mathscr{X}^{n} \rightarrow \mathscr{U}^{n} $ 的一组随机映射
+\begin{equation}\label{4.6.2}
+\overline{f}^{*}=\left\{f_{1}^{*}, f_{2}^{*}, \cdots, f_{M_{n}}^{*}\right\}
+\end{equation}
+它满足以下条件.\\
+(1) $ M_{n}=\left|\mathscr{X}^{n}\right| $ 是信源字母表的元素个数.\\
+(2) $ f_{1}^{*}, f_{2}^{*}, \cdots, f_{M_{n}}^{*} $ 一组独立同分布的随机变量.\\
+(3) 每个 $ f^{*} $ 在 $ \mathscr{U}^{n} $ 中取值, 并具有分布为
+$$
+p_{0}^{(n)}\left(u^{(n)}\right)=\prod_{i=1}^{n} p\left(u_{i}\right)
+$$
+
+随机码 $ \overline{f}^{*} $ 的一个样本值记为
+\begin{equation}\label{4.6.3}
+\overline{f}^{(n)}=\left\{f_{1}^{(n)}, f_{2}^{(n)}, \cdots, f_{M_{n}}^{(n)}\right\}=\left\{u_{1}^{(n)}, u_{2}^{(n)}, \cdots, u_{M_{n}}^{(n)}\right\}
+\end{equation}
+它就是 $ \mathscr{X}^{n} \rightarrow \mathscr{U}^{n} $ 的一个编码.
+
+如果信道的输入概率分布为 $ p_{0}^{(n)}\left(u^{(n)}\right) $ 与信道转移概率分布 $ p^{(n)}\left(v^{(n)} \mid u^{(n)}\right) $, 那么信道输入与输出的联合概率分布密度与互信息密度函数确定，它们分别为
+$$
+p_{0}^{(n)}\left(u^{(n)}, v^{(n)}\right)=p_{0}^{(n)}\left(u^{(n)}\right) p^{(n)}\left(v^{(n)} \mid u^{(n)}\right)
+$$
+及
+$$
+i_{0}\left(u^{(n)} ; v^{(n)}\right)=\log \left(\frac{p_{0}^{(n)}\left(u^{(n)}, v^{(n)}\right)}{p_{0}^{(n)}\left(u^{(n)}\right) q_{0}^{(n)}\left(v^{(n)}\right)}\right)
+$$
+由于输入概率分布 $ p_{0}^{(n)}\left(u^{(n)}\right) $ 、信道转移概率分布 $ p^{(n)}\left(v^{(n)} \mid u^{(n)}\right) $是无记忆的, 可知 $ p_{0}^{(n)}\left(u^{(n)}, v^{(n)}\right) $, \\$q_{0}^{(n)}\left(v^{(n)}\right) $ 是无记忆的.
+
+因此互信息密度函数为
+\begin{equation}\label{4.6.4}
+i_{0}\left(u^{(n)} ; v^{(n)}\right)=\sum_{j=1}^{n} \log \left(\frac{p_{0}\left(u_{j}, v_{j}\right)}{p_{0}\left(u_{j}\right) q_{0}\left(v_{j}\right)}\right)
+\end{equation}
+
+2. 阈值译码算法与带随机编码的通信系统
+
+阈值译码算法的定义如下.
+\begin{definition}
+    如果 $ \overline{f} $ 是由式(\ref{4.6.3})给定的随机编码样本, 那么它的码元集合也由式(\ref{4.6.3})给定. 如果 $ v^{(n)} $ 是信道序列的一个输出向量,那么以下的译码算法为阈值译码算法,
+\begin{equation}\label{4.6.5}
+    g\left(v^{(n)}\right)=\left\{\begin{array}{ll}
+j, & \text { 如果 } i_{0}\left(u_{j}^{(n)} ; v^{n}\right)>K_{n} \\
+1, & \text { 否则. }
+\end{array}\right.
+\end{equation}
+其中 $ K_{n} $ 是一个适当的常数, 我们称之为阈值.
+\end{definition}
+
+
+由以上定义, 我们得到一个带有随机编码的通信系统, 并记之为
+\begin{equation}\label{4.6.6}
+\varepsilon^{*}=\left\{\overline{f}^{*}, \mathscr{C}\right\}=\left\{j, f_{j}^{*}, v_{j}^{*}, g\left(v_{j}^{*}\right): j=1,2, \cdots, M_{n}\right\},
+\end{equation}
+
+对此模型, 我们说明如下.\\
+(1) 在式(\ref{4.6.6})中, $ j $ 是消息字母,它的取值概率为 $ \operatorname{Pr}\{\tilde{\xi}=j\}=\frac{1}{M_{n}} $.\\
+(2) $ f_{j}^{*} $ 是由消息字母 $ j $ 决定的随机码, 它在 $ \mathscr{U}_{n} $ 上取值, 具有概率分布为 $ p_{0}^{(n)}\left(u^{(n)}\right) $.\\
+(3) 由随机码的假定, 当 $ j \neq k $ 与时, $ f_{j}^{*} $ 与 $ f_{k}^{*} $ 相互独立.\\
+(4) $ v_{j}^{*} $ 是由输入信号 $ f_{j}^{*} $ 与信道 $ \mathscr{C}^{n} $ 决定的输出信号, 它在 $ \mathscr{V}^{n} $ 上取值, 当 $ f_{j}^{*}=u^{(n)} $ 时, $ V_{j}^{*} $ 的概率分 布为
+$$
+\operatorname{Pr}\left\{v_{j}^{*}=v^{(n)} \mid f_{j}^{*}=u^{(n)}\right\}=p^{(n)}\left(v^{(n)} \mid u^{(n)}\right)
+$$
+因此 $ \left(f_{j}^{*}, v_{j}^{*}\right) $ 的联合概率分布为
+$$
+p_{0}^{(n)}\left(u^{(n)}, v^{(n)}\right)=\operatorname{Pr}\left\{f_{j}^{*}=u^{(n)}, v_{j}^{*}=v^{(n)}\right\}=p_{0}^{(n)}\left(u^{(n)}\right) p^{(n)}\left(v^{(n)} \mid u^{(n)}\right),
+$$\\
+(5) 当 $ k \neq j $ 与时, $ \left(f_{k}^{*}, v_{k}^{*}\right) $ 与 $ v_{j}^{*} $ 相互独立, 因此它们的联合概率分布为
+$$
+\operatorname{Pr}\left\{f_{j}^{*}=u^{(n)}, v_{k}^{*}=v^{(n)}\right\}=p_{0}^{(n)}\left(u^{(n)}\right) q_{0}\left(v^{(n)}\right),
+$$\\
+(6) $ g\left(v_{j}^{*}\right) $ 是由式(\ref{4.6.5})给定的译码函数.
+
+3. 随机编码的误差概率
+
+我们现在考虑由式(\ref{4.6.3})和式(\ref{4.6.5})给定的随机码的编、译码方案的误差问题. 它可能出现两种不同类型的误差.
+\begin{definition}
+    如果 $ \bar{f}(n) $ 是随机码 $ \bar{f}^{*} $ 确定的一个编码，由式(\ref{4.6.3})給定, $ g\left(v^{(n)}\right) $ 是由式(\ref{4.6.5})给出的阈值译码,那么通信系统(4.6.6) 式所出现的两种不同类型的误差概率为
+    
+(1) 第一类误差概率. 如果发送消息是 $ j $, 但是最终还原消息 $ g\left(v_{j}^{*}\right) \neq j $;
+
+(2)第二类误差概率. 如果发送消息是某个 $ j $, 但是有一个其他的发送消息 $ k \neq j $,使 $ k $ 的还原消息是 $ j $, 也就是 $ g\left(v_{k}^{*}\right)=j $.
+\end{definition}
+这两类误差我们分别记为 $ e_{1, j}\left(\bar{f}^{(n)}, g\right), e_{2, j}\left(\bar{f}^{*}, g\right) $, 它们分别是
+$$
+\left\{\begin{array}{l}
+e_{1, j}\left(\overline{f}^{(n)}, g\right)=\operatorname{Pr}\left\{g\left(v_{j}^{*}\right) \neq j\right\} \\
+e_{2, j}\left(\overline{f}^{*}, g\right)=\operatorname{Pr}\left\{\text { 有一个 } k \neq j, \text { 使 } g\left(v_{k}^{*}\right)=j\right\},
+\end{array}\right.
+$$
+那么它们的平均误差分别为
+$$
+e_{\tau}\left(\overline{f}^{(n)}, g\right)=\frac{1}{M_{n}} \sum_{j=1}^{M_{n}} e_{\tau}\left(\overline{f}^{(n)}, g\left(v_{j}^{*}\right)\right), \quad \tau=1,2 .
+$$
+而记
+$$
+e_{0}\left(\overline{f}^{(n)}, g\right)=e_{1}\left(\overline{f}^{(n)}, g\right)+e_{2}\left(\overline{f}^{(n)}, g\right)
+$$
+为总误差概率. 我们以下记
+$$
+e_{\tau}\left(\overline{f}^{*}, g\right)=\sum_{\overline{f}(n)} \operatorname{Pr}\left\{f^{*}=\overline{f}^{(n)}\right\} e_{\tau}\left(\overline{f}^{(n)}, g\right), \quad \tau=1,2
+$$
+为随机码 $ \overline{f}^{*} $ 的平均概率误差, 其中 $ \operatorname{Pr}\left\{f^{*}=\bar{f}^{(n)}\right\} $ 为随机玛 $ f^{*} $ 取样本值 $ \overline{f}^{(n)} $ 概率. 我们现在估计 $ e_{\tau}\left(\overline{f}^{*}, g\right) $ 的值.
+
+4.关于随机编码的误差概率的估计
+
+在对随机编码的误差概率进行估计时, 我们首先注意到在随机编码 $ f_{j}^{*} $ 与接受信号之间的对称性, 因此有
+$$
+e_{\tau}\left(\overline{f}^{*}, g\right)=e_{\tau}\left(\overline{f}_{1}^{*}, g\right), \quad \tau=1,2
+$$
+成立, 这样只要估计 $ e_{\tau}\left(\overline{f}_{1}^{*}, g\right) $ 的值就可.
+可以证明, 取 $ \epsilon>0 $ 是任意小的正数, 当 $ n $ 充分大时, 必有
+$$
+e_{1}\left(\overline{f}_{1}^{*}, g\right)<\frac{\epsilon}{2}, \quad e_{2}\left(\overline{f}_{1}^{*}, g\right)<\frac{\epsilon}{2}
+$$
+成立.
+由此可得,对任何 $ \epsilon>0 $, 对均匀分布的信源 $ \mathscr{S} $, 当它的消息数 $ M_{n}=2^{(n R(1-\epsilon))} $ 时, 如果编码为式 (\ref{4.6.2}) 的随机码, 而译码是式 (\ref{4.6.4}) 的阈值 $ K_{n}=n R\left(1-\frac{\epsilon}{2}\right) $, 则当 $ n $ 充分大时,相应的平均误差概率
+$$
+e_{0}\left(\overline{f}^{*}, g\right) \leq e_{1}\left(\overline{f}^{*}, g\right)+e_{2}\left(\overline{f}^{*}, g\right) \leq \epsilon
+$$
+
+因为 $ \epsilon $ 是任意取的, 所以必存在一列 $ \epsilon_{n} \rightarrow 0 $, 使以上命题同样成立. 因此 $ R=C $ 是无记忆信道序列 $ \mathscr{C}^{n} $ 的可达速率. 定理得证.
+\end{proof}
+
+
+我们现在讨论无记忆信道编码的反编码定理，这就是信道容量是无记忆信道序列的一个最大可达速率.
+
+\begin{theorem}[无记忆信道编码的反编码定理]
+    如果 $ C $ 是一个离散无记忆信道 $ \mathscr{C} $ 的信道容量, 那么对任何 $ R>C $, 则 $ R $ 一定不是该离散无记忆信道序列的可达速率.
+\end{theorem}
+该定理不证明.
+
+综合信道编码定理和逆定理, 我们可知码率小于信道容量是错误概率趋于 0 的充分必要条件.
+
+信道编码定理的证明方法为随机码方法, 它首次由Shannon在他的原始论文中提出.这种方法虽然巧妙, 但它却不是构造性的, 它说明存在许多满足定理要求的码,但它并没有告诉我们具体的构造方法. 从Shannon发表他的文章到现在, 编码学者们一直在寻找构造满足信道编码定理条件的码的具体方法.
+
+在实际的编码工作中, 一个码仅满足定理要求是远远不够的, 它的编码和译码计算必须快速实现,使它的运算与通信同步,这样才具有应用价值. 在本书后面的章节中, 我们将会看到, 为了使编码和译码计算快速实现, 需要借助于代数或几何的工具, 构造出各种有用码.
+
+
+\section{可加高斯(Gaussian)信道}
+在前几节讨论的信道都是离散信道, 实际通信的信号在许多情形下是连续的. 连续信号通过分层处理才变成离散信号, 因此对连续信道的研究也是十分重要的. 现代的调制解调码理论就是对连续信号的直接处理.
+
+在连续信道中最重要的信道就是可加高斯信道, 它的定义如下.
+\begin{definition}
+    对连续型信道我们有以下定义.
+    
+(1) 称一个信道 $ \mathscr{C}=\{\mathscr{U}, P(v \mid u), \mathscr{V}\} $ 为连续信道, 如果 $ \mathscr{U}, \mathscr{V} $ 是连续型集合,如取 $ \mathscr{U}=\mathscr{V}=\mathbf{R} $ 是全体实数集合.
+
+(2) 在连续信道中, 如果存在一个随机变量 $ \zeta $, 与任何输入信号 $ \xi $ 的取值无关,且输出信号总有 $ \eta=\xi+\zeta $ 成立,那么称这个信道为可加噪声信道, 称 $ \zeta $ 为噪声随机变量.
+
+(3) 在可加噪声信道中,如果噪声随机变量是一个均值为零的正态随机变量,那么称这个信道为可加高斯信道.
+\end{definition}
+
+
+在可加高斯信道中, 记 $ \zeta $ 的方差为 $ \sigma_{N}^{2} $, 那么 $ \zeta $ 具有正态分布 $ N\left(0, \sigma_{N}^{2}\right) $. 这时信道 $ \mathscr{C} $ 的转移概率分布密度为
+\begin{equation}\label{4.7.1}
+    p(v \mid u)=\frac{1}{\sqrt{2 \pi \sigma_{N}^{2}}} \exp \left(-\frac{(v-u)^{2}}{2 \sigma_{N}^{2}}\right) .
+\end{equation}
+
+在连续信道的研究中, 对它的输入、输出及转移概率分布, 一般用分布密度来讨论, 如果记 $ p(u) $ 是输入信号的概率分布密度, 那么它的输入、输出概率分布密度同样用 $ p(u, v)=p(u) p(v \mid u) $ 来表示.这时输入与输出信号的互信息为
+\begin{equation}\label{4.7.2}
+    I(\xi ; \eta)=\int_{\mathscr{U}} \int_{\mathscr{V}} p(u, v) \log \frac{p(u, v)}{p(u) q(v)} d v d u,
+\end{equation}
+其中 $ q(v)=\displaystyle\int_{\mathscr{U}} p(u, v) d u $ 为输出信号的概率分布密度, 而 $ \xi, \eta $ 分别是信道的输入、输出随机变量.
+
+对连续状态下的互信息，同样可有关系式
+$$
+\begin{aligned}
+I(\xi ; \eta) & =H(\xi)+H(\eta)-H(\xi, \eta) \\
+& =H(\xi)-H(\xi \mid \eta) \\
+& =H(\eta)-H(\eta \mid \xi)
+\end{aligned}
+$$
+成立, 其中 $ H(\xi), H(\eta), H(\xi, \eta) $ 和 $ H(\xi \mid \eta), H(\eta \mid \xi) $ 分别是 $ \xi, \eta $ 的熵、联合熵和条件熵, 它们的定义分别为
+$$
+\begin{aligned}
+H(\xi)&=-\int_{\mathscr{U}} p(u) \log [p(u)] d u, \\
+H(\eta)&=-\int_{\mathscr{V}} q(v) \log [q(v)] d v \\
+H(\xi, \eta)&=-\int_{\mathscr{U} \times \mathscr{V}} p(u, v) \log [p(u, v)] d v d u,
+\end{aligned}
+$$
+而
+$$
+H(\xi \mid \eta)=H(\xi, \eta)-H(\eta), \quad H(\eta \mid \xi)=H(\xi, \eta)-H(\xi) .
+$$
+\begin{lemma}\label{lemma4.7.1}
+    在可加高斯信道中, 条件熵 $ H(\eta \mid \xi) $ 与输入分布 $ p(u) $ 无关,且
+$$
+H(\eta \mid \xi)=\frac{1}{2} \log \left(2 \pi e \sigma_{N}^{2}\right)
+$$
+\end{lemma}
+
+该引理不证明.
+在可加高斯信道中, 方差 $ \sigma_{N}^{2} $ 是干扰信号功率的强度. 在连续信道中,一般对输入信号的功率强度应有限制. 因此, 连续信道的信道容量应定义为对输入信号功率强度限制在一定区域内的最大互信息.
+
+\begin{definition}
+    如果 $ \mathscr{C}=\{\mathscr{U}, P(v \mid u), \mathscr{V}\} $ 为一个连续信道, 取 $ \mathscr{U}=\mathscr{V}=\mathbf{R} $, 那么它的信道容量应定义为
+\begin{equation}\label{4.7.3}
+    C=\sup \left\{I(\xi ; \eta) \mid \operatorname{Var}(\xi) \leq \sigma_{S}^{2}\right\}
+\end{equation}
+其中 $ \sigma_{S}^{2} $ 是个常数,它代表信道输入信号功率的上限, $ I(\xi ; \eta) $ 是输入、输出信号的互信息,由式(\ref{4.7.2})定义,而
+$$
+\operatorname{Var}(\xi)=\int_{-\infty}^{\infty}(u-\mu)^{2} p_{\xi}(u) d u
+$$
+是输入信号的方差, 其中 $ \mu=\displaystyle\int_{-\infty}^{\infty} u p_{\xi}(u) d u $ 是输入信号的均值.
+\end{definition}
+
+\begin{theorem}
+    在可加高斯信道中，如果输入信号功率的上限与干扰信号功率的强度分别为 $ \sigma_{S}^{2} $ 与 $ \sigma_{N}^{2} $, 那么该信道的信道容量为
+\begin{equation}\label{4.7.4}
+    C=\frac{1}{2} \log \left(1+\frac{\sigma_{S}^{2}}{\sigma_{N}^{2}}\right) .
+\end{equation}
+在信息论中,称 $ \dfrac{\sigma_{S}^{2}}{\sigma_{N}^{2}} $ 为信噪比.
+\end{theorem}
+
+
+\begin{proof}
+ 由可加信道的定义可知, 如记 $ \xi, \eta, \zeta $ 分别为输入、输出信号与噪声的随机变量, 这时 $ \eta=\xi+\zeta $. 因为 $ \xi $ 与 $ \zeta $ 相互独立, 所以
+$$
+\operatorname{Var}(\eta)=\operatorname{Var}(\xi)+\operatorname{Var}(\zeta)=\sigma_{S}^{2}+\sigma_{N}^{2}
+$$
+由引理\ref{lemma4.7.1}和最大熵原理可得
+$$
+\begin{aligned}
+I(\xi ; \eta) & =H(\eta)-\frac{1}{2} \log \left(2 \pi e \sigma_{N}^{2}\right) \\
+& \leq \frac{1}{2} \log \left(2 \pi e\left(\sigma_{S}^{2}+\sigma_{N}^{2}\right)\right)-\frac{1}{2} \log \left(2 \pi e \sigma_{N}^{2}\right) \\
+& =\frac{1}{2} \log \left(\frac{\sigma_{S}^{2}+\sigma_{N}^{2}}{\sigma_{N}^{2}}\right) \\
+& =\frac{1}{2} \log \left(1+\frac{\sigma_{S}^{2}}{\sigma_{N}^{2}}\right) .
+\end{aligned}
+$$
+另一方面，如取输入随机变量 $ \xi $ 为正态分布 $ N\left(0, \sigma_{S}^{2}\right) $ 时, 其中的等号成立, 因此式(\ref{4.7.4})成立.定理得证.
+可加高斯信道在调制解调码理论中得到应用.
+\end{proof}

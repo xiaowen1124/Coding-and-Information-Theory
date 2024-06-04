@@ -1,0 +1,110 @@
+
+信道编码的目的：在信源编码的基础上，增加一些适量的冗余信息, 保证信号的安全传输, 最终考虑在保证传输质量的前提下, 最多传输多少数量的信号(信道容量).
+
+\section{信道编码问题}
+信道编码问题 $ \left\{\begin{array}{l}\text { 线路编码（变信号） } \\ \text { 差错控制编码(信息论主要讨论的问题) }\end{array}\right. $
+
+\subsection*{信道的分类}
+离散信道：输入输出均为离散事件集.
+
+连续信道: 输入输出空间均为连续事件集.
+
+半连续信道: 输入和输出一个是离散的, 一个是连续的.
+
+\subsection*{信道的概率统计模型（表示参数）}
+信道的主要参数为转移概率 $ p(v \mid u) $
+
+信道由输入信号集合 $ \mathscr{U} $, 输出信号集合 $ \mathscr{V} $, 及转移概率 $ p(v \mid u) $ 构成.
+
+\begin{remark}
+     $ p(v \mid u) $ 转移概率: 当输入信号字母是 $ u $ 时, 输出信号字母为 $ v $的概率. 因此 $ p(v \mid u) \geq 0, \sum\limits_{v \in \mathscr{V}} p(v \mid u)=1 $, 对 $ \forall u \in \mathscr{U}, v \in \mathscr{V} $.信道记为 $ \mathscr{C}=\{\mathscr{U}, p(v \mid u), \mathscr{V}\} $.
+\end{remark}
+
+
+\subsection{通信系统的编码误差}
+
+通信系统 $ \mathscr{E} $ 与编码 $ (f, g) $ 给定后, 输入消息, 输入信号, 输出信号与输出消息的随机变量 $ (\widetilde{\xi}, \xi, \eta, \widetilde{\eta}) $ 也确定,我们称 $$ e(f, g)=P_{r}\{\widetilde{\xi} \neq \widetilde{\eta}\} $$ 为通信系统 $ \mathscr{E}(f, g) $ 所产生的编码误差.
+
+\begin{example}\label{example:4.1.1}
+    一个简单的通信系统 $ \mathscr{E} $ 给定如下. 取 $ \mathscr{S} $ 和 $ \mathscr{C} $ 都是四元信源与信道. 这时取 $$ \mathscr{X}=\mathscr{U}=\mathscr{V}=\mathscr{Y}=\{0,1,2,3\} $$它们的信源分布概率为 $$ p(0)=p(1)=p(2)=p(3)=0.25 $$ 信道的转移概率 $ p(v \mid u) $ 为
+\begin{center}
+\begin{tabular}{c|cccc}
+$ u \backslash v $ & 0 & 1 & 2 & 3 \\
+\hline
+0 & 0.64 & 0.16 & 0.16 & 0.04 \\
+1 & 0.16 & 0.64 & 0.04 & 0.16 \\
+2 & 0.16 & 0.04 & 0.64 & 0.16 \\
+3 & 0.04 & 0.16 & 0.16 & 0.64
+\end{tabular}
+\end{center}
+
+我们取编码 $ (f, g) $ 为 $ f(x)=x, g(v)=v, x, v=0,1,2,3 $
+$$ f: \mathscr{X} \longrightarrow \mathscr{U} \quad \mathscr{U} \xrightarrow{\text { 信道传输 }} \mathscr{V} \quad g: \mathscr{V} \longrightarrow \mathscr{Y} $$
+这时 $ (\overline{\xi}, \xi, \eta, \overline{\eta}) $ 的联合概率分布为
+$$
+p(x, u, v, y)=\left\{\begin{array}{ll}
+\frac{1}{4}, & \text { 如果 } x=u, v=y, \\
+0, & \text { 否则. }
+\end{array}\right.
+$$
+则此通信系统的编码误差为
+$$
+\begin{aligned}
+e(f, g)= & p(0) P_{r}(0 \neq y)+p(1) P_{r}(1 \neq y)+p(2) P_{r}(2 \neq y)+p(3) P_{r}(3 \neq y) \\
+= & 0.25 \times(0.16+0.16+0.04)+0.25 \times(0.16+0.04+0.16)+0.25 \times \\
+& (0.16+0.04+0.16)+0.25 \times(0.04+0.16+0.16) \\
+= & 0.16+0.16+0.04=0.36
+\end{aligned}
+$$
+误差率达到 $ 36 \% $, 无法使用.
+\end{example}
+从这个例子中可以看出, 如果改变它的编码, 也不会降低它的编码误差. 一个通信系统如果它的传递误差达到 $ 36 \% $, 那么这个近信系统实际上是无法使用的. 因为改变它的编码方式, 不能降低它的编码误差, 因此如何提高通信系统的通信质量是首先要考虑的问题.
+
+\begin{example}\label{example:4.1.2}
+    为了在信道不变的条件下提高通信系统 $ \mathscr{E} $ 的通信质量, 我们减少信源的传输消息数, 如取
+$$
+\mathscr{X}=\mathscr{Y}=\{0,1\}, \quad p(0)=p(1)=0.5,
+$$
+而信道与例 \ref{example:4.1.1}相同. 如取编码方案为
+$$
+f(0)=0, f(1)=3, \quad g(0)=g(1)=0, \quad g(2)=g(3)=1,
+$$
+那么我们计算它的编码误差为
+$$
+e(f, g)=0.5 \times(0.16+0.04)+0.5 \times(0.16+0.04)=0.2 .
+$$
+\end{example}
+
+由例 \ref{example:4.1.1} 和例 \ref{example:4.1.2} 可知, 在信道不变的条件下, 减少信源的传输消息数可以提高通信质量. 这就是信息论的一个基本原理: \textbf{在通信问题中, 牺牲数量可换取质量.}
+
+因此, 信息与编码理论的核心问题是对通信系统寻找一个最佳的数量与质量平衡点. 这就是, \textbf{在通信质量到达一定标准条件下, 尽可能多的增加数量}. 在一般通信系统中, 质量标准要求差错率不超过十万分之一 $ \left[e(f, g) \leqslant 10^{-5}\right] $. 在通信工程中,数量与质量又称为有效性与可靠性.
+
+
+
+\subsection{信道序列的编码问题}
+
+信道序列的编码问题是在确保编码误差很小的条件下,尽可能多地传递消息,我们给出数学描述.
+\begin{definition}
+     称 $ \mathrm{R} $ 为信道序列 $ \mathscr{C}^{n}=\left\{\mathscr{U}^{n}, p\left(\mathscr{V}^{n} \mid \mathscr{U}^{n}\right), \mathscr{V}^{n}\right\} $, $ n=1,2,3, \cdots $ 的一个可达速率, 如果存在一列正数 $ \epsilon_{n} \rightarrow 0 $, 一个信源序列 $ \mathscr{S}^{n} $
+$$
+\left\{\begin{array}{l}
+\mathscr{X}^{n}=\mathscr{Y}^{n}=\left\{1,2, \cdots, M_{n}\right\}, \\
+p^{(n)}\left(x^{(n)}\right)=\dfrac{1}{M_{n}}, \text { 对任何 } x^{(n)} \in \mathscr{X}^{n},
+\end{array}\right.
+$$
+以及一列编码函数 $ \left\{f^{(n)}, g^{(n)}\right\} $,满足以下条件
+
+(1)对任何 $ n=1,2,3, \cdots, M_{n}>2^{n R\left(1-\epsilon_{n}\right)} $
+
+(2) 由 $ \mathscr{S}^{n}, \mathscr{C}^{n},\left(f^{(n)}, g^{(n)}\right) $ 所确定的通信系统 $ \mathscr{E}^{n}\left(f^{(n)}, g^{(n)}\right) $ 的误差概率
+$$
+e\left(f^{(n)}, g^{(n)}\right)=\operatorname{Pr}\left\{\widetilde{\xi}^{(n)} \neq \widetilde{\eta}^{(n)}\right\}<\epsilon_{n} .
+$$
+\end{definition}
+
+\begin{definition}
+对已给信道序列 $ \mathscr{C}^{n} $, 它的全体可达速率的最大值或上确界,被称为信道序列的最大可达速率.
+\end{definition}
+
+因此，信道编码问题就是对已给的信道序列 $ \mathscr{C}^{n} $ 求它的最大可达速率问题.
+

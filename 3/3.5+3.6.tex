@@ -1,0 +1,202 @@
+\section{Huffman编码性能分析}
+
+本节对由Huffman信源编码算法所产生的Huffman码的性能进行分析.
+
+\subsection{ Huffman编码的前缀性}
+\begin{theorem}[Huffman码的前缀性]
+    由Huffman编码算法得到的Huffman码是前缀码.
+\end{theorem}
+\begin{proof}
+     由Huffman编码算法  中的各步骤可知, 第 $ 2 k $ 列中各码元各不相同,且第 $ 2 k-2 $ 列中各码元与第 $ 2 k $ 列中码元相同或是某个码元的延伸, 因此第 $ 2 k-2 $ 列中各码元互不相同, 且每个码元不能成为另一码元的前缀.
+
+一般情形,如果第 $ 2 j $ 列中各码元各不相同,且第 $ 2 j-2 $ 列中各码元与第 $ 2 j $ 列中码元相同或是某个码元的延伸,那么第 $ 2 j-2 $ 列中各码元互不相同,且每个码元不能成为另一码元的前缀.
+
+由此递推, 最后得到第一列中各码元互不能成为另一码元的前缀. 由此定理得证.
+\end{proof}
+
+\subsection{Huffman编码的最优性}
+\begin{theorem}[Huffman码的最优性定理]
+    由Huffman算法构造的Huffman码是最优码, 即对固定信源 $ \mathscr{S} $, 如果我们记 $ f_{0} $ 和 $ f $ 分别是Huffman 码与任一前缀码,那么必有
+$$
+L\left(\mathscr{S}, f_{0}\right) \leq L(\mathscr{S}, f)
+$$
+\end{theorem}
+
+
+为证明这个定理我们先做以下讨论. 设 $ \mathscr{S}, \mathscr{S}^{\prime} $ 是两个信源,我们分别记之为
+$$
+\mathscr{S}=(\mathscr{X}, \overline{p}), \quad \mathscr{S}^{\prime}=\left(\mathscr{X}^{\prime}, \overline{p^{\prime}}\right),
+$$
+其中
+$$
+\begin{array}{l}
+\mathscr{X}=\left\{x_{1}, x_{2}, \cdots, x_{a}\right\} . \quad \overline{p}=\left(p_{1}, p_{2}, \cdots, p_{a}\right), \\
+\mathscr{X}^{\prime}=\left\{x_{1}^{\prime}, x_{2}^{\prime}, \cdots, x_{a}^{\prime}\right\} . \quad \overline{p^{\prime}}=\left(p_{1}^{\prime}, p_{2}^{\prime}, \cdots, p_{a^{\prime}}^{\prime}\right) \text {, } \\
+\end{array}
+$$
+且
+$$
+p_{1} \geq p_{2} \geq \cdots \geq p_{a}, \quad p_{1}^{\prime} \geq p_{2}^{\prime} \geq \cdots \geq p_{a^{\prime}}^{\prime},
+$$
+
+\begin{lemma}
+    如果 $ C=\left\{c_{1}, c_{2}, \cdots, c_{a}\right\} $ 是 $ \mathscr{S} $ 的最优前缀码, 那么必有
+$$
+\ell\left(c_{1}\right) \leq \ell\left(c_{2}\right) \leq \cdots \leq \ell\left(c_{a}\right)
+$$
+成立
+\end{lemma}
+\begin{proof}
+ 由最优码的定义, 若 $ f_{0} $ 是信源 $ \mathscr{S} $ 的最优码, 则
+$$
+L\left(\mathscr{S}, f_{0}\right)=\sum_{k=1}^{a} p_{k} \ell\left(c_{k}\right)
+$$
+最小. 若存在 $ j<i $ 使得 $ \ell\left(c_{j}\right)>\ell\left(c_{i}\right) $, 此时
+$$
+\begin{array}{c}
+L\left(\mathscr{S}, f_{0}\right)=\sum\limits_{k=1}^{a} p_{k} \ell\left(c_{k}\right) \\
+>p_{1} \ell\left(c_{1}\right)+\cdots+p_{j-1} \ell\left(c_{j-1}\right)+p_{j} \ell\left(c_{i}\right)+p_{j+1} \ell\left(c_{j+1}\right) \\
++\cdots+p_{i} \ell\left(c_{j}\right)+\cdots+p_{a} \ell\left(c_{a}\right)
+\end{array}
+$$
+事实上
+$$
+p_{j} \ell\left(c_{j}\right)+p_{i} \ell\left(c_{i}\right)-p_{j} \ell\left(c_{i}\right)-p_{i} \ell\left(c_{j}\right)=\left(p_{j}-p_{i}\right)\left(\ell\left(c_{j}\right)-\ell\left(c_{i}\right)\right)>0
+$$
+从而 $ f_{0} $ 不是最优码.
+\end{proof}
+
+\begin{definition}
+    设 $ \mathscr{S}, \mathscr{S}^{\prime} $ 是两个信源,如上所记.我们有以下定义.
+    
+(1) 称 $ \mathscr{S}^{\prime} $ 是 $ \mathscr{S} $ 的 $ r $ Huffman扩张信源, 如果下面两个条件成立.
+
+(i) $ a<a^{\prime} \leq a+r-1 $.
+
+(ii) 对 $ p $ 和 $ p^{\prime} $, 存在一个正数 $ 1 \leq s \leq a $, 满足
+$$
+\left\{\begin{array}{ll}
+p_{j}=p_{j}^{\prime}, & \text {当} j<s \text { 时, } \\
+p_{j}=p_{j-1}^{\prime}, & \text {当} s<j<a \text { 时, } \\
+p_{j}=\sum\limits_{j=1}^{a^{\prime}-a+1} p_{a+-1} & \text { 当 } j=s \text { 时, }
+\end{array}\right.
+$$
+
+(2) 如果
+$$
+C=\left\{c_{1}, c_{2}, \cdots, c_{a}\right\}, \quad C^{\prime}=\left\{c_{1}^{\prime}, c_{2}^{\prime}, \cdots, c_{a^{\prime}}^{\prime}\right\}
+$$
+分别是 $ \mathscr{S} $ 和 $ \mathscr{S}^{\prime} $ 的编码, 称 $ C^{\prime} $ 是 $ C $ 的 $ r $ Huffman扩张编码, 如果以下两个条件成立.
+
+(i) $ \mathscr{S}^{\prime} $ 是 $ \mathscr{S} $ 的 $ r $ Huffman扩张信源.
+
+(ii) 码元集合 $ C^{\prime} $ 和 $ C $ 满足
+$$
+\left\{\begin{array}{ll}
+c_{j}^{\prime}=c_{j}, & \text { 当 } j<s \text { 时, } \\
+c_{j}^{\prime}=c_{j+1}, & \text { 当 } s<j<a \text { 时, }, \\
+c_{a+i-1}^{\prime}=\left(c_{s}, i-1\right) & \text { 当 } i=1,2, \cdots, a^{\prime}-a+1 \text { 时. }
+\end{array}\right.
+$$
+\end{definition}
+
+\begin{lemma}
+如果 $ C^{\prime} $ 与 $ C $ 分别是 $ \mathscr{S}^{\prime} $ 与 $ \mathscr{S} $ 的编码, $ \mathscr{S} $ 中的消息个数 $ a=k r-k+1 $, 且 $ C^{\prime} $ 是 $ C $ 的 $ r $ Huffman扩张编码, 那么当 $ C $ 是 $ \mathscr{S} $的最优前缀码时, $ C^{\prime} $ 一定是 $ \mathscr{S}^{\prime} $ 最优前缀码.
+\end{lemma}
+
+Huffman编码的最优性定理的证明: 该定理的证明由Huffman编码表的定义与第二个引理即得, 因为有以下结论成立.
+
+(1)在Huffman编码表中,如果记它的第 $ 2 j-1 $ 列
+$$
+\bar{p}_{j}=\left(p_{j i}, p_{j 2}, \cdots, p_{j t_{j}}\right)
+$$
+为信源 $ \mathscr{S}_{j} $, 而记它的第 $ 2 j $ 列
+$$
+C_{j}=\left(c_{j i}, c_{j 2}, \cdots, c_{j t_{j}}\right)
+$$
+为信源 $ \mathscr{S}_{j} $ 的一个编码, 那么 $ \mathscr{S}_{j} $ 是 $ \mathscr{S}_{j+1} $ 的Huffman扩张信源, $ C_{j} $ 是 $ C_{j+1} $ Huffman 扩张(见定义).
+
+(2) 在Huffman扩张编码表的最后两列第 $ 2 k-1,2 k $ 列中,因为码长 $ \ell\left(c_{k i}\right)=1 $, 所以一定是最优前缀码.
+
+(3) 由上面引理的递推法可得在Huffman编码表的 $ 2 j-1,2 j $ 列中, $ C_{j} $ 一定是 $ \mathscr{S}_{j} $ 的最优前缀码. 因此 $ C=C_{1} $ 一定是 $ \mathscr{S}=\mathscr{S}_{1} $ 的最优前缀码.
+
+\begin{example}
+$\bar{p}=(0.32,0.19,0.19,0.11,0.10,0.09) ,\quad \mathscr{U}=\{0,1\}$
+$$
+\begin{array}{l}
+k=\operatorname{lnt}_{+}\left(\frac{a-1}{r-1}\right)=\operatorname{Int}_{+}\left(\frac{6-1}{2-1}\right)=5 \\
+a=(k-1) r+k-1=6-(5-1) \times 2+5-1=2
+\end{array}
+$$
+\end{example}
+
+编码一:
+
+\begin{center}
+\begin{tabular}{ll||ll||ll||ll||ll}
+\hline 概率 & 码 & 概率 & 码 & 概率 & 码 & 概率 & 码 & 概率 & 码 \\
+\hline 0.32 & 00 & 0.32 & 00 & 0.32 & 00 & \boxed{0.38} & 1 & \boxed{0.62} & 0\\
+ 0.19 & 10 & 0.19 & 10 & \boxed{0.30} & 01 & 0.32 & 00 & 0.38 & 1 \\
+ 0.19 & 11 & 0.19 & 11 & 0.19 & 10 & 0.30 & 01 & & \\
+ 0.11 & 011 & \boxed{0.19} & 010 & 0.19 & 11 & & &  & \\
+ 0.10 & 0100 & 0.11 & 011 & & & & & & \\
+ 0.09 & 0101 & & & &  & & & & \\
+\hline
+\end{tabular}
+\end{center}
+码字总长度 17,
+$$
+L\left(\mathscr{S}, f_{1}\right)=4 \times 0.19+3 \times 0.11+2 \times 0.7=2.49 \text {. }
+$$
+
+编码二:
+\begin{center}
+\begin{tabular}{ll||ll||ll||ll||ll}
+\hline 概率 & 码 & 概率 & 码 & 概率 & 码 & 概率 & 码 & 概率 & 码 \\
+\hline 0.32 & 00 & 0.32 & 00 & 0.32 & 00 & \boxed{0.38} & 1 & \boxed{0.62} & 0\\
+ 0.19 & 11 & \boxed{0.19} & 10 & \boxed{0.30} & 01 & 0.32 & 00 & 0.38 & 1 \\
+ 0.19 & 010 & 0.19 & 11 & 0.19 & 10 & 0.30 & 01 & & \\
+ 0.11 & 011 & 0.19 & 010 & 0.19 & 11 & & &  & \\
+ 0.10 & 100 & 0.11 & 011 & & & & & & \\
+ 0.09 & 101 & & & &  & & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+码字总长度 $ 16, L\left(\mathscr{S}, f_{2}\right)=3 \times 0.49+2 \times 0.51=2.49 $.信源固定的最优码的平均码长的定值2.49. 虽编码方法不同, 但平均码长相同.
+
+
+上面两个表显示的是构造一个二元Huffman 码的过程, 其中 $ r=2 $. 对相等的概率可有不同的排列, 这时所得的Huffman 码可能不同, 但它们都是最优码, 因此它们的平均码长相等.
+
+ 对相等的概率可有不同的排列, 这时由Huffman 算法生成的Huffman编码不同. 经过计算可知, 第一个码的总码字长度是 17 , 而第二个码的总码字长度却是 16 , 但它们的平均码字长度都是 2.49 , 这是为前缀码平均码长的最小值.
+
+\section{ 信源定长码的编码定理}
+
+信源定长码的编码问题我们已在3.1节中给出, 现在讨论它的编码定理, 为了简单起见, 我们只讨论无记忆信源的情形.记 $ \mathscr{S}^{n} $ 是一个由 $ \mathscr{S} $ 决定的无记忆信源. 现在讨论它的定长编码问题,求它的最小可达速率.
+为证明定长编码定理,我们先给出以下引理.
+\begin{lemma}
+    $ R $ 是 $ \mathscr{S}^{n} $ 可达速率的充分与必要条件是存在一列 $ \mathscr{X}^{n} $ 的子集 $ \mathscr{X}_{1}^{n} $, 与一正数列 $ \varepsilon_{n} \rightarrow 0 $,使
+$$
+M_{n}=\left|\mathscr{X}_{1}^{n}\right|<2^{n R\left(1+\varepsilon_{n}\right)}
+$$
+且
+$$
+p\left(\mathscr{X}_{1}^{n}\right)=\operatorname{Pr}\left\{\xi^{n} \in \mathscr{X}_{1}^{n}\right\}>1-\varepsilon_{n}
+$$
+\end{lemma}
+
+引理给出了可达速率的一个充分必要条件, 证明过程中给出了如何构造可达速率的定义中需要的编译码序列 $ \left(f^{(n)}, g^{(n)}\right) $. 利用该引理可证明下面的信源定长码的编码定理.
+
+\begin{theorem}
+ 设 $ \mathscr{S}^{n} $ 是一个由 $ \mathscr{S} $ 决定的无记忆信源, 即
+$$
+p\left(x^{(n)}\right)=p\left(x_{1}\right) p\left(x_{2}\right) \cdots p\left(x_{n}\right) \text {, 对 } \forall x^{(n)}=\left(x_{1}, x_{2}, \cdots, x_{n}\right) \in \mathscr{X}^{n} \text {, }
+$$
+那么它的最小可达速率为
+$$
+R_{0}=H(\xi)=H\left(p_{1}, p_{2}, \cdots, p_{a}\right),
+$$
+其中 $ H(\xi) $ 是 $ \xi $ 的熵.
+\end{theorem}
+该定理不证明,掌握结论.
+

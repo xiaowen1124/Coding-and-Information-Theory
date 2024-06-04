@@ -1,0 +1,265 @@
+\section{线性码的译码方法}
+\begin{definition}[伴随式]
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ H $ 为它的校验阵, 对 $ \forall x \in V(n, q) $, 称 $ x H^{T} $ 为 $ x $ 的伴随式, 记为 $ S(x) $.
+\end{definition}
+\begin{remark}
+
+     (1) $ S(x)=0 \Leftrightarrow x \in L $
+
+     (2) 设
+设 $ H=\left(\begin{array}{c}h_{1} \\ h_{2} \\ \vdots \\ h_{n-k}\end{array}\right)_{(n-k) \times n} $,
+则
+$$
+\begin{aligned}
+S(x)=x H^{T} & =x_{1 \times n}\left(h_{1}^{T}, h_{2}^{T}, \cdots, h_{n-k}^{T}\right)_{n \times(n-k)} \\
+& =\left(x h_{1}^{T}, x h_{2}^{T}, \cdots, x h_{n-k}^{T}\right) \\
+& =\left(x \cdot h_{1}, x \cdot h_{2}, \cdots, x \cdot h_{n-k}\right)
+\end{aligned}
+$$
+\end{remark}
+考虑商空间 $ \frac{V(n, q)}{L}=\{x+L \mid x \in V(n, q)\} $. 集合
+$ x+L=\{x+c \mid \forall c \in L\} $ 称为 $ L $ 的陪集.
+
+对 $ \forall a \in F_{q}, x+L, y+L \in \frac{V(n, q)}{L} $.
+定义 $ a(x+L)=a x+L,(x+L)+(y+L)=(x+y)+L $,则 $ x+L=y+L \Leftrightarrow x-y \in L $.
+
+\begin{theorem}
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ H $ 是它的校验阵, 则对于 $ x, y \in V(n, q), x+L=y+L \Leftrightarrow x H^{T}=y H^{T} $.
+\end{theorem}
+\begin{proof}
+$$
+\begin{aligned}
+ x+L=y+L &\Leftrightarrow x-y \in L \\
+&\Leftrightarrow(x-y) H^{T}=0 \\
+&\Leftrightarrow x H^{T}=y H^{T} .
+\end{aligned}
+$$
+\end{proof}
+
+\begin{theorem}
+ 设 $ L $ 是一个 $ [n, k] $ 线性码, $ H $ 是它的校验阵, 最小距离译码等价于将收到的字 $ x $ 译成码字 $ c=x-a $, 其中 $ a $ 是陪集 $ x+L $ 中具有最小重量,且与 $ x $ 具有相同伴随式.
+\end{theorem}
+\begin{remark}
+    (1) 接收端接收到字为 $ x, x $ 译为 $ c $, 即 $ a=x-c $ 为最小.当 $ c $ 取遍 $ L $ 中元素时, $ a $ 取遍陪集 $ x+L $. 于是根据最小距离译码, 将 $ x $ 译为 $ c=x-a $, 其中 $ a $ 是 $ x+L $ 中具有最小重量的字.
+
+    (2)标准阵译码
+$$
+\begin{array}{cccccc}
+0 & c_{1} & c_{2} & \cdots & c_{m-1} & \\
+a_{1} & a_{1}+c_{1} & a_{1}+c_{2} & \cdots & a_{1}+c_{m-1} & a_{1}+L \\
+a_{2} & a_{2}+c_{1} & a_{2}+c_{2} & \cdots & a_{2}+c_{m-1} & a_{2}+L \\
+\vdots & \vdots & \vdots & & \vdots & \\
+a_{s-1} & a_{s-1}+c_{1} & a_{s-1}+c_{2} & \cdots & a_{s-1}+c_{m-1} & a_{s-1}+L
+\end{array}
+$$
+其中 $ m=q^{k}, s=q^{n-k}, a_{i} \notin L, a_{i} $ 是 $ a_{i}+L $ 中的重量最小的字, $ i=1, \cdots, s-1 $, 选取不在前 $ i $ 行出现且重量最小的字 $ a_{i} $ 与第一行的每个码字相加得到第 $ i+1 $ 行, 得到 $ a_{i}+L $.
+此过程一直进行到表中包含 $ V(n, q) $ 中的所有字,形成标准阵.若 $ x $ 出现在第 $ i+1 $ 行第 $ j+1 $ 列, $ i \geq 0, j \geq 0 $, 则 $ x=c_{j}+a_{i} $, 将 $ x $ 译为 $ c_{j}=x-a_{i} $, 即译为包含 $ x $ 的那一列中最上面的码字.
+\end{remark}
+
+\begin{example}
+ 设 $ L $ 是一个二元 $ [4,2] $ 线性码, 其生成矩阵为
+$$
+G=\left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+0 & 1 & 0 & 1
+\end{array}\right)
+$$
+则 $ L=\{0000,1011,0101,1110\} $
+(事实上, $ |L|=q^{k}=2^{2}=4 $.
+$
+L=x G=\left(x_{1}, x_{2}\right)\left(\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+0 & 1 & 0 & 1
+\end{array}\right), \\$
+ 而 $\left(x_{1}, x_{2}\right)=(0,0),(1,0),(0,1),(1,1)$,
+计算可得 $ L $ 的 4 个码字）.
+
+标准阵
+\begin{center}
+\begin{tabular}{lllll}
+0000 & 1011 & 0101 & $ \underline{1110} $ & \\
+1000 & 0011 & 1101 & 0110 & $ a_{1}+L $ \\
+0100 & 1111 & 0001 & 1010 & $ a_{2}+L $ \\
+0010 & 1001 & 0111 & 1100 & $ a_{3}+L $
+\end{tabular}
+\end{center}
+$ \left(|V(4,2)|=2^{4}=16\right. $, 故上述为标准阵).
+收到字 $ x=1100 $, 则由上表可知将 1100 译为 1110 .
+\end{example}
+
+(3)伴随式译码. 由于标准阵中每一行元素的伴随式相同, 故只需计算陪集头和对应的伴随式. 如果接收到 $ x $, 计算伴随式 $ x H^{T} $, 确定 $ x H^{T} $ 被译为 $ c=x-a_{i},\left(x=c+a_{i}\right) $ 称为伴随式译码.
+
+\begin{example}
+    如上例 $ G=\left(\begin{array}{llll}1 & 1 & 1 & 0 \\ 0 & 1 & 0 & 1\end{array}\right) $, 标准型生成矩阵$ G^{\prime}=\left(\begin{array}{llll}1 & 0 & 1 & 1 \\ 0 & 1 & 0 & 1\end{array}\right) $ ,则校验阵 $$ H=\left(\begin{array}{llll}1 & 0 & 1 & 0 \\ 1 & 1 & 0 & 1\end{array}\right) $$
+
+    \begin{center}
+\begin{tabular}{cccccc}
+\multicolumn{4}{c}{ 陪集头 } & 伴随式 $ \left(x H^{T}\right) $ & $ x_{1 \times 4} H_{4 \times 2}^{T} $ \\
+0 & 0 & 0 & 0 & 0  0 &\\
+1 & 0 & 0 & 0 & 1  1 &\\
+0 & 1 & 0 & 0 & 0  1 &\\
+0 & 0 & 1 & 0 & 1  0 &
+\end{tabular}
+\end{center}
+$ (V(2,2) $ 中的所有元已算出, 故不再计算 $(0001) H^{T}) $
+
+设在信道中接收到的字为 $ x=0001 $, 计算伴随式
+$$
+x H^{T}=(0001)\left(\begin{array}{ll}
+1 & 1 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1
+\end{array}\right)=\left(\begin{array}{ll}
+0 & 1
+\end{array}\right)
+$$
+故将 $ x $ 译为 $ c=x-a_{2}=0001-0100=0101 $.
+\end{example}
+
+
+\section{线性码的重量分布}
+\begin{definition}[线性码 $ L $ 的重量分布多项式]
+    设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ A_{i} $ 表示 $ L $ 中重量等于 $ i $ 的码字的个数, $ 0 \leq i \leq n $.
+称 $ A_{0}, A_{1} \cdots, A_{n} $ 为 $ L $ 的重量分布,称多项式
+$$
+W_{L}(z)=\sum_{i=0}^{n} A_{i} z^{i}=A_{0}+A_{1} z+\cdots+A_{n} z^{n}
+$$
+为 $ L $ 重量分布多项式. 显然，$W_{L}(z)=\sum\limits_{x\in L}z^{w(x)}$
+\end{definition}
+\begin{example}
+ 设 $ L $ 是一个二元 $ [3,2] $ 线性码, $L=\{000,011,101,110\},$ 其对偶码为 $ L^{\perp}=\{000,111\} $.
+$ L $ 和 $ L ^{\perp} $ 的重量分布多项式分别为
+$$
+\begin{array}{l}
+W_{L}(z)=1+3 z^{2} \\
+W_{L^{\perp}}(z)=1+z^{3} .
+\end{array}
+$$
+\end{example}
+
+\textbf{线性码的Mac Williams恒等式:}
+
+一般而言,确定码的重量分布是一件困难的事情. 对于线性码,MacWilliams 恒等式给出了线性码 $ L $ 的重量分布多项式与其对偶码 $ L ^\perp $ 的重量分布多项式之间的一种关系.我们下面主要介绍二元线性码的MacWilliams恒等式,并给出它的证明. 对于$q$元情形,只给出结论.
+
+\begin{lemma}\label{lemma7.4.1}
+    设 $ L $ 是一个二元 $ [n, k] $ 线性码, $ y \in V(n, 2) $, 并且 $ y \notin L^{\perp} $,则 $ L $ 中使 $ x \cdot y $ 等于 0 和 1 的码字 $ x $ 的个数相等.
+\end{lemma}
+
+\begin{proof}
+ 设
+$$
+\begin{array}{l}
+A=\{x \in L \mid x \cdot y=0\}, \\
+B=\{x \in L \mid x \cdot y=1\} .
+\end{array}
+$$
+因为 $ y \notin L^{\perp} $, 所以存在 $ u \in L $, 使得 $ u \cdot y=1 $. 记
+$$
+\begin{array}{l}
+u+A=\{u+x \mid x \in A\}, \\
+u+B=\{u+x \mid x \in B\} .
+\end{array}
+$$
+我们有
+$$
+\begin{array}{l}
+u+A \subseteq B, \\
+u+B \subseteq A .
+\end{array}
+$$
+于是 $ |A|=|B| $.
+\end{proof}
+
+\begin{lemma}\label{lemma7.4.2}
+ 设 $ L $ 是二元 $ [n, k] $ 线性码, $ y \in V(n, 2) $,则
+$$
+\sum_{x \in L}(-1)^{x \cdot y}=\left\{\begin{array}{ll}
+2^{k}, & \text { 如果 } y \in L^{\perp} ; \\
+0, & \text { 如果 } y \notin L^{\perp} .
+\end{array}\right.
+$$
+\end{lemma}
+\begin{proof}
+ 如果 $ y \in L^{\perp} $, 则对于任意 $ x \in L, x \cdot y=0 $. 因此,
+$$
+\sum_{x \in L}(-1)^{x \cdot y}=|L|=2^{k} .
+$$
+如果 $ y \notin L^{\perp} $, 由引理\ref{lemma7.4.1}知, 当 $ x $ 取遍 $ L $ 中的所有码字时, 有 $ 2^{k-1} $ 个码字使得 $ x \cdot y=0 $, 同样有 $ 2^{k-1} $ 个码字使得 $ x \cdot y=1 $. 因此, 我们有
+$$
+\sum_{x \in L}(-1)^{x \cdot y}=0
+$$
+\end{proof}
+
+\begin{lemma}\label{lemma7.4.3}
+ 设 $ x \in V(n, 2) $, 则
+$$
+\sum_{y \in V(n, 2)} z^{\omega(y)}(-1)^{x \cdot y}=(1-z)^{\omega(x)}(1+z)^{n-\omega(x)}
+$$
+\end{lemma}
+\begin{proof}
+
+ 因为
+$$
+\sum_{j=0}^{1} z^{j}(-1)^{x_{i} j}=\left\{\begin{array}{ll}
+1+z, & \text { 如果 } x_{i}=0 ; \\
+1-z, & \text { 如果 } x_{i}=1 .
+\end{array}\right.
+$$
+所以
+$$ \begin{aligned} \sum_{y \in V(n, 2)} z^{\omega(y)}(-1)^{x \cdot y} & =\sum_{y_{1}=0}^{1} \sum_{y_{2}=0}^{1} \cdots \sum_{y_{n}=0}^{1} z^{\sum_{i=1}^{n} y_{i}}(-1)^{\sum_{i=1}^{n} x_{i} y_{i}} \\ & =\sum_{y_{1}=0}^{1} \sum_{y_{2}=0}^{1} \cdots \sum_{y_{n}=0}^{1}\left(\prod_{i=1}^{n} z^{y_{i}}(-1)^{x_{i} y_{i}}\right) \\ & =\prod_{i=1}^{n}\left(\sum_{j=0}^{1} z^{j}(-1)^{x_{i} j}\right) \\ & =(1-z)^{\omega(x)}(1+z)^{n-\omega(x)} .\end{aligned} $$
+\end{proof}
+
+\begin{theorem}[二元线性码的Mac Williams恒等式]
+    设 $ L $ 是一个二元 $ [n, k] $ 线性码, $ L^{\perp} $ 为其对偶码,则有
+$$
+W_{L^{\perp}}(z)=\frac{1}{2^{k}}(1+z)^{n} W_{L}\left(\frac{1-z}{1+z}\right) .
+$$
+由于$L^\perp$是一个二元$[n,n-k]$线性码，并且$(L^\perp)^\perp=L$,所以Mac Williams恒等式可以写成
+$$
+W_{L}(z)=\frac{1}{2^{n-k}}(1+z)^{n} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) .
+$$
+\end{theorem}
+\begin{proof}
+ 设
+$$
+f(z)=\sum_{x \in L}\left(\sum_{y \in V(n, 2)} z^{\omega(y)}(-1)^{x \cdot y}\right) .
+$$
+一方面,根据引理\ref{lemma7.4.3},
+$$
+\begin{aligned}
+f(z)&=\sum_{x \in L}(1-z)^{\omega(x)}(1+z)^{n-\omega(x)}\\
+&=(1+z)^{n} \sum_{x \in L}\left(\frac{1-z}{1+z}\right)^{\omega(x)} \\
+&=(1+z)^{n} W_{L}\left(\frac{1-z}{1+z}\right)^{\omega(x)} .
+\end{aligned}
+$$
+另一方面,根据引理\ref{lemma7.4.2},
+$$
+f(z)=\sum_{y \in V(n, 2)} z^{\omega(y)} \sum_{x \in L}(-1)^{x \cdot y}=\sum_{y \in L^{\perp}} z^{\omega(y)} 2^{k}=2^{k} W_{L^{\perp}}(z) .
+$$
+因此,我们有
+$$
+W_{L^{\perp}}(z)=\frac{1}{2^{k}}(1+z)^{n} W_{L}\left(\frac{1-z}{1+z}\right)
+$$
+\end{proof}
+
+\begin{theorem}[q元线性码的Mac Williams恒等式]
+设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码, $ L^{\perp} $ 为其对偶码, 则有
+$$
+W_{L^{\perp}}(z)=\frac{1}{q^{k}}(1+(q-1) z)^{n} W_{L}\left(\frac{1-z}{1+(q-1) z}\right) .
+$$
+\end{theorem}
+该定理不证明.
+
+\begin{example}
+    在第一个例子中, $ W_{L}(z)=1+3 z^{2}, \quad[3,2] $ 码， 则 
+$$
+\begin{aligned}
+W_{L^{\perp}}(z) & =\frac{1}{2^{2}}(1+z)^{3} W_{L}\left(\frac{1-z}{1+z}\right) \\
+& =\frac{1}{4}(1+z)^{3} \times\left[1+3\left(\frac{1-z}{1+z}\right)^{2}\right] \\
+& =\frac{1}{4}\left[(1+z)^{3}+3(1-z)^{2}(1+z)\right] \\
+& =1+z^{3} .
+\end{aligned}
+$$
+同样 $$ \begin{aligned} W_{L}(z) & =\frac{1}{2^{k}}(1+z)^{n} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) \quad L^{\perp}[3,1] \text { 码 } \\ & =\frac{1}{2}(1+z)^{3} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) \\ & =\frac{1}{2}(1+z)^{3}\left[1+\left(\frac{1-z}{1+z}\right)^{3}\right] \\ & =\frac{1}{2}\left[(1+z)^{3}+(1-z)^{3}\right] \\ & =1+3 z^{2} .\end{aligned} $$
+\end{example}

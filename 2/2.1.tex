@@ -1,0 +1,269 @@
+\section{熵}
+设信源 $ \mathscr{S}=\{\mathscr{X}, p(x)\} $ 为离散信息, $ \bar{\xi} $ 为一随机变量, 取自 $ \mathscr{S} $ . 如: 随机事件掷骰子. 信源集 $ \mathscr{X}=\{1,2,3,4,5,6\} $ 的概率分布为 $ \left(\begin{array}{cccccc}1 & 2 & 3 & 4 & 5 & 6 \\ \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6}\end{array}\right) $ ,$ \bar{\xi} $ 取某一可能, 如 $ \bar{\xi}=4 $, 则 $ \bar{\xi} $ 带有多少信息量与 4 的概率有关, 即与不确定性有关.此时, $ \bar{\xi}=4 $ 提供了多少信息.
+
+
+一般地 $ \mathscr{X}=\left\{x_{1}, x_{2}, \cdots, x_{a}\right\} $, 其中 $ a $ 为某个正整数, 对 $ \forall x_{i} \in \mathscr{X} $, $ \bar{\xi} $ 取值为 $ x_{i} $ 的概率为
+$$
+p_{i}=p\left(\xi_{i}\right)=P_{r}\left(\xi=x_{i}\right), i=1,2, \cdots, a .
+$$
+$ \bar{\xi} $ 和它的概率分布表示为 $ \left(\begin{array}{llll}x_{1} & x_{2} & \cdots & x_{a} \\ p_{1} & p_{2} & \cdots & p_{a}\end{array}\right) $, 
+则有 $ p_{i} \geqslant 0, i=1,2, \cdots, a, \sum\limits_{i=1}^{a} p_{i}=1 $ .
+
+$ \bar{\xi} $ 取某一信号 $ x_{i}, \bar{\xi}=x_{i} $, 带有多少信息量, 与 $ x_{i} $ 的概率有关, 即与不确定性有关.
+
+\subsection{自信息量}
+\begin{definition}
+    一个随机事件发生某一结果后所带来的信息量称为自信息量. 定义为其发生概率的对数的负值.即若随机事件$x_i$ 发生的概率为 $p(x_i)$, 那么它的自信息量为 $$I(x_i)=-\log p(x_i)$$
+\end{definition}
+
+由于 $ x_{i} $ 是随机出现的, 它是 $ \mathscr{X} $ 的一个样值, 所以是一个随机量.而 $ I\left(x_{i}\right) $ 是 $ x_{i} $ 的函数, 它必须也是一个随机量.
+
+自信息量的单位与所用的对数底有关.在信息论中常用的对数底是 2 ,信息量的单位为比特 (bit); 若取自然对数, 则信息量的单位为奈特 (nat); 若以 10 为对数底, 则信息量的单位为笛特 (det).这三个信息量单位之间的转换关系如下:
+$$
+1 \text { nat }=\log _{2} \mathrm{e} \approx 1.433 \mathrm{bit}, \quad 1 \mathrm{det}=\log _{2} 10 \approx 3.322 \mathrm{bit}
+$$
+\begin{note}
+    信息量是纯数，信息量单位只是为了标示不同底数的对数值，并无量纲的含义.
+\end{note}
+
+
+    自信息量的特点是，当事件的概率越小，其自信息量越大，表示提供的信息越多；而当事件的概率越大，其自信息量越小，表示提供的信息越少.当事件的概率越小，其自信息量越大的原因可以通过信息的意外性来解释.假设一个事件的概率非常小，意味着这个事件发生的可能性非常低，它是一种罕见或异常的情况.当这个罕见事件发生时，它提供了大量的信息，因为它与我们的预期或常见情况相悖，具有较高的意外性.
+
+
+这里要引入随机事件的不确定度概念.根据日常知识, 各个出现概率不同的随机事件所包含的不确定度是有差别的.一个出现概率接近于 1 的随机事件, 发生的可能性很大, 所以它包含的不确定度就很小.反之, 一个出现概率很小的随机事件, 很难猜测在某个时刻它能否发生, 所以它包含的不确定度就很大.若是确定性事件, 出现概率为 1 , 则它包含的不确定度为 0 .
+
+\begin{remark}
+   \textbf{ 随机事件的不确定度在数量上等于它的自信息量, 两者的单位相同, 但含义却不相同.}具有某种概率分布的随机事件不管发生与否, 都存在不确定度, 不确定度表征了该事件的特性,而自信息量是在该事件发生后给予观察者的信息量.
+\end{remark}
+ 
+\subsection{不确定性(自信息量)的性质}
+
+上述自信息函数 $ I\left(x_{i}\right) $ 应满足以下性质:
+
+(1) $ p\left(x_{i}\right) $ 越大, $ I\left(x_{i}\right) $ 越小, 即 $ I(x) $ 是关于 $ P(x) $ 单调递减的;
+
+(2) $ x, y $ 是相互独立的两个信号, 即联合分布 $ p(x, y)=p(x) p(y) $ 时,$ I(x, y)=I(x)+I(y) $ .
+
+于是, 可推出自信息函数 $ I(x) $ 应满足以下公理:
+\begin{axiom}
+( i ) $ I(x) \geqslant 0 $;
+
+(ii) 当$ p(x)=1$时, $I(x)=0 $;
+
+(iii ) 当$ p(x)=0$时,$ I(x)=\infty $;
+
+(iv)若 $ p(x)>p(y) $ ，则 $ I(x)<I(y) $;
+
+ (v)  若 $ p(x, y)=p(x) p(y) $, 则 $ I(x, y)=I(x)+I(y) $ .
+\end{axiom}
+\begin{note}
+    (1) 信息量非负说明随机事件发生后总能提供一些信息量，最差情况是零，即什么信息也没提供，但不会因事件发生使得不确定性更大.$P_i$表示随机事件发生的概率，在闭区间$[0,1]$上取值,根据对数的性质也可知$I(x)\geqslant 0$.
+
+    (2)当$ p(x)=1$时, 说明该事件是必然事件. 必然事件不含有任何不确定性，所以不含任何信息量.
+
+    (3)当一个事件的概率接近于1时，它的信息量趋近于0，表示这个事件是高度可预测的，提供的信息量很少. 相反，当一个事件的概率接近于0时，它的信息量趋近于正无穷大，表示这个事件是高度意外的，提供的信息量很大.
+
+    (4)概率越大的事件，不确定性越小，发生后提供的信息量就越小.即$I(x)$是$p_i$的单调递减函数.
+
+    (5)首先，根据独立事件的定义，事件$x$和$y$的联合概率等于它们的边缘概率的乘积，即$p(x, y) = p(x) \cdot p(y)$.然后，根据自信息的定义，$I(x) = -\log p(x)$和$I(y) = -\log p(y)$. 将上述两个式子代入$I(x, y)$的定义中，有：$I(x, y) = -\log p(x, y) = -\log (p(x) \cdot p(y))$. 根据对数运算的性质，上式可以改写为：
+$I(x, y) = -\log p(x) - \log p(y) = I(x) + I(y)$. 因此，当事件$x$和$y$是独立事件且满足$p(x, y) = p(x) \cdot p(y)$时，可以得出$I(x, y) = I(x) + I(y)$的结论. 这意味着两个独立事件的联合自信息等于它们各自的自信息之和.
+\end{note}
+
+
+于是, 要对信息量进行度量 (定量表示) , 需要寻求一个满足上述条件的自信息函数.
+
+\subsection{自信息函数的推导}
+\begin{lemma}
+若实函数 $ f(x)(1 \leqslant x \leqslant \infty) $ 满足以下条件:\\
+( i ) $ f(x) \geqslant 0 $;\\
+(ii) $ f(x) $ 是严格单调增加的, 即 $ x<y \Rightarrow f(x)<f(y) $ :\\
+(iii) $ f(x \cdot y)=f(x)+f(y) $ :
+
+则有 $ f(x)=c \log x $ ，其中 $ c $ 为常数.
+
+
+\end{lemma}
+
+\begin{proof}
+    反复使用  (iii), 对任意正整数 $ k $, 我们有
+$$
+f\left(x^{k}\right)=f\left(x \cdot x^{k-1}\right)=f(x)+f\left(x^{k-1}\right)=\cdots=k f(x)
+$$
+从而 $ f(1)=0 $. 进而由于 (i) 和 (ii) , 对于任意 $ x>1, f(x)>0 $, 对于任意大于 1 的 $ x, y $与任意正整数 $ k $, 总可以找到非负整数 $ n $, 使
+$$
+y^{n} \leqslant x^{k}<y^{n+1}
+$$
+(事实上, 由 $ y>1 $, 则区间 $ (1,+\infty) $ 可由 $ y $ 分为 $ (1, y],\left(y, y^{2}\right],\left[y^{2}, y^{3}\right], \cdots, x $ 取定， $ x^{k} $ 是固定的正函数,必落在某个区间内.)
+
+
+取对数并除以 $ k \log_a y $ 得
+\begin{equation}
+\frac{n}{k} \leqslant \frac{\log_a x}{\log_a y}<\frac{n+1}{k}\label{eq1}
+\end{equation}
+另一方面, 由$f\left(x^{k}\right)=k f(x)$结合条件 (ii)可得
+$$
+n f(y) \leqslant k f(x)<(n+1) f(x)
+$$
+两边同时除以 $ k f(y) $ 得:
+$$
+\frac{n}{k} \leqslant \frac{f(x)}{f(y)}<\frac{n+1}{k}
+$$
+两边同时乘以$-1$得:
+\begin{equation}
+-\frac{n+1}{k} \leqslant-\frac{f(x)}{f(y)} \leqslant-\frac{n}{k}\label{eq2}
+\end{equation}
+于是联立\eqref{eq1}和\eqref{eq2}得:
+$$
+-\frac{1}{k} \leqslant \frac{\log _{c} x}{\log _{c} y}-\frac{f(x)}{f(y)} \leqslant \frac{1}{k}
+$$
+我们有
+$$
+\left|\frac{f(x)}{f(y)}-\frac{\log_a x}{\log_a y}\right| \leqslant \frac{1}{k}
+$$
+当 $ k \rightarrow \infty $ 时,
+$$
+\frac{f(x)}{f(y)}=\frac{\log_a x}{\log_a y}
+$$
+因此,
+$$
+\frac{f(x)}{\log_a x}=\frac{f(y)}{\log_a y}=c
+$$
+或
+$$
+f(x)=c \log_a x
+$$
+\end{proof}
+\begin{remark}
+  对于自信息函数 $ I(x)=I(p(x)) $, 令 $ t=\frac{1}{p(x)} $,则 $ I(t)=I\left(\frac{1}{p(x)}\right), I(x) $ 关于 $ p(x) $ 递减,又 $ I(t(x), t(y))=I(t(x))+I(t(y)) $ 成立,由引理知: $ I(t)=c \log _{a} t $, 从而 $ I(x)=c \log _{a} \frac{1}{p(x)} $ .
+\end{remark}
+
+\begin{theorem}
+    若自信息 $ I(x) $ 满足5条公理, 则 $ I(x)=c \log _{a} \frac{1}{p(x)} $, 其中 $ c $ 为常数, 此时称 $ I(x) $ 为自信息函.
+\end{theorem}
+
+设 $ x \in \mathscr{X}, x $ 具有概率分布 $ p(x) $, 则 $ x $ 的自信息定义为
+$$
+I(x)=\log _{a} \frac{1}{p(x)}
+$$
+\subsection{香农熵的定义(Shannon 熵)}
+信源 $ \mathscr{S}=\{\mathscr{X}, p(x)\},  \xi $ 是随机变量(考虑随机信号的信息量).
+
+前面介绍 $ x \in \mathscr{X} $ 的自信息是在 $ X $ 确定的情况下，现在 $ \xi $ 是随机变量，发送哪一个信号是不确定的，因此需考虑在信号随机选取时携带的信息量如何刻画，即对整个信源，每个信号的平均信息量为多少?
+
+\begin{definition}
+   如果一个离散随机变量 $ \xi $ 的概率分布为 $\bar{p}=\left(p_{1}, p_{2}, \cdots, p_{a}\right)$, 则它的熵 $H(\xi)$或  $H(\bar{p})$定义为 
+$$
+\begin{aligned}
+H(\xi)&=H\left(p_{1}, p_{2}, \cdots, p_{a}\right)=-\sum_{i=1}^{a} p_{i} \log _{c} p_{i} \\
+&=\sum_{i=1}^{a} p_{i} \log _{c} \frac{1}{p_{i}}=E\left(\log _{c} \frac{1}{p}\right)
+\end{aligned}
+$$ 
+\end{definition}
+\begin{remark}
+
+(1) $ H(\xi) $ 是 $ \log _{c} \frac{1}{p(\xi)} $ 的期望值
+
+(2) 底数 $ c=2 $ 时, $ H(\xi) $ 的单位规定为比特;
+
+底数 $ c=e $ 时, $ H(\xi) $ 的单位规定为奈特;
+
+底数 $ c=3 $ 时, $ H(\xi) $ 的单位规定为铁特;
+
+各个单位之间可根据对数的换底公式进行换算;如: $ \log _{2} \frac{1}{p_{i}}=\frac{\log _{e} \frac{1}{p_{i}}}{\log _{e} 2} $
+
+(3) 除特别说明外, 取 $ c=2 $.
+\end{remark}
+
+\subsection{熵的简单性质与例子}
+
+ $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right) $ 为上述定义的Shannon熵，则其满足以下性质:
+ 
+(1) 对称性: $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right)=H\left(p_{\sigma(1)}, p_{\sigma(2)}, \cdots, p_{\sigma(a)}\right) $其中 $ \sigma $ 为有限集 $ \{1,2, \cdots, a\} $ 的一个置换.
+
+(2)非负性：对任意的概率分布 $ \bar{p}=\left\{p_{1}, p_{2}, \cdots, p_{a}\right\} $ ，有 $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right) \geqslant 0 $, 且等号成立当且仅当 $ \bar{p} $ 是一个确定性分布 （其中一个取 1 , 其它的取 0 ).
+
+证明：(1) 显然当概率的顺序发生置换后，只是求和顺序不同，并不影响求和结果. (平均值, 数学期望).
+
+(2) $ \Leftarrow $ : 显然
+$$
+\Rightarrow: H\left(p_{1}, p_{2}, \cdots, p_{a}\right)=0 \text {, 由 } H\left(p_{1}, p_{2}, \cdots, p_{a}\right) \text { 的 }
+$$
+定义可知, $ \forall i, p_{i} \log _{c} p_{i}=0 $, 或者 $ p_{i}=0 $, 或者 $ \log _{c} p_{i}=0 $, 由于 $ \sum\limits_{i=1}^{a} p_{i}=1, p_{i} \geq 0 $, 存在 $ i $ 使得 $ p_{i}=1 $, 而其它 $ p_{j}=0 $, 因此 $ \bar{p} $ 必为确定型分布.
+
+
+\begin{example}
+    以等概率 $ p_{i}=\frac{1}{3} $ 从集合 $ \mathscr{X}=\left\{x_{1}, x_{2}, x_{3}\right\} $ 中抽样,以 $ p_{1}=p_{2}= $ $ \frac{1}{4}, p_{3}=\frac{1}{2} $ 从集合 $ \mathscr{X}=\left\{x_{1}, x_{2}, x_{3}\right\} $ 中抽样, 以上两个随机事件那个信息量大? (不确性大, 信息量越大)
+
+    解: 设两个随机事件的随机变量分别为 $ \xi_{1}, \xi_{2} $, 则有
+$$
+\begin{aligned}
+H\left(\xi_{1}\right) & =\sum_{i=1}^{3} p_{i} \log _{2} \frac{1}{p_{i}} \\
+& =\left(\frac{1}{3} \log _{2} 3+\frac{1}{3} \log _{2} 3+\frac{1}{3} \log _{2} 3\right) \\
+& =\log _{2} 3 \approx 1.585 \\
+H\left(\xi_{2}\right) & =\sum_{i=1}^{3} p_{i} \log _{2} \frac{1}{p_{i}} \\
+& =\left(\frac{1}{4} \log _{2} 4+\frac{1}{4} \log _{2} 4+\frac{1}{2} \log _{2} 2\right) \\
+& =\frac{1}{2}+\frac{1}{2}+\frac{1}{2}=1.5
+\end{aligned}
+$$
+第一个随机事件信息量大.
+\end{example}
+
+\begin{example}
+设 $ \xi $ 是一个二元随机变量, 即 $ \mathscr{X}=\{0,1\} $, 令
+$$
+\begin{array}{l}
+p(\xi=1)=p, \text { 则 } p(\xi=0)=1-p \text { .则有 } \\
+H(\xi)=p \log _{2} \frac{1}{p}+(1-p) \log _{2} \frac{1}{1-p}\triangleq H(p)
+\end{array}
+$$
+$ H(p) $ 被称为熵函数.
+\end{example}
+\begin{example}
+    信源集 $ \mathscr{X}=\left\{x_{1}, x_{2}, \cdots, x_{a}\right\} $, 以等概率从 $ \mathscr{X} $ 中抽样, 即 $ \xi $ 服从分布 $ \left(\begin{array}{llll}x_{1} & x_{2} & \cdots & x_{a} \\ p_{1} & p_{2} & \cdots & p_{a}\end{array}\right) $, 则该随机事件的信息量为多少?
+
+解: $$ H(\xi)=\sum\limits_{i=1}^{a} p_{i} \log _{2} \frac{1}{p_{i}} =\sum_{i=1}^{a} \frac{1}{a} \log _{2} a=\log _{2}a $$
+可知$a$越大, $ H(\xi) $ 越大（信号越多，不确定性越大）.
+\end{example}
+
+\begin{example}
+令黑白电视机的分辨率为 $ 500 \times 600 $, 且灰度为 10 , 令文章中的字可以从一万个字中任意挑选, 分别求出一副电视画面和一篇千字文章中所含的信息量并比较大小.
+
+解: 设两个随机事件的随机变量分别为 $ \xi_{1}, \xi_{2} $ .
+对于随机事件一, 一幅电视画面, 分辨率为 $ 500 \times 600 $, 则像素数为 $ 500 \times 600=300000=3 \times 10^{5}=N_{1} $
+
+对每个像素我们计算它携带的信息量, 由于灰度为10（每个灰度值均一样) , 则
+$$
+\begin{array}{l}
+\xi_{1} \sim\left(\begin{array}{cccc}
+x_{1} & x_{2} & \cdots & x_{10} \\
+\frac{1}{10} & \frac{1}{10} & \cdots & \frac{1}{10}
+\end{array}\right) \\
+H\left(\xi_{1}\right)=\sum\limits_{i=1}^{10} \frac{1}{10} \log _{2} 10=\log _{2} 10 \approx 3.32 \text { 比特/像素 }
+\end{array}
+$$
+则一副电视画面携带的信息量为
+$$
+N_{1} H\left(\xi_{1}\right)=3 \times 10^{5} \times 3.32=9.96 \times 10^{5} \text { 比特. }
+$$
+对于随机事件二, 一篇千字文章, 计算每个文字所携带的信息量 $ N_{2}=1000 $,
+$$
+\xi_{2} \sim\left(\begin{array}{cccc}
+x_{1} & x_{2} & \cdots & x_{10^{4}} \\
+\frac{1}{10^{4}} & \frac{1}{10^{4}} & \cdots & \frac{1}{10^{4}}
+\end{array}\right)
+$$
+$$
+H\left(\xi_{2}\right)=\sum_{i=1}^{10^{4}} \frac{1}{10^{4}} \log _{2} 10^{4}=4 \log _{2} 10=13.29 \text { 比特/字 }
+$$
+则一篇千字文章所携带的信息量为
+$ N_{2} H\left(\xi_{2}\right)=1000 \times 13.29=1.329 \times 10^{4} $ 比特.
+故一副电视画面携带的信息量大.
+
+\end{example}
+
+
+
+
+
+
+

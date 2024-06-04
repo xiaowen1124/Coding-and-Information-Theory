@@ -1,0 +1,251 @@
+\chapter{编码理论的基本知识}
+为了保证通信系统能够准确的传输信息, 我们要对信源消息进行编码, 代数编码能够起到降低通信中传输误差的作用.即可在信道接收端实现自动地纠错和检错.
+本章介绍编码理论的一些基本知识.
+
+\section{码的基本概念}
+
+记输入信号字母集和输出信号字母集为 $ \mathscr{U}=\mathscr{V}=F_{q} $, $ F_{q} $ 是 $ q $ 元域, $ q=p^{m}, p $ 是素数. $ V(n, q)=F_{q}^{n} $表示$q$元域$F_q$上的$n$维向量, 信息输入和输出字符串用 $ F_{q}^{n} $ 中的元素表示. $ F_{q}^{n} $ 中的元素 $ \left(z_{1}, z_{2}, \cdots, z_{n}\right) $ 表示为 $ z_{1} z_{2} \cdots z_{n} $.
+
+\subsection{码的定义}
+\begin{definition}
+    $ C \subseteq V(n, q), C \neq \varnothing $, 则称 $ C $ 为 $ q $ 元分组码, $ n $ 称为码长, $ C $ 中的向量称为码字. $ M=|C| $ 为码字的个数. 此时称 $ C $ 为 $ q $ 元 $ (n, M) $ 码.
+\end{definition}
+\begin{definition}
+    设 $ C $ 为 $ q $ 元 $ (n, M) $ 码, 定义 $ R(C)=\dfrac{\log _{q} M}{n} $, 称为码 $ C $ 的码率.
+\end{definition}
+
+\begin{example}
+ $ q=2, n=3,V(n, q)=\{000,001,010,011,100,101,110,111\} . $取$C=\{000,101,111\}$,显然 $C$ 为二元分组码,码长 $n=3$.且$|C|=3=M$, 因此$C$ 为二元$(3,3)$码.
+$$
+\text { 码率 } R(C)=\frac{\log _{2} 3}{3}
+$$
+\end{example}
+\begin{remark}
+ $ R(C) $ 的意义：传输的最大平均信息量, $ n $ 长的码字所携带的最大信息量为 $ \left(\mathscr{U}=F_{q}\right) n \log _{q} q=\log _{q} q^{n} \triangleq \log _{q} M $, 平均信息量 $ \frac{\log _{q} q^{n}}{n} $, 将 $ q^{n} $ 换为 $ M $, 即为 $ \frac{\log _{q} M}{n} $.
+\end{remark}
+
+\subsection{Hamming距离和Hamming重量}
+
+(用于后面的译码、纠错和检错)
+
+\begin{definition}
+    设 $ x, y \in V(n, q), x, y $ 的Hamming 距离 $ d(x, y) $ 定义为 $ x $ 和 $ y $ 中不同分量的个数, 即
+$$
+d(x, y)=\sum_{j=1}^{n} d\left(x_{j}, y_{j}\right)
+$$
+其中
+$$
+d\left(x_{j}, y_{j}\right)=\left\{\begin{array}{ll}
+0 & \text { 如果 } x_{j}=y_{j} \\
+1 & \text { 如果 } x_{j} \neq y_{j}
+\end{array}\right.
+$$
+\end{definition}
+\begin{remark}
+    $ d(x, y): V(n, q) \times V(n, q) \longrightarrow N $ 的映射, $ N $ 为全体非负整数的集合.
+\end{remark}
+
+\begin{definition}
+     设 $ x \in V(n, q) $,称 $ x $ 中非零分量的个数为 $ x $ 的Hamming 重量, 记为 $ \omega(x) $.
+\end{definition}
+
+\begin{example}
+     $ \quad x=12112 \in V(5,3), y=10201 \in V(5,3) $,
+则 $ d(x, y)=4, \omega(x)=5, \omega(y)=3 $
+\end{example}
+\textbf{Hamming距离的性质}
+\begin{theorem}
+     对 $ \forall x, y, z \in V(n, q) $, 即Hamming 距离 $ d(x, y) $ 满足下列性质:\\
+(1)非负性 $\quad d(x, y) \geq 0, d(x, y)=0 \Longleftrightarrow x=y $\\
+(2)对称性 $ \quad d(x, y)=d(y, x) $\\
+(3) 三角不等式 $ \quad d(x, y) \leq d(x, z)+d(z, y) $
+\end{theorem}
+\begin{proof}
+(1)、(2)显然成立,只需证明(3)成立.
+
+设 $ x=x_{1} x_{2} \cdots x_{n}, y=y_{1} y_{2} \cdots y_{n}, z=z_{1} z_{2} \cdots z_{n} $, 
+对 $ \forall j=1,2, \cdots, n $
+
+ 若 $ x_{j}=y_{j} $, 则 $ d\left(x_{j}, y_{j}\right)=0 $.
+于是有 $ d\left(x_{j}, y_{j}\right) \leq d\left(x_{j}, z_{j}\right)+d\left(z_{j}, y_{j}\right) $,
+而 $ d(x, y)=\sum\limits_{j=1}^{n} d\left(x_{j}, y_{j}\right), d(x, z)=\sum\limits_{j=1}^{n} d\left(x_{j}, z_{j}\right) $
+$ d(y, z)=\sum\limits_{j=1}^{n} d\left(y_{j}, z_{j}\right) \quad $ .故(3)成立.
+
+若 $ x_{j} \neq y_{j} $ 则 $ d\left(x_{j}, y_{j}\right)=1 $, 此时 $ x_{j} \neq z_{j} $ 与 $ y_{j} \neq z_{j} $ 至少有一个成立, 因此有 $ d\left(x_{j}, y_{j}\right) \leq d\left(x_{j}, z_{j}\right)+d\left(z_{j}, y_{j}\right) $, 于是(3)成立.
+\end{proof}
+\begin{remark}
+ $ V(n, q) $ 中定义了Hamming距离,称 $ V(n, q) $ 为 Hamming空间.
+\end{remark}
+
+\subsection{Hamming距离(重量)与译码}
+(最大似然译码或最小Hamming距离译码)
+
+分析：对于二元对称信道
+
+信道矩阵为 $ \left(\begin{array}{cc}1-p & p \\ p & 1-p\end{array}\right) $, 其中令 $ p<\frac{1}{2} $, 设 $ x $ 为输入码字, $ y $ 为输出向量,则信道发生错误的字符个数等于Hamming 距离 $ d(x, y) $, 因此我们有
+$$
+p(y \mid x)=p^{d(x, y)}(1-p)^{n-d(x, y)}
+$$
+对于Hamming 距离 $ d^{\prime} $, 若 $ d<d^{\prime} $, 则有 $ \left(p<\frac{1}{2}\right) $:
+$$
+p^{d}(1-p)^{n-d}>p^{d^{\prime}}(1-p)^{n-d^{\prime}}\Rightarrow\text{\textbf{(Hamming距离小, 输出的概率大)}}
+$$
+对 $ \forall y \in V(n, q) $, 存在 $ x^{\prime} \in C $, 使得 $ d\left(x^{\prime}, y\right) \leq d(x, y) $.
+此时有 $ p\left(y \mid x^{\prime}\right) \geq p(y \mid x) $,
+于是将收到的向量译为与其Hamming 距离最近的码字, 即将 $ y $ 译为 $ x^{\prime} $.
+
+\begin{example}
+ 码长为 3 的二元重复码为 $ C=\{000,111\} $, 已知码字集合, 但不知发送的是哪一个, 设000是发送的码字, 则收到字000,100,010,001 时将被译成000, 当收到字 $ 111,110,101,011 $时将被译成 111 ,这时对任意信道入口概率分布 $ p(000)=p_{0}, p(111)=1-p_{0} $, 则译码错误概率为
+$$
+\begin{aligned}
+e & =p_{0}(p(111 \mid 000)+p(110 \mid 000)+p(101 \mid 000)+p(011 \mid 000)) \\
++ & \left(1-p_{0}\right)(p(000 \mid 111)+p(100 \mid 111)+p(001 \mid 111)+p(010 \mid 111)) \\
+& =p_{0}\left(p^{3}+3 p^{2}(1-p)\right)+\left(1-p_{0}\right)\left(p^{3}+3 p^{2}(1-p)\right) \\
+& =3 p^{2}(1-p)+p^{3}=3 p^{2}-2 p^{3}
+\end{aligned}
+$$
+\end{example}
+
+\subsection{系统码}
+设 $ V(k, q)=\left\{\left(a_{1}, a_{2}, \cdots, a_{k}\right)\right\} $, 则 $ q^{k} $ 个消息编码为 $ V(q, k) $ 中的 $ q^{k} $ 个元素, 如此编码无纠错、检错能力, 故需编成 $ n $ 长的, 使其具有纠错、检错能力.
+
+设 $ \alpha=\left\{i_{1}, i_{2}, \cdots, i_{k}\right\} $ 是一个正整数集合, $ 1 \leq i_{1}<i_{2}<\cdots<i_{k} \leq n $. 设 $ x=\left(x_{1}, x_{2}, \cdots, x_{n}\right) \in V(n, q) $ , 称 $ x_{\alpha}=\left(x_{i_ 1}, x_{i_ 2}, \cdots, x_{i_ k}\right) $ 为 $ x $ 的部分向量, 这时有 $ x=\left(x_{\alpha}, x_{\alpha^{c}}\right) $ 其中 $ \alpha^{C}=N-\alpha $ 为 $ \alpha $ 的余集, $ N=\{1,2, \cdots, n\} $.
+
+\begin{definition}[ 系统码]
+ 设 $ C $ 是一个 $ q $ 元 $ \left(n, q^{k}\right) $ 码,如果存在一个下标集合 $ \alpha=\left\{i_{1}, i_{2}, \cdots, i_{k}\right\} $, 使得码 $ C $ 中所有码字都去掉其余 $ n-k $ 个位置后, 得到的向量的全体为 $ F_{q} $ 上长度为 $ k $ 的所有串的集合 $ V(k, q) $, 即
+$$
+C_{\alpha}=\left\{x_{\alpha}=\left(x_{i 1}, x_{i 2}, \cdots, x_{i k}\right) \mid x \in C\right\}=V(k, q)
+$$
+则称 $ C $ 为具有 $ k $ 个信息位的 $ q $ 元系统码, $ \left\{i_{1}, i_{2}, \cdots, i_{k}\right\} $ 称为信息位,其余 $ n-k $ 个位置称为校验位或冗余位.
+\end{definition}
+
+\begin{example}
+二元码 $ C=\{0000,0110,1001,1010\} $ 是系统码
+$$
+\begin{array}{l}
+00 \longrightarrow \underline{0} 0\underline{0} 0 \\
+01 \longrightarrow \underline{0} 1 \underline{1}0  \\
+10 \longrightarrow \underline{1}0\underline{0} 1 \\
+11 \longrightarrow \underline{1}0\underline{1}0
+\end{array}\quad i_{1}=1, i_{2}=3 ，\quad k=2
+$$
+译码过程可从码字的信息位上读出信源字符.
+\end{example}
+
+\begin{example}
+   二元码 $ C=\{000,100,010,001\} $ 不是系统码.
+
+\textbf{系统码的定义}:在错误更正编码中，一个系统码通常被定义为能够将信息位（或消息位）和校验位（或冗余位）分开的编码，其中信息位直接出现在码字中的固定位置上.这样，原始信息可以直接从码字的某个部分读取，而无需进行任何转换.
+\begin{solution}
+    给定的码 $ C=\{000,100,010,001\} $ 包含 4 个码字，每个码字由 3 位组成.对于一个 $ q $-元系统 (这里 $ q=2 $ ，即二进制），如果我们尝试将 $ C $ 视为系统码，我们需要确定信息位 $ k $ 和码字长度 $ n $ 的关系，以及如何从码字中分离信息位和校验位.
+
+$ k=1 $ 的情况: 当我们假设信息位数 $ k=1 $ 时，理论上码 $ C $ 应包含 $ q^{k}=2^{1}=2 $ 个码字，因为一个信息位可以表示两个不同的值.然而，码 $ C $ 实际上包含 4 个码字，这超出了 $ k=1 $ 时的预期码字数量.因此，在 $ k=1 $ 的情况下，给定的码 $ C $ 不能满足系统码的要求.$ k=2 $ 的情况:
+对于 $ k=2 $ ，理论上码 $ C $ 应包含 $ q^{k}=2^{2}=4 $ 个码字，与 $ C $ 实际的码字数量匹配.然而，问题在于找不到一种合理的方式将任一位确定为校验位，并使剩余的位作为信息位来满足系统码的要求.无论选择哪个位作为校验位，都无法创建一个满足所有情况下校验规则的系统，特别是无法生成长度为2的信息位序列(11)，同时满足给定的码字集.
+
+因此，无论是在 $ k=1 $ 还是 $ k=2 $ 的情况下，给定的码 $ C $ 都不能被视为系统码.在系统码中，信息位和校验位之间应有明确的、固定的区分，而给定的码 $ C $ 无法提供这样的区分，因此它不符合系统码的定义.
+\end{solution}
+
+
+
+
+\end{example}
+
+
+\section{码的检错和纠错能力}
+\subsection{最小距离}
+\begin{definition}
+    设 $ C $ 是一个 $ q $ 元 $ (n, M) $ 码, 码 $ C $ 的最小距离定义为
+$$
+d(C)=\min \{d(x, y) \mid x, y \in C, x \neq y\}
+$$
+\end{definition}
+\begin{remark}
+    用记号 $ (n, M, d) $ 表示码长为 $ n $, 码字个数为 $ M $, 最小距离为 $ d $ 的码.
+\end{remark}
+\begin{example}
+    码 $ C=\{0000,0110,1001,1010\} $, 则 $ d(C)=2 $.
+
+    汉明距离 \(d(C)\) 是码 \(C\) 中任意两个不同码字之间的最小汉明距离，其中汉明距离是指两个码字在相同位置上不同符号的数量.对于给定的码 \(C=\{0000, 0110, 1001, 1010\}\)，我们需要计算所有码字对之间的汉明距离，然后找出这些距离中的最小值来确定 \(d(C)\).计算码 \(C\) 中所有码字对之间的汉明距离：
+ \(d(0000, 0110)\) = 2;
+ \(d(0000, 1001)\) = 3;
+ \(d(0000, 1010)\) = 2;
+ \(d(0110, 1001)\) = 4;
+ \(d(0110, 1010)\) = 3;
+ \(d(1001, 1010)\) = 2.
+从这些计算中，我们可以看到最小的汉明距离是 2，出现在多个码字对之间.因此，码 \(C=\{0000, 0110, 1001, 1010\}\) 的最小汉明距离 \(d(C)\) 是 2.
+\end{example}
+
+\subsection{码的检错和纠错能力}
+\begin{definition}
+    如果对于码 $ C $ 中的每一个码字, 当发生至多 $ t $ 个错误时, 检查出所产生的字不是码字,则称码 $ C $ 为可检查 $ t $ 个错误的检错码. 如果能检查 $ t $ 个错误而不能检查 $ t+1 $ 个错误, 则称码 $ C $ 为至多可检查 $ t $个错误的检错码.
+\end{definition}
+\begin{theorem}
+    码 $ C $ 至多可检查 $ t $ 个错误的充分必要条件为 $ d(C)=t+1 $
+\end{theorem}
+\begin{proof}
+ $ \Leftarrow $ 充分性 $ (d(C)=t+1 \Rightarrow $ 码 $ C $ 至多可检查 $ t $ 个错误).
+如果码 $ C $ 的最小汉明距离 $ d(C)=t+1 $ ，考虑以下情况:
+ 
+对于码字 $ x \in C $ ，如果 $ x $ 发生的错误个数 $ \leq t $ ，即输入 $ x $ ，输出 $ y $ ，且 $ d(x, y) \leq t $ ，则 $ y $ 必定不在码 $ C $ 中，因为从 $ x $ 到 $ y $ 的任何变化需要至少 $ t+1 $ 个位的改变才能到达另一个有效码字.因此，可以检查出 $ y $ 必出错.
+
+如果 $ x $ 发生的错误个数为 $ t+1 $ ，则 $ d(x, y)=t+1 $ . 这是最小汉明距离的情况，意味着 $ y $ 可能是码 $ C $ 中的另一个码字，因此无法仅通过检测 $ t+1 $ 个错误来判断 $ y $ 是否出错.
+
+$ \Rightarrow $ 必要性 (码 $ C $ 至多可检查 $ t $ 个错误 $ \Rightarrow d(C)=t+1 $ ).
+反过来，如果码 $ C $ 至多可检查 $ t $ 个错误，这意味着对于任意 $ x \in C $ 和任意 $ y \in $ $ V(n, q)(V(n, q) $ 表示所有可能的 $ n $ 位长、基于 $ q $ 元字母表的向量空间），当 $ d(x, y) \leq t $ 时， $ y $ 必定不是码字.这是因为如果 $ y $ 是码字，则可能无法检测出 $ x $ 到 $ y $的 $ t $ 或更少的错误.由此推断，码 $ C $ 的最小距离必须大于 $ t $ ，否则不可能保证所有最多 $ t $ 个错误都能被检测出来.因此，有 $ d(C)>t $ . 如果 $ d(C)=t+2 $ 或更大，根据充分性，码 $ C $ 将能至多检查 $ t+1 $ 或更多个错误，这与原假设矛盾.因此，最小汉明距离不能大于 $ t+1 $ ，即 $ d(C)=t+1 $ .
+
+\end{proof}
+\begin{definition}
+   当对码 C采用最小Hamming距离译码时,如果任意一个码字发生至多 $ t $ 个错误时, 都能正确译码, 则称码 $ C $ 为可纠正 $ t $ 个错误的纠错码. 如果 $ C $ 能纠正 $ t $ 个错误而不能纠正 $ t+1 $ 个错误, 则称码 $ C $ 为至多可纠正 $ t $ 个错误的纠错码.
+\end{definition}
+
+\begin{theorem}
+码 $ C $ 至多可纠正 $ t $ 个错误的充分必要条件为 $ d(C)=2 t+1 $或 $ 2 t+2 $.
+\end{theorem}
+\begin{proof}
+$ \Leftarrow $ 先证充分性. 先证 $ d(C)=2 t+1 $ 或 $ 2 t+2 $ 时 $ C $ 至多可纠正 $ t $ 个错误, 对于 $ x \in C $, 定义 $ B_{x}(t)=\{y \in V(n, q) \mid d(x, y) \leq t\} $, 则对 $ \forall x^{\prime} \in C, x^{\prime} \neq x, B_{x}(t) \cap B_{x^{\prime}}(t)=\emptyset $, 否则若 $ \exists z \in B_{x}(t) \cap B_{x^{\prime}}(t) $, 则有 $ d(z, x) \leq t, d\left(z, x^{\prime}\right) \leq t $, 从而
+$$
+d\left(x, x^{\prime}\right) \leq d(x, z)+d\left(z, x^{\prime}\right) \leq 2 t
+$$
+与 $ d(C)=2 t+1 $ 或 $ 2 t+2 $ 矛盾.
+故对 $ y \in V(n, q), d(x, y) \leq t $, 对 $ \forall x^{\prime} \in C, x^{\prime} \neq x $, 必有 $ d\left(x^{\prime}, y\right)>t $. 于是将 $ y $ 译为 $ x $, 即当 $ x $ 发生 $ \leq t $ 个错误时可纠正.
+
+再证此时 C不能纠正 $ t+1 $ 个错误. 事实上,若$ d(C)=2 t+1$,设$ x, x^{\prime} \in C$, $x=\left(x_{1}, \cdots, x_{n}\right)$, $x^{\prime}=\left(x_{1}^{\prime}, \cdots, x_{n}^{\prime}\right)$.$\quad x_{i 1} \neq x_{i 1}^{\prime}, x_{i 2} \neq x_{i 2}^{\prime}, \cdots, x_{i 2 t+1}^{\prime} \neq x_{i 2 t+1}^{\prime} \text {, 其余情况 } x_{j}=x_{j}^{\prime}$
+
+取$ y=y_{1} \cdots y_{n}$,令
+$$
+y_{j}=\left\{\begin{array}{ll}
+x_{j} & \text { 如果 } j=i_{1}, \cdots, i_{t} \\
+x_{j}^{\prime} & \text { 如果 } j=i_{t+1}, \cdots, i_{2 t+1} \\
+x_{j}=x_{j}^{\prime} & \text { 否则 }
+\end{array}\right.
+$$
+则有 $ d(x, y)=t+1, d\left(x^{\prime}, y\right)=t $.
+若 $ d(C)=2 t+2 $. 重复上述过程, $ \exists y $ 使得
+$$
+d(x, y)=t+1, \quad d\left(x^{\prime}, y\right)=t+1
+$$
+于是 $ \exists y \in B_{x}(t+1) \cap B_{x^{\prime}}(t+1) $, 故当收到 $ y $ 时不能确定将其译为那个码字, 因此码 $ C $ 不能纠正 $ t+1 $ 个错误.
+
+$ \Longrightarrow $ 设码 $ C $ 至多可纠正 $ t $ 个错误,则必有 $ d(C)>2 t $. 否则 $ d(C) \leq 2 t=2(t-1)+2 $. 由充分性可知码 $ C $ 可纠正至多 $ t-1 $ 个错误，矛盾. 另外 $ d(C) \leq 2 t+2 $, 否则如果 $ d(C)>2 t+2 $, 则 $ d(C)=2 t+3=2(t+1)+1 $. 则 $ C $ 可纠正 $ t+1 $ 个错误,矛盾.故 $ d(C)=2 t+1 $ 或 $ 2 t+2 $.
+\end{proof}
+
+\begin{corollary}
+ $ d(C)=d $ 的充分必要条件为码 $ C $ 至多可纠正 $ \left\lfloor\frac{d-1}{2}\right\rfloor $ 个错误.
+\end{corollary}
+
+\begin{proof}
+  $ \left\lfloor\frac{d-1}{2}\right\rfloor $ 为不超过 $ \frac{d-1}{2} $ 的最大正整数,
+故
+$$
+\left\lfloor\frac{d-1}{2}\right\rfloor=\left\{\begin{array}{ll}
+\frac{d-1}{2} & d \text { 为奇数 } \\
+\frac{d}{2}-1 & d \text { 为偶数 }
+\end{array}\right.
+$$
+于是 $ \frac{d-1}{2}=t \Longrightarrow d=2 t+1 $,
+$\frac{d}{2}-1=t \Longrightarrow d=2 t+2$
+\end{proof}
+
+\begin{example}
+ 称 $ C=\{\overbrace{00 \cdots 0}^{n}, \overbrace{11 \cdots 1}^{n}, \cdots, \overbrace{(q-1)(q-1) \cdots(q-1)}^{n}\} $为码长为 $ n $ 的 $ q $ 元重复码, $ d(C)=n $, 码 $ C $ 是一个至多可纠正 $ \left\lfloor\frac{n-1}{2}\right\rfloor $也是一个至多可检查 $ n-1 $ 个错误的检错码.
+\end{example}

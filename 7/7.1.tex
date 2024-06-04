@@ -1,0 +1,86 @@
+\chapter{线性码}
+线性码是一类很重要的分组码,是讨论各种码的基础. 线性码的编码方法和译码方法都很简单. 许多特殊的线性码都有很好的性质.绝大多数已知的好码都是线性码.
+本章主要介绍有关线性码的基本概念, 基本性质以及线性码的编码和译码方法等.
+
+\section{线性码的定义}
+
+\subsection{线性码的概念及性质}
+
+\begin{definition}
+    设 $ L \subseteq V(n, q) $, 若 $ L $ 是 $ V(n, q) $ 的子空间, 则称 $ L $ 为 $ q $ 元线性码. 若 $ \operatorname{dim} L=k $, 则称 $ L $ 为一个 $ q $ 元 $ [n, k] $ 线性码,若 $ d(L)=d $,则称 $ L $ 是一个 $ q $ 元 $ [n, k, d] $ 码.
+\end{definition}
+
+\begin{theorem}
+    设 $ L \subseteq V(n, q) $ 是线性码, 则 $ d(L)=\omega(L) $.
+\end{theorem}
+\begin{proof}
+    首先设 $ L^{\prime}=\{x-y \mid \forall x, y \in L\} $, 则有 $ L=L^{\prime} $, 因为 $ L $ 是子空间, 故对 $ \forall x, y \in L $, 有 $ x-y \in L $, 即 $ L^{\prime} \subseteq L $.
+
+    反之, 对 $ \forall x \in L, x=\underbrace{(x+y)}_{\in L}-y $, 故 $ x \in L^{\prime} $, 从而 $ L=L^{\prime} $.
+于是 
+$$ d(L)=\min\limits _{x \neq y \in L}\{d(x, y)\} 
+=\min\limits _{x \neq y \in L}\{\omega(x-y)\} 
+=\min\limits _{0 \neq x \in L}\{\omega(x)\}=\omega(L)
+$$
+\end{proof}
+\begin{example}
+     $ n=3, q=2, V(3,2), L=\{100,010,110,000\} $ 是一个2元 $ [3,2] $ 线性码, $ d(L)=1 $, 即 $ L $ 是一个 2 元 $ [3,2,1] $ 码.
+\end{example}
+
+\subsection{线性码的表示方法}
+\begin{definition}
+     设 $ L $ 是一个 $ q $ 元 $ [n, k] $ 线性码. 由 $ L $ 的一组基作为行向量所组成的 $ k \times n $ 矩阵 $ G $, 称为线性码 $ L $ 的生成矩阵.
+\end{definition}
+\begin{remark}
+    (1) $ L $ 是 $ q $ 元 $ [n, k] $ 线性码, $ \operatorname{dim} L=k $. 设 $ \alpha_{i}=\left(a_{i 1}, \cdots, a_{i n}\right) $, $ (i=1, \cdots, k) $ 为 $ L $ 的一组基, 则 $ L $ 的生成矩阵 $ G $ 为
+$$
+\left(\begin{array}{cccc}
+a_{11} & a_{12} & \cdots & a_{1 n} \\
+a_{21} & a_{22} & \cdots & a_{2 n} \\
+\vdots & \vdots & & \vdots \\
+a_{k 1} & a_{k 2} & \cdots & a_{k n}
+\end{array}\right)
+$$
+上例中线性码 $ L $ 的生成阵 $ G=\left(\begin{array}{lll}1 & 0 & 0 \\ 0 & 1 & 0\end{array}\right) $.
+
+(2) $ L $ 的生成阵 $ G $ 若具有形式 $ G=\left(I_{k} \mid A\right) $,则称 $ G $ 为 $ L $ 的标准型生成矩阵,其中 $ I_{k} $ 为 $ k \times k $ 阶单位矩阵, $ A $ 为 $ k \times(n-k) $ 阶矩阵.
+
+(3)设 $ q $ 元 $ [n, k] $ 线性码 $ L $ 的生成矩阵为 $ G $, 则 $ L=\{x G \mid x \in V(k, q)\} $. 事实上, $ \forall y \in L, y=\underbrace{x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{k} \alpha_{k}}_{\text {行变列 }} $,
+$$ x_{1 \times k} G_{k \times n}=\left[\left(\underline{x_{1}, x_{2}, \cdots, x_{k}}\right)\left(\begin{array}{c|ccc}a_{11} & a_{12} & \cdots & a_{1 n} \\ a_{21} & a_{22} & \cdots & a_{2 n} \\ \vdots & \vdots & & \vdots \\ a_{k 1} & a_{k 2} & \cdots & a_{k n}\end{array}\right)\right]_{1 \times n} $$ 
+$ x G $ 是 $ L $ 中的码字, $ x $ 取遍 $ V(k, q) $ 时得到 $ L $ 中的所有码字.
+$$
+\begin{aligned}
+& \left(x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{k} \alpha_{k}\right) \\
+= & x_{1}\left(a_{11}, a_{12}, \cdots, a_{1 n}\right)+x_{2}\left(a_{21}, a_{22}, \cdots, a_{2 n}\right)+\cdots  +x_{k}\left(a_{k 1}, a_{k 2}, \cdots, a_{k n}\right) \\
+= & \left(x_{1} a_{11}+x_{2} a_{21}+\cdots+x_{k} a_{k 1}, \cdots, x_{1} a_{1 n}+x_{2} a_{2 n}+\cdots+x_{k} a_{k n}\right)
+\end{aligned}
+$$
+故每个码字具有 $ x G $ 的形式, 从而 $ |L|=q^{k} $.
+$$
+\left(x \in V(k, q) \text {, 而 }|V(k, q)|=q^{k}, x \neq x^{\prime}, x G \neq x^{\prime} G\right)
+$$
+若 $ x_{1} \alpha_{1}+\cdots+x_{k} \alpha_{k}=x_{1}^{\prime} \alpha_{1}+\cdots+x_{k}^{\prime} \alpha_{k} $
+则 $ \left(x_{1}-x_{1}^{\prime}\right) \alpha_{1}+\cdots+\left(x_{k}-x_{k}^{\prime}\right) \alpha_{k}=0 $
+$ \Rightarrow x_{i}=x_{i}^{\prime} $ 矛盾.
+
+(4) $ [n, k] $ 线性码 $ L $ 完全由它的生成矩阵来决定.
+
+(5) $ [n, k] $ 线性码 $ L $ 的码率 $ R(L)=\dfrac{\log _{q} q^{k}}{n}=\dfrac{k}{n} $
+\end{remark}
+
+\begin{example}
+ 设码 $ L $ 的生成矩阵为 $ G=\left(\begin{array}{llll|lll}1 & 0 & 0 & 0 & 0 & 1 & 1 \\ 0 & 1 & 0 & 0 & 1 & 0 & 1 \\ 0 & 0 & 1 & 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 1 & 1 & 1 & 1\end{array}\right) $. 
+$ G $ 为标准型生成矩阵, $\forall x \in V(4,2), x=\left(x_{1}, x_{2}, x_{3}, x_{4}\right)$
+$$
+\begin{array}{l}
+x G=\left(x_{1}, x_{2}, x_{3}, x_{4}\right)\left(\begin{array}{lllllll}
+1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1
+\end{array}\right) \\
+=\left(x_{1}, x_{2}, x_{3}, x_{4}, x_{2}+x_{3}+x_{4}, x_{1}+x_{3}+x_{4}, x_{1}+x_{2}+x_{4}\right)_{1 \times 7} \\
+\end{array}
+$$
+$ L $ 是 $ [7,4] $ 码.
+\end{example}

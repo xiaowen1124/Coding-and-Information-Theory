@@ -1,0 +1,104 @@
+\section{循环码的编码方法}
+设 $ C=\langle\langle g(x)\rangle\rangle $ 是一个 $ q $ 元 $ [n, n-r] $ 循环
+码, $ \operatorname{deg}(g(x))=r, C $ 有 $ n-r $ 个信息位, 则它可以对 $ V(n-r, q) $ 中的数字信息进行编码.
+
+1. 非系统的编码方法
+
+对任意信息串 $ a_{0} a_{1} \cdots a_{n-r-1} \in V(n-r, q) $, 可得到一个信息多项式
+$$
+a(x)=a_{0}+a_{1} x+\cdots+a_{n-r-1} x^{n-r-1},
+$$
+将 $ a(x) $ 编成 $ C $ 中的码字 $ a(x) g(x) $.
+
+2. 系统的编码方法
+
+对 $ \forall a_{0} a_{1} \cdots a_{n-r-1} \in V(n-r, q) $,构造多项式
+$$
+\bar{a}(x)=a_{0} x^{n-1}+a_{1} x^{n-2}+\cdots+a_{n-r-1} x^{r},
+$$
+显然, $ r \leq \operatorname{deg}(\bar{a}(x)) \leq n-1 $, 用 $ g(x) $ 去除 $ \bar{a}(x) $, 得
+$$
+\overline{\mathrm{a}}(x)=q(x) g(x)+r(x) \text {, }
+$$
+其中 $ \operatorname{deg}(r(x))<\operatorname{deg}(g(x))=r $,信息串 $ a_{0} a_{1} \cdots a_{n-r-1} $ 可编为 $ C $ 中的码字
+$$
+c(x)=\bar{a}(x)-r(x)=q(x) g(x) .
+$$
+因为 $ \bar{a}(x) $ 与 $ r(x) $ 中没有相同的项, 所以这种编码是系统编码（去掉后面 $ r $ 个位置后, 恰好为 $ V(n-r, q) $ 中的全部向量）. 事实上,如果 $ c(x) $ 中 $ x $ 的项以降幂排列, 则前 $ n-r $ 个是信息位,后 $ r $ 位是校验位.
+
+
+\begin{example}
+设 $ C $ 是一个二元 $ [7,4] $ 循环码, 它的生成多项式
+为 $ g(x)=x^{3}+x+1 $, 因为
+$$
+\begin{aligned}
+h(x)&=\frac{x^{7}-1}{x^{3}+x+1}=x^{4}+x^{2}+x+1, \\
+h^{\perp}(x)&=x^{4} h\left(x^{-1}\right)=1+x^{2}+x^{3}+x^{4},
+\end{aligned}
+$$
+所以码 $ C $ 的校验矩阵为 $ H=\left(\begin{array}{lllllll}1 & 0 & 1 & 1 & 1 & 0 & 0 \\ 0 & 1 & 0 & 1 & 1 & 1 & 0 \\ 0 & 0 & 1 & 0 & 1 & 1 & 1\end{array}\right) $.
+这与二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(3,2) $ 的校验矩阵相同,因此, $ C $ 就是 $ \operatorname{Ham}(3,2) . C $ 可以纠正一个错误.
+设信息串为0101,用非系统编码方法可得:
+$$
+a(x)=x+x^{3}
+$$
+对 $ a(x) $ 编码所对应的码字为
+$$
+c(x)=a(x) g(x)=\left(x+x^{3}\right)\left(x^{3}+x+1\right)=x^{6}+x^{3}+x^{2}+x
+$$
+用系统编码方法对信息串0101进行编码, 有
+$$
+\begin{array}{l}
+\bar{a}(x)=x^{5}+x^{3} \\
+x^{5}+x^{3}=x^{2}\left(x^{3}+x+1\right)+x^{2}
+\end{array}
+$$
+所以0101被编为码字
+$$
+c(x)=\bar{a}-r(x)=x^{5}+x^{3}+x^{2} .
+$$
+\end{example}
+
+
+\section{循环码的检错性能}
+
+循环码作为检错码时, 可以检查出成区间的错误.
+\begin{definition}
+    设 $ e(x)=e_{0}+e_{1} x+\cdots+e_{n-1} x^{n-1} \in R_{n} $, 如果 $ e(x) $ 的系数有连续 $ b $ 个, 如第 $ m+1, m+2, \cdots, m+b $ 个, 使得当 $ j<m+1 $ 或 $ j>m+b $ 时, $ e_{j}=0 $ 但 $ e_{m+1} \neq 0, e_{m+b} \neq 0 $, 则称 $ e(x) $为一个长为 $ b $ 的成区间差错模式.
+\end{definition}
+
+设在信道发送端发送的码字为 $ c(x) $, 在信道接收端接收到的字为 $ u(x) $. 如果
+$$
+e(x)=u(x)-c(x)
+$$
+是一个长为 $ b $ 的成区间的差错模式, 则称 $ c(x) $ 在传输的过程中出现了一个长为 $ b $ 的成区间的错误.
+
+\begin{theorem}
+设 $ C $ 是一个 $ q $ 元 $ [n, n-r] $ 循环码, 则 $ C $ 可以检查出任意一个长为 $ b \leq r $ 的成区间错误.
+\end{theorem}
+\begin{proof}
+ 设
+$$
+c(x)=c_{0}+c_{1} x+\cdots+c_{n-1} x^{n-1} \in C \subseteq R_{n}
+$$
+是发送的码字, 在传送的过程中出现了一个长为 $ b \leq r $ 的成区间错误, 在信道接收端接收到的字为 $ u(x) $, 则
+$$
+e(x)=u(x)-c(x)=e_{0}+e_{1} x+\cdots+e_{n-1} x^{n-1}
+$$
+中存在连续 $ b $ 个系数, 设为第 $ m+1, m+2, \cdots, m+b $ 个, 使得当 $ j<m+1 $ 或 $ j>m+b $ 时, $ e_{j}=0 $, 而 $ e_{m+b} \neq 0 $. 于是
+$$
+\begin{aligned}
+e(x) & =e_{0}+e_{1} x+\cdots+e_{n-1} x^{n-1} \\
+& =x^{m+1}\left(e_{m+1}+e_{m+2} x+\cdots+e_{m+b} x^{b-1}\right) .
+\end{aligned}
+$$
+令
+$$
+a(x)=e_{m+1}+e_{m+2} x+\cdots+e_{m+b} x^{b-1},
+$$
+则
+$$
+\operatorname{deg}(a(x))=b-1 \leq r-1 .
+$$
+设 $ g(x) $ 是循环码 $ C $ 的生成多项式, $ \operatorname{deg}(g(x))=r $, 则显然 $ g(x) $ 不能整除 $ a(x) $. 因为 $ g(x) $ 的零次项的系数不为零. 所以 $ g(x) $ 不能整除 $ e(x) $. 否则, 假设 $ g(x) \mid e(x) $, 即 $ g(x) \mid x^{m+1} a(x) $, 因为 $ g(x) $ 与 $ x^{m+1} $ 互素, 所以 $ g(x) \mid a(x) $,导致矛盾. 又因为 $ c(x) $ 是码字, 所以 $ g(x) \mid c(x) $. 因此,我们有 $ g(x) $ 不能整除 $ c(x)+e(x) $. 这说明 $ c(x) $ $ +e(x) $ 不是码字, 即在信道接收端接收到的字 $ u(x)=c(x)+e(x) $不是码字. 因此, 循环码 $ C $ 可以检查出任意长为 $ b \leq r $ 的成区间错误.
+\end{proof}

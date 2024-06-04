@@ -1,0 +1,83 @@
+
+\section{连续型随机变量的信息量}
+\subsection{连续型随机变量的Shannon熵}
+
+\textbf{1. 连续型随机变量}
+\begin{definition}
+    设 $ \xi $ 是一个随机变量, 在 $ \mathbb{R}=(-\infty,+\infty) $ （或 $ \mathbb{R} $ 的某个区域 $ \mathscr{X} $ ) 中取值, 称 $ \xi $ 是一个连续型随机变量, 它的概率分布函数定义为
+$$
+F(x)=P_r\{\xi \leqslant x\}, x \in \mathbb{R}
+$$
+如果 $ F(x) $ 是连续函数, 那么称随机变量 $ \xi $ 具有连续分布,若 $ F(x) $ 的导数存在, 则 $ f(x)=F^{\prime}(x)=\frac{d F(x)}{d(x)} $ 是 $ \xi $ 的概率分布密度函数
+\end{definition}
+
+\begin{remark}
+  对于概率分布密度函数 $ f(x) $, 有 $ f(x) \geqslant 0 $, 对 $ \forall x \in \mathscr{X} $,
+$$
+\int_{-\infty}^{+\infty} f(x) d x=1 \text { . }
+$$
+\end{remark}
+
+\textbf{2. 连续型随机变量的Shannon 熵}
+\begin{definition}
+    一个概率密度函数为 $ f(x) $ 的连续型随机变量 $ \xi $ 的熵 $ H(\xi) $ 定义为
+$$
+H(\xi)=-\int_{\mathscr{X}} f(x) \log f(x) d x .
+$$
+规定 $ 0 \log 0=0 $, 也称为微分熵
+\end{definition}
+\begin{example}
+     (一致分布) 随机变量 $ \xi $ 在 0 到 $ a $ 之间为一致分布, 于是在 0 到 $ a $ 之间的密度为 $ \frac{1}{a} $, 而在其它处的密度均为 0 , 它的熵为
+$$
+H(\xi)=-\int_{0}^{a} \frac{1}{a} \log \frac{1}{a} d x=\log a
+$$
+\end{example}
+\begin{remark}
+    当 $ a<1 $ 时, $ \log a<0 $, 此时熵为负值, 此时并不代表信息的不确定性的大小, 而在物理学中有其意义.
+\end{remark}
+\begin{example}
+  （指数分布） 设 $ \xi \sim p_{\lambda}(x)=\lambda e^{-\lambda x}, x, \lambda \geqslant 0 $, 它的熵为
+$$
+\begin{aligned}
+H(\xi)  =-\int_{0}^{\infty} p_{\lambda}(x) \log p_{\lambda}(x) d x  &=-\int_{0}^{\infty} \lambda e^{-\lambda x} \log \left(\lambda e^{-\lambda x}\right) d x \\
+& =-\lambda \int_{0}^{\infty} e^{-\lambda x}(\log \lambda-\lambda x) d x \\
+& =-\lambda \int_{0}^{\infty} e^{-\lambda x}(-\lambda x) d x-\int_{0}^{\infty} \lambda e^{-\lambda x} \log \lambda d x \\
+& =\int_{0}^{\infty} e^{-\lambda x}(-\lambda x) d(-\lambda x)-\log \lambda \\
+& =1-\log \lambda
+\end{aligned}
+$$
+\end{example}
+\begin{example}
+  （正态分布） 如果 $ \xi \sim N\left(\mu, \sigma^{2}\right) $ ，其中 $ N\left(\mu, \sigma^{2}\right) $ 表示期望为 $ \mu $,均方为 $ \sigma^{2} $ 的正态分布, 那么它的分布密度为
+$$
+\phi_{\mu, \sigma^{2}}(x)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right) .
+$$
+则它的熵为
+$$
+\begin{aligned}
+H\left(\phi_{\mu, \sigma^{2}}\right)&=-\int \phi_{\mu, \sigma^{2}}(x) \log \phi_{\mu, \sigma^{2}}(x) d x \\
+&=-\int \phi_{\mu, \sigma^{2}}(x)\left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}-\log \sqrt{2 \pi \sigma^{2}}\right) d x \\
+&=\frac{E\left\{(\xi-\mu)^{2}\right\}}{2 \sigma^{2}}+\frac{1}{2} \log 2 \pi \sigma^{2} \\
+&=\frac{1}{2}+\frac{1}{2} \log 2 \pi \sigma^{2} \\
+&=\frac{1}{2} \log 2 \pi e \sigma^{2}
+\end{aligned}
+$$
+\end{example}
+
+\subsection{连续型随机变量的联合熵与条件熵}
+$ (\xi, \eta) $ 是一对连续型随机变量, 联合分布为 $ p(x, y) $, 边际分布为 $ p(x), p(y) $, 则有如下定义:
+
+(1) 联合熵 $$ H(\xi, \eta)=-\int p(x, y) \log p(x, y) d x d y $$
+
+(2)条件熵 $$ H(\eta \mid \xi)=-\int p(x, y) \log \frac{p(x, y)}{p(x)} d x d y $$
+
+(3)互信息 $$ I(\xi ; \eta)=\int p(x, y) \log \frac{p(x, y)}{p(x) p(y)} d x d y $$
+
+
+
+
+
+
+
+
+

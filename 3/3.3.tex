@@ -1,0 +1,92 @@
+
+\section{信源变长码的编码定理}
+这一节讨论最优变长码平均码长的上、下界估计问题.
+
+
+\subsection{最优变长码平均码长的下界估计}
+记 $ \mathscr{S}=\{\mathscr{X}, p(x)\} $ 为信源, 其中 $ \mathscr{X}=\left\{x_{1}, x_{2}, \cdots, x_{a}\right\} $ 是信源字母表, 对应的概率分布为 $ P=\left(p_{1}, p_{2}, \cdots, p_{a}\right) $. 它的编码方案为 $ (C, f) $, 其中 $ C $ 是一个码元集, 简记为 $ C=\left\{c_{1}, c_{2}, \cdots, c_{a}\right\} $, 码字长度分别是 $ \left\{\ell_{1}, \ell_{2}, \cdots, \ell_{a}\right\} $, 这时平均码长为
+$$
+L(\mathscr{S}, f)=\sum_{i=1}^{a} p_{i} \ell\left(f\left(x_{i}\right)\right)=\sum_{i=1}^{a} p_{i} \ell_{i}
+$$
+
+\begin{theorem}
+    如果 $ \mathscr{S}=\{\mathscr{X}, p(x)\} $ 是给定信源, $ f $ 是即时码, 那么
+$$
+H_{r}\left(p_{1}, \cdots, p_{a}\right) \leqslant L(\mathscr{S}, f),
+$$
+其中 $ H_{r}(\cdot) $ 是取对数 $ r $ 为底的熵函数, 而等号成立的条件是 $ \ell_{i}=-\log _{r} p_{i}$ , 
+
+$r=|\mathscr{U}|, \mathscr{U} $ 为信号字母表.
+\end{theorem}
+\begin{proof}
+    因为 $ f $ 是即时码, 根据Kraft不等式,我们有
+$$
+q_{0}=\sum_{i=1}^{a} \frac{1}{r^{\ell_{i}}} \leq 1
+$$
+令 $ q_{i}=\dfrac{1}{\left(q_{0} r^{\ell_{i}}\right)} $, 则有 $ q_{i} \geq 0, i=1, \cdots, a $,
+$$
+\sum_{i=1}^{a} q_{i}=\sum_{i=1}^{a} \frac{1}{\left(\sum\limits_{k=1}^{a} \frac{1}{r_{k}}\right) r^{\ell_{i}}}=\frac{\sum\limits_{i=1}^{a} \frac{1}{r^{\ell_{i}}}}{\sum\limits_{k=1}^{a} \frac{1}{r^{\ell_{k}}}}=1
+$$
+结合引理 \ref{lamma2}则有 
+$$
+\begin{aligned}
+H_{r}\left(p_{1}, \cdots, p_{a}\right)=\sum_{i=1}^{a} p_{i} \log _{r} \frac{1}{p_{i}}
+&\leq \sum_{i=1}^{a} p_{i} \log _{r} \frac{1}{q_{i}} \quad\left(p_{i}=q_{i} \text { 等号成立 }\right) \\
+&=\sum_{i=1}^{a} p_{i} \log _{r}\left(q_{0} r^{\ell_{i}}\right) \\
+&=\sum_{i=1}^{a} p_{i} \ell_{i}+\log _{r} q_{0} \quad (q_{0} \leq 1) \\
+&\leq \sum_{i=1}^{a} p_{i} \ell_{i}=L(S, f),
+\end{aligned}
+$$
+等号成立的充要条件为 $ p_{i}=q_{i}, q_{0}=1 $. 即 $ p_{i}=\dfrac{1}{r^{\ell_{i}}} $ 或 $ \ell_{i}=-\log _{r} p_{i} $.
+\end{proof}
+\begin{remark}
+    等号成立的条件为 $ \ell_{i}=-\log _{r} p_{i} $. 即要求 $ \ell_{i}=-\log _{r} p_{i} $ 必须是个整数, 而这个条件并不是总能满足, 所以定理中的等号一般不成立.
+\end{remark}
+
+\subsection{ 最优变长码平均码长的上界估计}
+\begin{theorem}
+    对于已给信源 $ \mathscr{S}=\{\mathscr{X}, p(x)\} $, 它的 $ r $ 元最优变长即时码 $ f_{0} $有
+$$
+L\left(\mathscr{S}, f_{0}\right)<H_{r}\left(p_{1}, \cdots, p_{a}\right)+1
+$$
+\end{theorem}
+\begin{proof}
+    记 $ \operatorname{lnt}(z) $ 是 $ z $ 的整数部分, 而
+$$
+\ln t_{+}(z)=\left\{\begin{array}{ll}
+z, & \text { 如果 } z \text { 是整数 } \\
+\operatorname{lnt}(z)+1, & \text { 如果 } z \text { 不是整数 }
+\end{array}\right.
+$$
+如果 $ \overline{p}=\left(p_{1}, p_{2}, \cdots, p_{a}\right) $ 是固定信源的概率分布, 那么我们取 $ \ell_{i}=\operatorname{lnt}_{+}\left(-\log _{r} p_{i}\right) $ 大于或等于 $ \log _{r} \frac{1}{p_{i}} $ 的最小正整数. 那么有 $ \log _{r} \frac{1}{p_{i}} \leq \ell_{i}<\log \frac{1}{p_{i}}+1 $, 且由 $ \log _{r} \frac{1}{p_{i}} \leq \ell_{i} $ 可得 $ \frac{1}{p_{i}} \leq r^{\ell_{i}} $, 因此有 $ \frac{1}{r^{\ell_{i}}} \leq p_{i} $ 成立
+
+从而 $ \sum\limits_{i=1}^{a} \frac{1}{r^{\ell_{i}}} \leq \sum\limits_{i=1}^{a} p_{i}=1 $.
+即Kraft不等式成立.因此存在码长为 $ \left\{\ell_{1}, \ell_{2}, \cdots, \ell_{a}\right\} $ 的即时码.这时它的平均码长为
+$$
+\begin{aligned}
+L(\mathscr{S}, f) & =\sum_{i=1}^{a} p_{i} \ell_{i} \\
+& <\sum_{i=1}^{a} p_{i}\left(\log _{r} \frac{1}{p_{i}}+1\right) \\
+& =\sum_{i=1}^{a} p_{i} \log _{r} \frac{1}{p_{i}}+\sum_{i=1}^{a} p_{i} \\
+& =H_{r}\left(p_{1}, \cdots, p_{a}\right)+1
+\end{aligned}
+$$
+于是我们找到了一个平均码字长度小于 $ H_{r}\left(p_{1}, \cdots, p_{a}\right)+1 $ 的即时编码方案.
+
+\end{proof}
+
+\begin{theorem}
+    定理：对于已给信源 $ \mathscr{S}=\{\mathscr{X}, p(x)\} $, 它的 $ r $ 元最优变长即时码 $ f_{0} $有
+$$
+H_{r}\left(p_{1}, \cdots, p_{a}\right) \leq L\left(\mathscr{S}, f_{0}\right)<H_{r}\left(p_{1}, \cdots, p_{a}\right)+1
+$$
+成立.
+\end{theorem}
+
+
+
+
+
+
+
+
+

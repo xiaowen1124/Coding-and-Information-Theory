@@ -1,0 +1,142 @@
+\section{前缀码和即时码}
+
+变长码的讨论 $ \left\{\begin{array}{l}\text { (1)唯一可译变长码的构造 } \\ \text { (2)平均码长的估计与优化 }\end{array}\right. $
+
+\subsection{唯一可译变长码的构造}
+\begin{example}
+    考虑一个信源字母表 $ \mathscr{X}=\{a, b, c, d\} $, 它的编码函数为 $ f(a)=0, f(b)=01, f(c)=011, f(d)=0111 $,则码元集 $ C=\{0,01,011,0111\} $, 则码 $ C $ 是唯一可译码.事实上,假设我们收到的码字串为 01101001110010. 注意到每个码字都是以0开始的,故按此规则将码字符串进行分组, 可得到信源字母串为cbadaba.
+
+    再如收到码字符串为 0100111011 , 则可知信源字母串为badc.码 $ C $ 为唯一可译码, 但注意到我们收到的码字串中有码元011, 我们还不能确定它的信源字母, 因为在 011 后面可能出现 0 或 1 , 如果是 0 , 那么就可把011译出为 $ c $, 如果是 1 , 那么就可把0111译出为 $ d $.即译码不是即时的,依赖于它后面的字符,故称这种码为\textbf{非即时码}.
+\end{example}
+
+\begin{example}
+ 考虑信源字母表 $ \mathscr{X}=\{a, b, c, d\} $, 编码函数为 $ f $ :
+$$
+f(a)=1, f(b)=01, f(c)=001, f(d)=0001,
+$$
+它的码元集为
+$$
+C=\{1,01,001,0001\}
+$$
+它把 1 作为两个码字的分隔号 (以1为结尾), 收到码字串 10010110001101 时, 译为信源字母串acbadab; 又如收到码字串 0010001101 , 译为信源字母串 cdab, 这种码可直接译码, 不用考虑码字符后面出现什么数字, 当我们收到一个字符串时, 就可从左向右读, 只要码元一出现, 我们就可译出相应的信源字母, 这种码我们称为\textbf{即时码}.
+\end{example}
+
+\begin{definition}[即时码与非即时码]
+    如果在任意的码串中, 从左到右, 只要一个码字出现, 就可唯一译出这个码字所对应的信源字母, 则称这种码为即时码, 否则为非即时码.
+\end{definition}
+\begin{remark}
+
+    (1)即时码和非即时码均是对唯一可译码而言.
+    
+(2)唯一可译码不一定是即时码,如第一个例子.
+\end{remark}
+
+\begin{definition}[前缀码]
+设有两个字符串 $ a^{(k)}=\left(a_{1}, a_{2}, \cdots, a_{k}\right) $, $ b^{\left(k^{\prime}\right)}=\left(b_{1}, b_{2}, \cdots, b_{k^{\prime}}\right) $, 如果 $ k \leq k^{\prime} $, 且有 $ \left(a_{1}, a_{2}, \cdots, a_{k}\right)=\left(b_{1}, b_{2}, \cdots, b_{k}\right) $, 则称 $ a^{(k)} $ 是 $ b^{\left(k^{\prime}\right)} $ 的前缀. 如果码元集 $ C $ 中任何一个码字都不能是另一个码字的前缀,即在码元集 $ C $ 中, 任何一个码元 $ c_{i} $ 都不能是另一个码元 $ c_{j}(i \neq j) $ 的前缀,就称码 $ C $ 为前缀码.
+\end{definition}
+
+如上面第二个例.
+$$
+f(a)=1, f(b)=01, f(c)=001, f(d)=0001,
+$$
+每个码字都不是另一个码字的前缀.
+但第一个例子中. $ f(a)=0, f(b)=01, f(c)=011, f(d)=0111 $, 就不是前缀码. 码元集 $ C=\{0,01,  011,0111\} $.
+
+如何判断一个码元集是否具有前缀性？只要把每个码元按照它们的长度由小到大排列，把每个码元与它后面的码元进行比较，看它与后面的码元的前边部分是否相同即可. 只要能找到有一个码元能与它后面的码元的前边部分相同，那么这种码就不是前缀码，否则就是前缀码. 
+\begin{theorem}[即时码与前缀码的关系]
+    前缀码一定是即时码, 反之亦然, 即即时码也是前缀码.
+\end{theorem}
+\begin{proof}
+ $ \Leftarrow $ : 假设 $ C $ 是一个码元集, 若 $ \mathrm{C} $ 不是前缀码, 则存在码字 $ c_{i}, C_{j} $,使得 $ c_{i} $ 是 $ c_{j} $ 的前缀, 在一个含有 $ c_{i} $ 的码字串中, 从左到右, 当 $ c_{i} $ 出现时,只有当 $ c_{i} $ 后面出现部分, 连同 $ c_{i} $ 不是 $ c_{j} $ 时才能把 $ c_{i} $ 还原；若 $ c_{i} $以及连同后面部分是 $ c_{j} $ 时, 不能把 $ c_{i} $ 还原, 应该把 $ c_{j} $ 还原, 因此 $ C $ 不是即时码,矛盾.故即时码一定为前缀码.
+ 
+$ \Rightarrow $ : 若 $ C $ 不是即时码, 则从左到右, 出现一个码字 $ c_{i} $, 还原为消息字母时, 依赖于后面的字符串, 即存在另一个码字 $ c_{j} $, 使得 $ c_{i} $ 是 $ c_{j} $ 的前缀, 从而C不是前缀码.
+\end{proof}
+
+\subsection{Kraft不等式}
+
+$ \mathscr{S}=\{\mathscr{X}, p(x)\} $ 是信源, $ \mathscr{U} $ 输入信号字母集, $ f: \mathscr{X} \rightarrow \mathscr{U}^{*} $, 考虑即时码存在的条件.
+
+\begin{theorem}[Kraft不等式]
+    如果 $ f $ 是一个变长码, 它的码元集为 $ C $, 它的码字长度分别为 $ \left\{\ell_{1}, \ell_{2}, \cdots, \ell_{a}\right\} $, 记 $ r=|\mathscr{U}| $, 如果 $ f $ 是一个即时码, 那么它必满足Kraft 不等式
+$$
+\sum_{k=1}^{a} \frac{1}{r^{\ell_{k}}} \leq 1 .
+$$
+反之, 如果有一组数 $ \left\{\ell_{1}, \ell_{2}, \cdots, \ell_{a}\right\} $ 满足Kraft不等式, 那么必存在一个码长为 $ \left\{\ell_{1}, \ell_{2}, \cdots, \ell_{a}\right\} $ 的即时码.
+\end{theorem}
+
+\begin{remark}
+反之的含义并不是若 $ C=\left\{c_{1}, c_{2}, \cdots, c_{a}\right\}, \ell_{1}, \cdots, \ell_{a} $ 满足 $ \sum\limits_{k=1}^{a} \frac{1}{r^{l_{k}}} \leq 1 $, 则 $ C $ 一定是即时码.
+\end{remark}
+
+\begin{proof}
+记 $ C=\mathscr{U}_{f}=\left\{u_{1}^{\left(\ell_{1}\right)}, u_{2}^{\left(\ell_{2}\right)}, \cdots, u_{a}^{\left(\ell_{a}\right)}\right\} $ 是一个即时码的码元集,其中它的码字分别为
+$$
+u_{i}^{\left(\ell_{i}\right)}=\left\{u_{i 1}, u_{i 2}, \cdots, u_{i \ell_{i}}\right\}, i=1,2, \cdots, a
+$$
+令 $ \ell=\max \left\{\ell_{i} \mid i=1, \cdots, a\right\} $, 对 $ \forall j=1,2, \cdots, a $,记 
+$$ \mathscr{U}_{j}=\left\{\left(u_{j}^{\left(\ell_{j}\right)}, z^{\left(\ell-\ell_{j}\right)}\right) \mid z^{\left(\ell-\ell_{j}\right)} \in \mathscr{U}^{\left(\ell-\ell_{j}\right)}\right\} \subseteq \mathscr{U}^{(\ell)} $$
+$ \left(\right. $ 因 $ u_{j}^{\left(\ell_{j}\right)} $ 固定, $ z^{\left(\ell-\ell_{j}\right)}=(*, *, \cdots, *), * \in \mathscr{U},|\mathscr{U}|=r $. 每个位置 $ r $种取法)有
+$ \left|\mathscr{U}_{j}\right|=r^{\ell-\ell_{j}} $, 且 $ i \neq j $ 时, $ \mathscr{U}_{i} \neq \mathscr{U}_{j}, \mathscr{U}_{i} \cap \mathscr{U}_{j}=\varnothing $
+
+事实上,若 $ \left(u_{i}^{\left(\ell_{i}\right)}, z_{1}^{\left(\ell-\ell_{i}\right)}\right)=\left(u_{j}^{\left(\ell_{j}\right)}, z_{2}^{\left(\ell-\ell_{j}\right)}\right) $, 不妨设 $ \ell_{i} \leq \ell_{j} $,
+则 $ u_{i}^{\left(\ell_{i}\right)} $ 是 $ u_{j}^{\left(\ell_{j}\right)} $ 的前缀, 与 $ f $ 是即时码矛盾. 由 $ \mathscr{U}_{j} \subseteq \mathscr{U}^{(\ell)} $ 知则有 $ \bigcup\limits_{j=1}^{a} \mathscr{U}_{j} \subseteq \mathscr{U}^{(\ell)} $
+$$
+\left|\bigcup_{j=1}^{a} \mathscr{U}_{j}\right| \leq\left|\mathscr{U}^{(\ell)}\right| $$
+$$
+\left|\bigcup_{j=1}^{a} \mathscr{U}_{j}\right|=\sum_{j=1}^{a}\left|\mathscr{U}_{j}\right|=\sum_{j=1}^{a} r^{\ell-\ell_{j}} ,\quad\left|\mathscr{U}^{(\ell)}\right|=r^{\ell} $$
+即 $$ \sum_{j=1}^{a} r^{\ell-\ell_{j}} \leq r^{\ell} \Rightarrow \sum_{j=1}^{a} \frac{1}{r^{\ell_{j}}} \leq 1 $$
+\end{proof}
+
+反之, 假设 $ \ell_{1}, \ell_{2}, \cdots, \ell_{a} $ 和 $ r $ 满足Kraft 不等式. 下面证明存在即时码 $ f $, 使它的码字长度为 $ \ell_{1}, \ell_{2}, \cdots, \ell_{a} $. (下面通过例子来说明构造方法).
+
+\begin{example}
+    令 $ \mathscr{U}=\{0,1,2\} $, 且 $ \ell_{1}=\ell_{2}=1, \ell_{3}=2, \ell_{4}=\ell_{5}=4, \ell_{6}=5 $,是否可构造出具有上述码字长度的即时码, 若有, 构造出一个这样的码.
+$$
+\begin{aligned}
+\sum_{i=1}^{6} \frac{1}{r^{\ell_{i}}}&=\frac{1}{3}+\frac{1}{3}+\frac{1}{3^{2}}+\frac{1}{3^{4}}+\frac{1}{3^{4}}+\frac{1}{3^{5}} \\
+&=\frac{3^{4}+3^{4}+3^{3}+3+3+1}{3^{5}}=\frac{196}{243}<1
+\end{aligned}
+$$
+满足Kraft不等式，故这样的即时码存在. 构造如下: 设 $ \alpha_{i} $ 为码字长度为 $ i $ 的码字个数.
+\begin{enumerate}
+    \item 挑选码字长度最小的码字. $ \ell_{1}=\ell_{2}=1, \alpha_{1}=2 $
+所以取 $ u_{1,1}=0, u_{1,2}=1 $
+( $ u_{i, j} $ 长度为 $ i $ 的第 $ j $ 个码字)
+    \item $ \ell_{3}=2, \alpha_{2}=1 $, 取长度为 2 的码字不能以 0,1 开头 (为保证是前缀码),故取 $ \left(u_{2,1,1}, u_{2,1,2}\right)=(2,0) $. 长度为 2 的码字的第 1 个分量不能是码字 $ u_{1,1}, u_{1,2} $.
+    \item $ \ell_{4}=\ell_{5}=4 $, 这两个码字不能以 0,1 开头,只能以 2 开头.
+
+同时它的前两个分量不能取 $ (2,0) $, 于是可以取
+$$
+\begin{array}{l}
+\left(u_{4,1,1}, u_{4,1,2}, u_{4,1,3}, u_{4,1,4}\right)=(2,1,0,0), \\
+\left(u_{4,2,1}, u_{4,2,2}, u_{4,2,3}, u_{4,2,4}\right)=(2,1,0,1) .
+\end{array}
+$$
+    \item 最后再挑选长度为 5 的码字
+$$
+\left(u_{5,1,1}, u_{5,1,2}, u_{5,1,3}, u_{5,1,4}, u_{5,1,5}\right)=(2,1,1,0,0) \text {. }
+$$
+\end{enumerate}
+最后我们构造出满足即时性的码为
+$$\mathscr{U}_f=\{0,1,20,2100,2101,21100\}$$
+\end{example}
+
+\begin{remark}
+
+(1) 若 $ \ell_{1}, \ell_{2}, \cdots, \ell_{2} $ 满足 Kraft不等式, 则必存在码字长度为 $ \ell_{1}, \ell_{2}, \cdots, \ell_{a} $ 的即时码. 如果一个码的码字长度满足 Kraft 不等式, 但它不一定是即时码.
+
+如: 考虑二元码 $ C=\{0,11,100,110\} $,码字长度分别为 $ 1,2,3,3 $,因为$|\mathscr{U}|=2$, 我们有
+$$
+\frac{1}{2}+\frac{1}{2^{2}}+\frac{1}{2^{3}}+\frac{1}{2^{3}}=1,
+$$
+所以, 它的码字长度满足kraft 不等式.
+但这个码并不是即时的（不是前缀码）, 因为码字11是码字110的前缀.
+但根据 $ 1,2,3 $, 3 可构造一个即时码，如 $ \{0,10,110,111\} $或 $ \{1,01,001,000\} $.
+
+(2)不满足Kraft不等式的码字长度为 $ \ell_{1}, \ell_{2}, \cdots, \ell_{a} $ 的即时码一定不存在.
+\end{remark}
+
+
+
+
+

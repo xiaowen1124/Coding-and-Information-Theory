@@ -1,0 +1,190 @@
+\section{循环码的校验矩阵及其对偶码}
+设 $ C=\langle g(x)\rangle, \operatorname{deg}(g(x))=r, C $ 是一个 $ [n, n-r] $ 循环码, 并且存在 $ h(x) \in R_{n} $, 使得
+$$
+x^{n}-1=h(x) g(x) .
+$$
+$ h(x) $ 为首1 多项式, $ \operatorname{deg}(h(x))=n-r, h(x) $ 称为循环码 $ C $ 的校验多项式.
+
+\begin{theorem}\label{theorem9.3.1}
+    设 $ h(x) $ 是循环码 $ C=\langle g(x)\rangle $ 的校验多项式, $ \operatorname{deg}(g(x))=r $, 则
+    
+(1) $ C=\left\{p(x) \in R_{n} \mid p(x) h(x) \equiv 0\left(\bmod \left(x^{n}-1\right)\right)\right\} $;
+
+(2) 如果 $ h(x)=h_{0}+h_{1} x+\cdots+h_{n-r} x^{n-r} $, 则 $ C $ 的校验矩阵为
+$$
+H=\left(\begin{array}{ccccccc}
+h_{n-r} & \cdots & h_{0} & 0 & 0 & \cdots & 0 \\
+0 & h_{n-r} & \cdots & h_{0} & 0 & \cdots & 0 \\
+0 & 0 & h_{n-r} & \cdots & h_{0} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+0 & 0 & \cdots & 0 & h_{n-r} & \cdots & h_{0}
+\end{array}\right) ;
+$$
+
+(3)循环码 $ C $ 的对偶码 $ C^{\perp} $ 是一个 $ [n, r] $ 循环码,其生成多项式为
+$$
+\begin{aligned}
+h^{\perp}(x) & =h_{0}^{-1} x^{n-r} h\left(x^{-1}\right) \\
+& =h_{0}^{-1}\left(h_{0} x^{n-r}+h_{1} x^{n-r-1}+\cdots+h_{n-r}\right) .
+\end{aligned}
+$$
+\end{theorem}
+\begin{proof}
+ (1) 如果 $ p(x) \in C $, 则存在 $ f(x) \in R_{n} $, 使得 $ p(x)=f(x) g(x) $. 因此,
+$$
+p(x) h(x)=f(x) g(x) h(x)=f(x)\left(x^{n}-1\right) \equiv 0\left(\bmod \left(x^{n}-1\right)\right) .
+$$
+另一方面, 如果 $ p(x) \in R_{n} $, 并且 $ p(x) h(x) \equiv 0\left(\bmod \left(x^{n}-1\right)\right) $, 则用 $ g(x) $ 去除 $ p(x) $ 可得
+$$
+p(x)=q(x) g(x)+r(x),
+$$
+其中 $ \operatorname{deg}(r(x))<\operatorname{deg}(g(x))=r $.
+于是,我们有
+$$
+\begin{array}{c}
+p(x) h(x)=q(x) g(x) h(x)+r(x) h(x)=q(x)\left(x^{n}-1\right)+r(x) h(x), \\
+p(x) h(x) \equiv r(x) h(x) \equiv 0\left(\bmod \left(x^{n}-1\right)\right) .
+\end{array}
+$$
+由于 $ \operatorname{deg}(r(x) h(x))<n $, 所以一定有 $ r(x) h(x)=0 $. 因此, $ r(x)=0 $. 于是, $ p(x)=q(x) g(x) \in C $.
+
+(2) 设
+$$
+c(x)=c_{0}+c_{1} x+c_{2} x^{2}+\cdots+c_{n-1} x^{n-1} \in C,
+$$
+则 $ c(x) h(x) \equiv 0\left(\bmod \left(x^{n}-1\right)\right) $. 由于 $ \operatorname{deg}(c(x) h(x))<2 n-r $, 所以存在 $ q(x) \in R_{n} $,
+$$
+\operatorname{deg}(q(x))<n-r
+$$
+使得
+$$
+c(x) h(x)=q(x)\left(x^{n}-1\right)=q(x) x^{n}-q(x) .
+$$
+由此可知, $ C(x) h(x) $ 中 $ x^{n-r}, x^{n-r+1}, \cdots, x^{n-1} $ 的系数一定为零, 即
+$$
+\begin{array}{c}
+c_{0} h_{n-r}+c_{1} h_{n-r-1}+\cdots+c_{n-r} h_{0}=0, \\
+c_{1} h_{n-r}+c_{2} h_{n-r-1}+\cdots+c_{n-r+1} h_{0}=0, \\
+\vdots \\
+c_{r-1} h_{n-r}+c_{r} h_{n-r-1}+\cdots+c_{n-1} h_{0}=0 .
+\end{array}
+$$
+这等价于
+$$
+\left(c_{0} c_{1} c_{2} \cdots c_{n-1}\right) H^{T}=0
+$$
+
+设 $ C^{\prime} $ 为以 $ H $ 为生成矩阵的线性码, 则 $ C^{\prime} \subseteq C^{\perp} $. 因为 $ h_{n-r} \neq 0 $, $ \operatorname{dim}\left(C^{\prime}\right)=\operatorname{dim}\left(C^{\perp}\right)=r $, 所以 $ C^{\prime}=C^{\perp} $, 即 $ H $ 是 $ C $ 的校验矩阵.
+
+(3) 因为 $ h(x) g(x)=x^{n}-1 $, 所以有
+$$
+\begin{array}{c}
+h\left(x^{-1}\right) g\left(x^{-1}\right)=x^{-n}-1, \\
+x^{n-r} h\left(x^{-1}\right) x^{r} g\left(x^{-1}\right)=1-x^{n} .
+\end{array}
+$$
+于是, $ h^{\perp}(x) \mid\left(x^{n}-1\right) $. 因此 $ h^{\perp}(x) $ 是循环码 $ \left\langle h^{\perp}(x)\right\rangle $ 的生成多项式,其生成矩阵为 $ H $, 因此 $ \left\langle\left\langle h^{\perp}(x)\right\rangle\right\rangle=C^{\prime} $.
+
+\end{proof}
+
+由上述定理可知, 循环码的对偶码也是循环码. 需要注意的是,如果 $ g(x) $ 和 $ h(x) $ 分别是循环码 $ C $ 的生成多项式和校验多项式, 则对偶码 $ C^{\perp} $ 的生成多项式不是 $ h(x) $, 而是 $ h^{\perp}(x) $. 这是因为
+$$
+g(x) h(x) \equiv 0\left(\bmod \left(x^{n}-1\right)\right)
+$$
+并不等价于对应的 $ V(n, q) $ 中的向量正交.
+
+设 $ h(x) $ 是 $ R_{n} $ 中的一个多项式,
+$$
+h(x)=h_{0}+h_{1} x+h_{2} x^{2}+\cdots+h_{k} x^{k}, \quad h_{k} \neq 0 .
+$$
+多项式
+$$
+\bar{h}(x)=x^{k} h\left(x^{-1}\right)=h_{0} x^{k}+h_{1} x^{k-1}+\cdots+h_{k}
+$$
+称为 $ h(x) $ 的互反多项式. 定理\ref{theorem9.3.1} 中的 $ h^{\perp}(x) $ 就是校验多项式 $ h(x) $ 的首1互反多项式.
+
+\begin{example}
+ 在三元域 $ F_{3} $ 中, 多项式 $ x^{4}-1 $ 可分解为
+$$
+x^{4}-1=(x-1)\left(x^{3}+x^{2}+x+1\right)=(x-1)(x+1)\left(1+x^{2}\right)
+$$
+循环码 $ C=\langle\langle x-1\rangle\rangle $ 的生成矩阵为
+$$
+G=\left(\begin{array}{cccc}
+-1 & 1 & 0 & 0 \\
+0 & -1 & 1 & 0 \\
+0 & 0 & -1 & 1
+\end{array}\right)
+$$
+校验多项式
+$$
+h(x)=(x+1)\left(x^{2}+1\right)=x^{3}+x^{2}+x+1
+$$
+$ C $ 的对偶码 $ C^{\perp} $ 的生成多项式为
+$$
+h^{\perp}(x)=x^{3} h\left(x^{-1}\right)=1+x+x^{2}+x^{3} .
+$$
+因此, 码 $ C $ 的校验矩阵, 即 $ C^{\perp} $ 的生成矩阵为
+$$
+H=\left(\begin{array}{llll}
+1 & 1 & 1 & 1
+\end{array}\right)
+$$
+于是, $ C^{\perp}=\{0000,1111,2222\} $.
+\end{example}
+
+
+下面我们来证明,二元Hamming 码和它的对偶码与循环码等价.
+
+\begin{theorem}
+     二元Hamming 码Ham $ (r, 2) $ 等价于循环码.
+\end{theorem}
+\begin{proof}
+    设 $ p(x) $ 是 $ F_{2}[x] $ 中的一个 $ r $ 次不可约多项式. 则 $ F_{2}[x] /\langle p(x)\rangle $是一个 $ 2^{r} $ 阶域. 因此, 存在本原元 $ \alpha \in F_{2}[x] /\langle p(x)\rangle $, 使得
+    $$
+F_{2}[x] /\langle p(x)\rangle=\left\{0,1, \alpha, \alpha^{2}, \cdots, \alpha^{2^{r}-2}\right\} .
+$$
+将 $ F_{2}[x] /\langle p(x)\rangle $ 中的每一个多项式 $ a_{0}+a_{1} x+\cdots+a_{r-1} x^{r-1} $ 看成一个列向量
+$
+\left(\begin{array}{c}
+a_{0} \\
+a_{1} \\
+\vdots \\
+a_{r-1}
+\end{array}\right).
+$
+
+令
+$$
+H=\left(\begin{array}{lllll}
+1 & \alpha & \alpha^{2} & \cdots & \alpha^{2^{r}-2}
+\end{array}\right)
+$$
+$ H $ 是一个 $ r \times\left(2^{r}-1\right) $ 阶矩阵. 设 $ C $ 是以 $ H $ 为校验矩阵的线性码. 因为 $ H $ 的全部列向量正好是 $ V(n, 2) $ 中的所有非零向量, 所以 $ C $ 就是 $ \operatorname{Ham}(r, 2) $. 令 $ n=2^{r}-1 $, 我们有
+$$
+\begin{aligned}
+C & =\left\{c_{0} c_{1} \cdots c_{n-1} \in V(n, 2) \mid c_{0}+c_{1} \alpha+\cdots c_{n-1} \alpha^{n-1}=0\right\} \\
+& =\left\{c(x) \in R_{n} \mid c(\alpha) \equiv 0(\bmod p(x))\right\} .
+\end{aligned}
+$$
+如果 $ c(x) \in C, r(x) \in R_{n} $, 则
+$$
+r(\alpha) c(\alpha) \bmod p(x)=r(\alpha) \cdot 0 \quad \bmod p(x)=0 .
+$$
+从而 $ r(x) c(x) \in C $, 因此, $ C $ 是循环码.
+因为循环码的对偶码也是循环码, 所以二元Hamming 码的对偶码也与循环码等价.
+\end{proof} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

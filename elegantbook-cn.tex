@@ -1,0 +1,90 @@
+\documentclass[lang=cn,12pt]{elegantbook}
+\title{信息论与编码理论： \LaTeX{}排版 }
+\subtitle{笔记： 自用版}
+
+\author{xiaowen}
+%\institute{Elegant\LaTeX{} Program}
+\date{\today}
+%\version{4.3}
+%\bioinfo{自定义}{信息}
+\extrainfo{2021级信息与计算科学专业}%文档的附加信息
+
+\setcounter{tocdepth}{3}
+%控制 LaTeX 文档中目录（table of contents）的深度的命令。这个命令指定了在目录中包含多少级别的章节或标题。
+%\setcounter{tocdepth}{0} 将只显示章节标题。
+%\setcounter{tocdepth}{1} 将显示章节和子章节标题。
+%\setcounter{tocdepth}{2} 将显示章节、子章节和子子章节标题。
+%\setcounter{tocdepth}{3} 将显示章节、子章节、子子章节以及更深层级的标题，如果有的话。
+\logo{logo-blue.png}
+\cover{cover.jpg}%书籍的封面图
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+%定义了一个新的命令 \ccr，它接受一个参数，用于创建带颜色的单元格，通常用于表格。
+%\newcommand{\ccr}[1]: 这部分定义了一个新的命令 \ccr，它接受一个参数，这个参数在方括号 [1] 中指定。
+%\makecell{}: 这是一个命令，通常由 makecell 宏包提供，用于更灵活地格式化表格单元格的内容。
+%\color{#1}：这个部分使用给定的参数 #1 来设置单元格的文本颜色，#1 是您在使用 \ccr 命令时传递的颜色参数。
+%\rule{1cm}{1cm}：这部分创建一个1厘米宽、1厘米高的有颜色的矩形框，作为单元格的内容。
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\numberwithin{equation}{section}
+
+%\usepackage[dvipsnames]{xcolor}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{diagbox}
+
+\usepackage{mdframed}
+\mdfsetup{linewidth=1pt,linecolor=blue}
+\mdfsetup{backgroundcolor=gray!10}
+\mdfsetup{shadow=true}
+
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+%\frontmatter: 这个命令将文档切换到前言部分。在前言中，页码可能会使用罗马数字，并且章节编号可能会被隐藏。前言通常包括摘要、致谢等内容。
+\tableofcontents
+\mainmatter
+%\mainmatter: 这个命令将文档切换到主体部分。在主体部分中，页码通常使用阿拉伯数字，并且章节和子章节的编号是可见的。主体部分包含文档的主要内容。
+%\chapter{特殊的函数项级数——幂级数}
+\input{1/1}
+\chapter{信息量}
+\input{2/2.1}
+\input{2/2.2}
+\input{2/2.3}
+\input{2/2.4}
+\input{2/2.5}
+\input{2/2.6}
+\input{2/2.7}
+\input{2/ex2}
+%\input{2/homework_2}
+\chapter{信源编码}
+\input{3/3.1}
+\input{3/3.2}
+\input{3/3.3}
+\input{3/3.4}
+\input{3/3.5+3.6}
+\input{3/ex3}
+\chapter{信道编码定理}
+\input{4/4.1}\input{4/4.2}\input{4/4.3}\input{4/4.4+4.5}\input{4/4.6+4.7}\input{4/ex4}
+\input{5/5}
+\input{6/6.1+6.2}\input{6/6.3}\input{6/ex6}
+\input{7/7.1}\input{7/7.2}
+\input{7/7.3+7.4}\input{7/ex7}
+\input{8/8.1+8.2}\input{8/8.3+8.4}\input{8/ex8}
+
+\input{9/9.1}\input{9/9.2}\input{9/9.3}
+\input{9/9.4+9.5}\input{9/ex9}
+
+
+\end{document}

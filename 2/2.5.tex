@@ -1,0 +1,65 @@
+
+\section{凸函数及其应用}
+\subsection{凸函数的定义与判别}
+\begin{definition}
+     设 $ g(x) $ 是定义在区间 $ (a, b) $ 上的函数，如果对任意的 $ x_{1}, x_{2} \in(a, b) $ 和任意的 $ 0 \leqslant \lambda \leqslant 1 $, 都有
+$$
+g\left(\lambda x_{1}+(1-\lambda) x_{2}\right) \geqslant \lambda g\left(x_{1}\right)+(1-\lambda) g\left(x_{2}\right)
+$$
+则称 $ g(x) $ 是 $ (a, b) $ 上的上凸函数，如果等号只有当 $ \lambda=0 $ 或 $ \lambda=1 $或 $ x_{1}=x_{2} $ 时才成立，则称函数 $ g $ 是严格上凸的（若不等式相反称是下凸的）.
+\end{definition}
+\begin{remark}
+
+    (1)如果 $ g $ 是上凸（严格上凸）的，那么 $ -g $ 必是下凸（严格下凸）的;
+    
+(2) 函数是上凸的, 那么它的函数值总是位于任意弦的上方. 函数是下凸的, 那么它的函数值总是位于任意弦的下面.如$x^2,|x|,e^x,x\log x$等是下凸函数，$\sqrt{x}, \log x$是上凸函数. 注意$ax+b$是上凸也是下凸的.
+
+(3) 像许多信息量，如熵和互信息都具有上凸性.
+\end{remark}
+\begin{theorem}[判定定理]
+    如果函数 $ g $ 在任意处都有非负（正）二阶导数，则函数 $ g $ 是下凸（严格下凸的）
+\end{theorem}
+\begin{proof}
+    函数 $ g $ 在的处的泰勒展开式
+$$
+g(x)=g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right)\left(x - x_{0}\right)+\frac{1}{2} g^{\prime \prime}\left(x_{*}\right)\left(x-x_{0}\right)^{2}
+$$
+其中 $ x_*$ 在 $ x $ 与 $ x_{0} $ 之间.
+
+由假设 $ g^{\prime \prime}\left(x_{*}\right) \geqslant 0 $. 则有 $ g(x) \geqslant g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right)\left(x-x_{0}\right) $.令 $ x_{0}=\lambda x_{1}+(1-\lambda) x_{2} $.
+
+当 $ x=x_{1} $ 时有 $ g\left(x_{1}\right) \geqslant g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right)\left(x_{1}-x_{0}\right) $,
+而 $ x_{1}-x_{0}=x_{1}-\left[\lambda x_{1}+(1-\lambda) x_{2}\right] =\left(x_{1}-x_{2}\right)(1-\lambda)$,因而有
+\begin{equation*}
+    g\left(x_{1}\right) \geqslant g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right)(1-\lambda)\left(x_{1}-x_{2}\right) \tag{1}
+\end{equation*}
+
+当 $ x=x_{2} $ 时有 $ q\left(x_{2}\right) \geqslant g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right)\left(x_{2}-x_{0}\right) $
+而 $ x_{2}-x_{0}=x_{2}-\left[\lambda x_{1}+(1-\lambda) x_{2}\right] =\lambda\left(x_{2}-x_{1}\right)$,因而有
+\begin{equation*}
+    g\left(x_{2}\right) \geqslant g\left(x_{0}\right)+g^{\prime}\left(x_{0}\right) \lambda\left(x_{2}-x_{1}\right) \tag{2}
+\end{equation*}
+
+$$
+\begin{aligned}
+(1)\times \lambda+(2) \times(1-\lambda) &=\lambda g\left(x_{1}\right)+(1-\lambda) g\left(x_{2}\right) \\& \geqslant \lambda g\left(x_{0}\right)+\lambda g^{\prime}\left(x_{0}\right)(1-\lambda)\left(x_{1}-x_{2}\right) \\
+& +(1-\lambda) g\left(x_{0}\right)+\lambda g^{\prime}\left(x_{0}\right)(1-\lambda)\left(x_{2}-x_{1}\right) \\
+& =g\left(x_{0}\right)
+\end{aligned}
+$$
+即证下凸性，同理可证严格下凸性.
+\end{proof}
+易知 $ x \geqslant 0 $ 时， $ x^{2},|x|, e^{x}, x \log x $ 均是严格下凸的 .$ \sqrt{x} $ ,$ \log x $ 是严格上凸的.
+如 $ g(x)=x \log x $,有 $ g^{\prime}(x)=1+\log x \quad ,g^{\prime \prime}(x)=\frac{1}{x}>0 $
+
+\subsection{熵函数的凸性}
+若$\mathscr{X}$是一个固定的集合，记
+$$
+ \boldsymbol{\tilde{p}}=\left\{\bar{p}=p(x) \mid x \in \mathscr{X}, p(x) \geqslant 0, \sum_{x \in \mathscr{X}} p(x)=1\right\}
+$$
+是$\mathscr{X}$上的全体概率分布，那么$H(\bar{p}), H(p \| q)$都是$ \boldsymbol{\tilde{p}}$上的函数.
+\begin{theorem}
+     (1) 熵函数 $ H(\bar{p}) $ 是 $ \boldsymbol{\tilde{p}} $ 上的上凸函数, 即对 $ \forall 0 \leqslant \lambda \leqslant 1 $, $ \forall \overline{p_{1}}, \overline{p_{2}} \in \boldsymbol{\tilde{p}} $, 总有 $ H\left(\lambda \overline{p_{1}}+(1-\lambda) \overline{p_{2}}\right) \geqslant \lambda H\left(\overline{p_{1}}\right)+(1-\lambda) H\left(\overline{p_{2}}\right) $等号成立的充要条件为 $ \lambda=0 $ 或 1 , 或 $ \overline{p_{1}}=\overline{p_{2}} $;
+     
+(2) 在 $ q $ 固定时，互熵函数 $ H(p \| q) $ 是 $ p $ 的下凸函数，在 $ p $ 固定时, 互熵函数 $ H(p \| q) $ 是 $ q $ 的下凸函数.
+\end{theorem}

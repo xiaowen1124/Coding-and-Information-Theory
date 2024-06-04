@@ -1,0 +1,453 @@
+\section{习题课}
+
+\subsection{基本概念}
+循环码的定义, 循环码的生成多项式, 循环码的校验多项式, 循环码的非系统编码方法与系统编码方法, 成区间的差错模式
+
+\subsection{基本性质与结论}
+
+1. 一个码 $ L \subseteq R_{n} $ 是循环码的充分必要条件为 $ L $ 满足下列两个条件.\\
+(1) 如果 $ a(x), b(x) \in L $, 则 $ a(x)+b(x) \in L $.\\
+(2) 如果 $ a(x) \in L, r(x) \in R_{n} $, 则 $ r(x) a(x) \in L $.
+
+2. 一个码 $ L \subseteq R_{n} $ 是循环码的充分必要条件为 $ L $ 是 $ R_{n} $ 的理想.
+
+3. 定理\ref{theorem9.2.1}
+
+4. $ R_{n} $ 中首1多项式 $ p(x) $ 是循环码 $ C=\langle p(x)\rangle $ 的生成多项式的充要条件为 $ p(x) \mid x^{n}-1 $.
+
+5. 定理\ref{theorem9.3.1}
+
+6. 二元Hamming 码 $ \operatorname{Ham}(r, 2) $ 等价于循环码.
+
+7. 设 $ C $ 是一个 $ q $ 元 $ [n, n-r] $ 循环码, 则 $ C $ 可以检查出任意一个长为 $ b \leq r $ 的成区间错误.
+
+\subsection{课后习题}
+\begin{exercise}
+     设 $ p $ 是一个素数.\\
+(1)在 $ F_{p} $ 上将 $ x^{p}-1 $ 分解成不可约多项式的乘积.\\
+(2) 在 $ F_{p} $ 上将 $ x^{p-1}-1 $ 分解成不可约多项式的乘积.
+\end{exercise}
+\begin{solution}
+(1) $ x^{p}-1 $ 在 $ \mathbb{F}_{p} $ 上的分解:在有限域 $ \mathbb{F}_{p} $ 中，由于域的特征是 $ p $ ，可以应用二项式定理，得到:
+$$
+x^{p}-1=(x-1)^{p}
+$$
+这是因为在 $ \mathbb{F}_{p} $ 中，除了 $-1$ 和 1 的项外，二项式展开中所有的组合数 $ \left(\begin{array}{l}p \\ k\end{array}\right) $ 乘以 $ x^{p-k}(-1)^{k} $ (其中 $ 1<k<p-1) $ 都会被 $ p $ 整除，从而在 $ \mathbb{F}_{p} $ 中为 0 .这意味着 $ x^{p}-1 $ 与 $ (x-1)^{p} $ 等价.
+
+(2) $ x^{p-1}-1 $ 在 $ \mathbb{F}_{p} $ 上的分解:对于有限域 $ \mathbb{F}_{p} $ 中的任何非零元素 $ a $ ，根据费马小定理，我们知道 $ a^{p-1}=1 $ .这表明 $ x^{p-1}-1 $ 的每个非零元素 $ a $ 都是一个根，因此:
+$$
+x^{p-1}-1=(x-1)(x-2) \cdots(x-(p-1))
+$$
+这里，我们有 $ p-1 $ 个根，每个根对应于 $ \mathbb{F}_{p} $ 中的非零元素，从而给出了 $ x^{p-1}-1 $ 的完全分解.
+\end{solution}
+
+
+\begin{exercise}
+ 在 $ F_{3} $ 上将 $ x^{4}-1 $ 分解成不可约多项式的乘积, 确定所有码长为 4 的三元循环码,并写出每一个码的生成矩阵和校验矩阵.
+
+\end{exercise}
+\begin{solution}
+     长为 4 的三元循环码的生成多项式, 生成矩阵和校验矩阵如下:
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+\text{特征多项式} & \text{特征矩阵}&\text{校验多项式} & \text{校验矩阵} \\
+\hline
+1 & I_4 & x^4-1=0&
+\begin{pmatrix}
+0 & 0 & 0 & 0
+\end{pmatrix} \\
+\hline
+x - 1 &
+\begin{pmatrix}
+-1 & 1 & 0 & 0 \\
+0 & -1 & 1 & 0 \\
+0 & 0 & -1 & 1
+\end{pmatrix} &  x^3+x^2+x+1&
+\begin{pmatrix}
+1 & 1 & 1 & 1
+\end{pmatrix} \\
+\hline
+x + 1 &
+\begin{pmatrix}
+1 & 1 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+0 & 0 & 1 & 1
+\end{pmatrix} &x^3-x^2+x-1&
+\begin{pmatrix}
+1 & -1 & 1 & -1
+\end{pmatrix} \\
+\hline
+x^2 + 1 &
+\begin{pmatrix}
+1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1
+\end{pmatrix} &x^2-1&
+\begin{pmatrix}
+1 & 0 & -1 & 0 \\
+0 & 1 & 0 & -1
+\end{pmatrix} \\
+\hline
+x^2 - 1 &
+\begin{pmatrix}
+-1 & 0 & 1 & 0 \\
+0 & -1 & 0 & 1
+\end{pmatrix} &x^2+1&
+\begin{pmatrix}
+1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1
+\end{pmatrix} \\
+\hline
+x^3 - x^2 + x - 1 &
+\begin{pmatrix}
+-1 & 1 & -1 & 1
+\end{pmatrix} &x+1&
+\begin{pmatrix}
+1 & 1 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+0 & 0 & 1 & 1
+\end{pmatrix} \\
+\hline
+x^3 + x^2 + x + 1 &
+\begin{pmatrix}
+1 & 1 & 1 & 1
+\end{pmatrix} &x-1&
+\begin{pmatrix}
+1 & -1 & 0 & 0 \\
+0 & 1 & -1 & 0 \\
+0 & 0 & 1 & -1
+\end{pmatrix} \\
+\hline
+x^4 - 1 = 0 &
+\begin{pmatrix}
+0 & 0 & 0 & 0
+\end{pmatrix}&1 & I_4 \\
+\hline
+\end{array}
+$$
+每个生成多项式所对应的具体码字的形式见例题 \ref{example9.2.3}.
+\end{solution}
+
+
+
+
+
+\begin{exercise}
+    在 $ F_{2} $ 上将 $ x^{5}-1 $ 分解成不可约多项式的乘积,确定所有码长为 5 的二元循环码, 并写出每个码的生成矩阵和校验矩阵.
+\end{exercise}
+\begin{solution}
+ 在 $ F_{2} $ 上, $ x^{5}-1=(x+1)\left(x^{4}+x^{3}+x^{2}+x+1\right) $所有码长为 5 的二元循环码的生成多项式,生成矩阵和校验矩阵如下:
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+\text{生成多项式} & \text{生成矩阵} & \text{校验矩阵} & V(5,2)\text{中的码} \\
+\hline
+1 & I_5 &
+\begin{pmatrix}
+0 & 0 & 0 & 0 & 0
+\end{pmatrix} & V(5,2) \\
+\hline
+x + 1 &
+\begin{pmatrix}
+1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1
+\end{pmatrix} &
+\left\{
+\begin{array}{l}
+00000,11000 \\
+01100,00110 \\
+00011,10001 \\
+10010,01001 \\
+10100,01010 \\
+00101,11110 \\
+01111,10111 \\
+11011,11101 \\
+\end{array}
+\right\} \\
+\hline
+x^4 + x^3 + x^2 + x + 1 &
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1
+\end{pmatrix} &
+\{00000, 11111\} \\
+\hline
+x^5 - 1 &
+\begin{pmatrix}
+0 & 0 & 0 & 0 & 0
+\end{pmatrix} & I_5 &
+\{00000\} \\
+\hline
+\end{array}
+$$
+\end{solution}
+
+
+
+
+
+
+\begin{exercise}
+    证明:在一个 $ q $ 元 $ [n, k] $ 循环码中, 任意 $ k $ 个连续坐标位置都可构成信息位.
+\end{exercise}
+\begin{solution}
+   
+设 $ C $ 是一个 $ q $ 元 $ [n, k] $ 循环码, $ g(x) $ 是 $ C $ 的生成多项式,对于任意信息串 $ a_{0} a_{1} \cdots a_{k-1} \in V(k, q) $ ，构造信息多项式
+$$
+\bar{a}(x)=a_{0} x^{n-1}+a_{1} x^{n-2}+\cdots+a_{k-1} x^{n-k} .
+$$
+显然, $ n-k \leq \operatorname{deg}(\bar{a}(x)) \leq n-1 $, 用 $ g(x) $ 去除 $ \bar{a}(x) $, 得
+$$
+\bar{a}(x)=q(x) g(x)+r(x)
+$$
+其中 $ \operatorname{deg}(r(x))<\operatorname{deg}(g(x))=n-k $, 信息串 $ a_{0} a_{1} \cdots a_{k-1} $ 可编为 $ C $ 中的码字
+$$
+c(x)=\bar{a}(x)-r(x)=q(x) g(x)
+$$
+因为 $ \bar{a}(x) $ 与 $ r(x) $ 中没有相同的项,所以这种编码是系统编码（去掉后面 $ n-k $ 个位置后,恰好为 $ V(k, q) $ 中的全部向量）. 事实上, 如果 $ c(x) $ 中 $ x $ 的项以降幂排列, 则前 $ k $ 个是信息位,后 $ n-k $ 位是校验位.
+
+将码 $ C $ 中的码字均向右循环移位 $ t $ 位, 由于 $ C $ 是循环码, 那么移位后的 $ q^{k} $ 个字恰好还是 $ C $ 的全部码字. 此时 $ q^{k} $ 个码字中的每个码字从第 $ t $ 位起至第 $ t+k-1 $ 的长为 $ k $ 的字符串恰为 $ V(k, q) $ 中的全部向量,因而从第 $ t $ 位起至第 $ t+k-1 $ 位连续 $ k $ 个坐标位构成信息位.
+\end{solution}
+
+
+
+
+
+
+\begin{exercise}
+    设 $ C_{1}=\langle\langle g_{1}(x)\rangle\rangle $ 和 $ C_{2}=\langle\langle g_{2}(x)\rangle\rangle $ 是 $ R_{n} $ 中的循环码. 令
+$$
+C_{1}+C_{2}=\left\{c_{1}+c_{2} \mid c_{1} \in C_{1}, c_{2} \in C_{2}\right\}
+$$
+则\\
+(1) $ C_{1} \subset C_{2} \Longleftrightarrow g_{2}(x) \mid g_{1}(x) $.\\
+(2) $ C_{1} \cap C_{2}=\langle\langle \operatorname{lcm}(g_{1}(x), g_{2}(x))\rangle\rangle $.\\
+(3) $ C_{1}+C_{2}=\langle\langle\operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\rangle\rangle $.
+\end{exercise}
+\begin{solution}
+
+证明: (1)
+
+$ \Longrightarrow $ 由于 $ C_{1} \subset C_{2} $, 则 $ \forall c(x) \in C_{1} $, 有 $ c(x) \in C_{2} $, 特别地取 $ c(x)=g_{1}(x) $, 则 $ g_{1}(x) \in C_{2}, \exists a(x) \in R_{n} $, 使得 $ g_{1}(x)=a(x) g_{2}(x) $, 即 $ g_{2}(x) \mid g_{1}(x) $.
+
+ $ \Longleftarrow $由于 $ g_{2}(x) \mid g_{1}(x) $, 则 $ \exists h(x) \in R_{n} $, 使得 $ g_{1}(x)=h(x) g_{2}(x) $.
+$ \forall c(x) \in C_{1} $, 即 $ \exists b(x) \in R_{n} $, 使得 $ c(x)=b(x) g_{1}(x) $,
+从而 $ c(x)=b(x) h(x) g_{2}(x) $. 因此 $ c(x) \in C_{2} $, 即 $ C_{1} \subset C_{2} $.
+
+(2) 由于 $ C_{1}=\left\langle\langle g_{1}(x)\right\rangle\rangle, C_{2}=\left\langle\langle g_{2}(x)\right\rangle\rangle $, 则 $ \forall c(x) \in C_{1} \cap C_{2} $, $ \exists a(x), b(x) \in R_{n} $, 使得 $ c(x)=a(x) g_{1}(x) $ 且 $ c(x)=b(x) g_{2}(x) $, 于是 $ \exists d(x) \in R_{n} $ 使得
+$$
+c(x)=d(x) \operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right),
+$$
+即 $ c(x) \in\left\langle\langle\operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)\right\rangle\rangle $, 因此
+$$
+C_{1} \cap C_{2} \subseteq\left\langle\left\langle\operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)\right\rangle\right.
+$$
+反之, 对 $ \forall c(x) \in \langle\langle\operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)\rangle \rangle$, 则 $ \exists t(x) \in R_{n} $, 使得
+$$
+c(x)=t(x) \operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)
+$$
+则 $ g_{1}(x)\left|c(x), g_{2}(x)\right| c(x) $, 于是 $ c(x) \in C_{1}, c(x) \in C_{2} $.
+即 $ C(x) \in C_{1} \cap C_{2} $. 因此
+$$
+\left.C_{1} \cap C_{2} \supseteq \langle\langle\operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)\right\rangle \rangle.
+$$
+综上 $ C_{1} \cap C_{2}=\left\langle\langle\operatorname{lcm}\left(g_{1}(x), g_{2}(x)\right)\right\rangle \rangle$.
+
+(3) 设 $ \operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)=d(x) $, 则 $ \exists f_{1}(x), f_{2}(x) \in R_{n} $ ，
+
+使得 $ d(x)=f_{1}(x) g_{1}(x)+f_{2}(x) g_{2}(x) $
+对 $ \forall c(x) \in\left\langle\langle\operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\right\rangle \rangle$,
+则 $ \exists a(x) \in R_{n} $, 满足 $ c(x)=a(x) d(x) $.
+即 $ c(x)=a(x) f_{1}(x) g_{1}(x)+a(x) f_{2}(x) g_{2}(x) \triangleq c_{1}(x)+c_{2}(x) $.
+显然 $ c_{1}(x) \in C_{1}, c_{2}(x) \in C_{2} $ 即 $ c(x) \in C_{1}+C_{2} $.
+故 $ \left.C_{1}+C_{2} \supseteq \langle\langle \operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\right\rangle\rangle $.
+
+反之, $ \forall c(x) \in C_{1}+C_{2} $, 则 $ \exists c_{1}(x), c_{2}(x) \in R_{n} $, 使得 $ c(x)=c_{1}(x) g_{1}(x)+c_{2}(x) g_{2}(x) $,
+又 $ \operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)=d(x) $, 则 $ \exists a_{1}(x), a_{2}(x) \in R_{n} $,
+使得 $ g_{1}(x)=a_{1}(x) d(x), g_{2}(x)=a_{2}(x) d(x) $,
+从而 $ c(x)=\left(c_{1}(x) a_{1}(x)+c_{2}(x) a_{2}(x)\right) d(x) $,
+即 $ c(x) \in\left\langle\langle\operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\right\rangle\rangle $.
+故 $ C_{1}+C_{2} \subseteq\left\langle\langle\operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\right\rangle \rangle$.
+综上有 $ C_{1}+C_{2}=\left\langle\langle\operatorname{gcd}\left(g_{1}(x), g_{2}(x)\right)\right\rangle\rangle $.
+\end{solution}
+
+
+
+
+
+\begin{exercise}
+ 设 $ E_{n} $ 是 $ V(n, 2) $ 中所有具有偶数重量的向量的集合, $ C $ 是一个码长为 $ n $ 的二元循环码,其生成多项式为 $ g(x) $,则\\
+(1) $ E_{n}=\langle \langle x-1\rangle \rangle$.\\
+(2) $ C=\langle\langle g(x)\rangle\rangle \subset E_{n} \Longleftrightarrow(x-1) \mid g(x) $.
+\end{exercise}
+\begin{solution}
+    证明 (1) 首先证明 $ E_{n} $ 是循环码. $ \forall x, y \in E_{n} $, $ \omega(x+y)=\omega(x)+\omega(y)-2 \omega(x \cap y) $, 因此, $ \omega(x+y) $ 为偶数, $ x+y \in E_{n} $, 即 $ E_{n} $ 是线性码, 若 $ \omega(x) $ 为偶数, 则 $ x $ 的循环移位的重量不变, 仍然为偶重量, 因此 $ x $ 的循环移位仍属于 $ E_{n} $, 即 $ E_{n} $ 是循环码. $ x-1 $ 的重量为 2 , 则 $ x-1 \in E_{n} $, 且 $ x-1 $ 是 $ E_{n} $ 中次数最低的首1多项式, 因此 $ E_{n}=\langle x-1\rangle $.
+
+方法二： 设循环码 $ C=\langle x-1\rangle $, 则 $ C $ 的校验多项式为
+$$
+h(x)=\frac{x^{n}-1}{x-1}=x^{n-1}+x^{n-2}+\cdots+x+1 .
+$$
+于是,
+$$
+C^{\perp}=\left\langle x^{n-1}+x^{n-2}+\cdots+x+1\right\rangle=\{\mathbf{0}, \mathbf{1}\} .
+$$
+显然, $ C=\left(C^{\perp}\right)^{\perp}=\{\mathbf{0}, \mathbf{1}\}^{\perp}=E_{n} $.
+    
+(2) 若 $ C=\langle\langle g(x)\rangle\rangle \subset E_{n} $, 则 $ g(x) \in E_{n}=\langle\langle x-1\rangle\rangle $, 即存在 $ q(x) \in R_{n} $ 使得 $ g(x)=q(x)(x-1) $, 因此 $ (x-1) \mid g(x) $. 反之, 若 $ (x-1) \mid g(x) $, 则 $ g(x) \in\langle\langle x-1\rangle \rangle$, 从而有
+$$
+C=\langle\langle g(x)\rangle\rangle \subset\langle\langle x-1\rangle\rangle=E_{n} .
+$$
+\end{solution}
+
+
+
+
+\begin{exercise}
+    设 $ C_{1}=\langle\langle x^{3}+x+1\rangle\rangle $ 是一个二元 $ [7,4] $ 循环码, $ C_{2}=\langle\langle x^{4}+x^{3}+x^{2}+1\rangle\rangle $ 是一个二元 $ [7,3] $ 循环码. 证明: $ C_{1} $ 和 $ C_{2} $ 互为对偶码.
+\end{exercise}
+\begin{solution}
+
+证明: 由已知得, 码 $ C_{1} $ 的生成矩阵为 $ \left(\begin{array}{lllllll}1 & 1 & 0 & 1 & 0 & 0 & 0 \\ 0 & 1 & 1 & 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 & 1 & 0 & 1\end{array}\right) $,设码 $ C_{2} $ 的校验多项式为 $ h(x) $, 则有
+$$
+h(x)\left(x^{4}+x^{3}+x^{2}+1\right)=x^{7}-1,
+$$
+即 $ h(x)=x^{3}+x^{2}+1 $.
+显然, 码 $ C_{2} $ 的校验矩阵与码 $ C_{1} $ 生成矩阵相同, 则 $ C_{1} $ 和 $ C_{2} $ 互为对偶码.
+
+方法二： 由于 0 和 1 都不是多项式 $ x^{3}+x+1 $ 的根, 所以 $ x^{3}+x+1 $ 一定是二元域 $ \mathrm{GF}(2) $ 上的不可约多项式. 因此, $ x^{3}+x+1 $ 一定是循环码 $ C_{1}=\left\langle x^{3}+x+1\right\rangle $ 的生成多项式. $ C_{1} $ 的校验多项式为
+$$
+\frac{x^{7}-1}{x^{3}+x+1}=x^{4}+x^{2}+x+1 .
+$$
+于是, 由定理知, $ C_{1}^{\perp}=\left\langle 1+x^{2}+x^{3}+x^{4}\right\rangle=C_{2} $.
+
+\end{solution}
+
+
+
+
+
+\begin{exercise}
+在 $ F_{2} $ 上将 $ x^{7}-1 $ 分解成不可约因式的乘积,
+$$
+x^{7}-1=(x-1)\left(x^{3}+x+1\right)\left(x^{3}+x^{2}+1\right)
+$$
+确定所有码长为 7 的循环码, 并且准确描述这些码的特性.
+\end{exercise}
+\begin{solution}
+ 在 $ F_{2} $ 上 $ x-1=x+1 $, 则所有码长为 7 的二元循环码的生成多项式,生成矩阵和校验矩阵如下:
+ 
+ $$
+ \begin{array}{|c|c|c|}
+\hline
+\text{生成多项式} & \text{生成矩阵} & \text{校验矩阵} \\
+\hline
+1 & I_7 &
+\begin{pmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix} \\
+\hline
+x + 1 &
+\begin{pmatrix}
+1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1
+\end{pmatrix} \\
+\hline
+x^3 + x + 1 &
+\begin{pmatrix}
+1 & 1 & 0 & 1 & 0 & 0 &0\\
+0 & 1 & 1 & 0 & 1 & 0 &0\\
+0 & 0 & 1 & 1 & 0 & 1&0\\
+0 & 0&0 & 1 & 1 & 0 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 0 & 1 & 1 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+0 & 0 & 1 & 0 & 1 & 1 & 1
+\end{pmatrix} \\
+\hline
+x^3 + x^2 + 1 &
+\begin{pmatrix}
+1 & 0 & 1 & 1 & 0 & 0 &0\\
+0 & 1 & 0 & 1 & 1 & 0 &0\\
+0 & 0 & 1 & 0 & 1 & 1&0\\
+0&0 & 0 & 1 & 0 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+0 & 0 & 1 & 1 & 1 & 0 & 1 
+\end{pmatrix} \\
+\hline
+x^4 + x^2 + x + 1 &
+\begin{pmatrix}
+1 & 1 & 1 & 0 & 1 & 0 &0\\
+0 & 1 & 1 & 1 & 0 & 1&0\\
+0&0 & 1 & 1 & 1 & 0 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 0 & 1 & 1
+\end{pmatrix} \\
+\hline
+x^4 + x^3 + x^2 + 1 &
+\begin{pmatrix}
+1 & 0 & 1 & 1 & 1 & 0&0 \\
+0 & 1 & 0 & 1 & 1 & 1&0\\
+0& 0 & 1 & 0 & 1 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 0 & 1
+\end{pmatrix} \\
+\hline
+x^6 + x^5 + x^4 + x^3 + x^2 + x + 1 &
+\begin{pmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1
+\end{pmatrix} &
+\begin{pmatrix}
+1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 1
+\end{pmatrix} \\
+\hline
+x^7 - 1 &
+\begin{pmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{pmatrix} & I_7 \\
+\hline
+\end{array}
+ $$
+
+
+
+
+ 将上述循环码依次记作 $ C_{1}, C_{2}, \cdots, C_{8} $, 从各个循环码的生成矩阵和校验矩阵可以看出, $ C_{1} $ 与 $ C_{8}, C_{2} $ 与 $ C_{7}, C_{3} $ 与 $ C_{6}, C_{4} $ 与 $ C_{5} $ 为四组对偶码.
+\end{solution}
+
+
+
+

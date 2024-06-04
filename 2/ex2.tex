@@ -1,0 +1,303 @@
+\section{习题课}
+\begin{exercise}
+     计算 $ H\left(\frac{1}{a}, \frac{1}{a}, \cdots, \frac{1}{a}, \frac{2}{a}, \frac{2}{a}\right) $
+\end{exercise}
+\begin{solution}
+由 $ \Sigma P_{i}=1 $ 知,含 $ (a-4) $ 个 $ \frac{1}{a}$ , 2 个$ \frac{2}{a} $ ，总共$ (a-2) $ 项， 于是
+$$
+\begin{aligned}
+H\left(\frac{1}{a}, \frac{1}{a}, \cdots, \frac{1}{a}, \frac{2}{a}, \frac{2}{a}\right) & =\sum_{i=1}^{a-2} p_{i} \cdot \log \frac{1}{p_{i}} \\
+& =\sum_{i=1}^{a-4} \frac{1}{a} \log a+2 \cdot \frac{2}{a} \log \frac{a}{2} \\
+& =\frac{a-4}{a} \cdot \log a+\frac{4}{a} \log \frac{a}{2} \\
+& =\frac{a-4}{a} \cdot \log a+\frac{4}{a} \log a-\frac{4}{a} \log 2 \\
+& =\log a-\frac{4}{a} \log 2
+\end{aligned}
+$$
+\end{solution}
+
+\begin{exercise}
+计算 $ H^{\prime}(p) $ ，其中 $ H(p) $ 为熵函数
+\end{exercise}
+\begin{solution}
+$$
+\begin{aligned}
+H(p) & =-p \log p-(1-p) \log (1-p) \\
+H^{\prime}(p) & =-\log p-p \cdot \frac{1}{\ln 2 \cdot p}+\log (1-p)+\frac{1}{1-p} \cdot \frac{1-p}{\ln 2} \\
+& =-\log p-\frac{1}{\ln 2}+\log (1-p)+\frac{1}{\ln 2} \\
+& =-\log p+\log (1-p) \\
+& =\log \frac{1-p}{p}
+\end{aligned}
+$$
+\end{solution}
+
+\begin{exercise}
+    设两只口袋中各有 20 个球，第一支口袋中有 10 个白球，5个黑球和5个红球; 第二只口袋中有 8 个白球，8个黑球和4个红球，从每只口袋中各取一个球，试判断哪一个结果的不肯定性更大.
+\end{exercise}
+ \begin{solution}
+ 当我们要判断哪个结果的不确定性更大时，可以使用熵来衡量.首先，我们将第一只口袋的球的颜色作为随机变量 $\xi_1$，它的概率分布为：
+$$
+\xi_1 \sim \left(\begin{array}{ccc}\text{白} & \text{黑} & \text{红} \\ \frac{1}{2} & \frac{1}{4} & \frac{1}{4}\end{array}\right)
+$$
+其中，$\frac{1}{2}$ 表示白球的概率，$\frac{1}{4}$ 表示黑球的概率，$\frac{1}{4}$ 表示红球的概率.
+
+计算第一只口袋的熵 $H(\xi_1)$：
+$$ H\left(\xi_{1}\right)=\frac{1}{2} \log 2+2 \times \frac{1}{4} \log 4=\frac{1}{2}+1=1.5  \text{ bits}
+$$
+接下来，我们将第二只口袋的球的颜色作为随机变量 $\xi_2$，它的概率分布为：
+$$
+\xi_2 \sim \left(\begin{array}{ccc}\text{白} & \text{黑} & \text{红} \\ \frac{2}{5} & \frac{2}{5} & \frac{1}{5}\end{array}\right)
+$$
+其中，$\frac{2}{5}$ 表示白球的概率，$\frac{2}{5}$ 表示黑球的概率，$\frac{1}{5}$ 表示红球的概率.
+
+计算第二只口袋的熵 $H(\xi_2)$：
+
+$$
+\begin{aligned}
+H\left(\xi_{2}\right) & =\frac{4}{5} \log \frac{5}{2}+\frac{1}{5} \log 5 \\
+& =\frac{4}{5}(\log 5-\log 2)+\frac{1}{5} \log 5 \\
+& =\frac{4}{5} \log 5+\frac{1}{5} \log 5-\frac{4}{5} \\
+& =\log 5-\frac{4}{5} \approx 2.32-0.8 \\
+& =1.52 \text { 比特 }
+\end{aligned}
+$$
+比较 $H(\xi_1)$ 和 $H(\xi_2)$ 的值，我们可以得出结论：第二只口袋的结果的不确定性更大，因为它的熵值更大. 
+ \end{solution}
+
+ \begin{exercise}
+ 设 $ \xi $ 和 $ \eta $ 联合分布 $ p(0,0)=\frac{1}{3}, p(0,1)=\frac{1}{3}, p(1,0)=0 $, $ p(1,1)=\frac{1}{3} $, 试求:\\
+(1) $ H(\xi), H(\eta) $;\\
+(2) $ H(\xi \mid \eta), H(\eta \mid \xi) $\\
+(3) $ H(\xi, \eta) $;\\
+(4) $ H(\eta)-H(\eta \mid \xi) $;\\
+(5) $ I(\xi ; \eta) $;\\
+(6) 画出上述各信息之间关系的韦恩图.
+
+ \end{exercise}
+ \begin{solution}
+ \begin{table}[h]
+     \centering
+     \resizebox{.3\textwidth}{!}{
+     \begin{tabular}{|c|c|c|c|}
+\hline\diagbox{$ \eta $}{$ \xi $} & 0 & 1 & $ \sum $ \\
+\hline 0 & $ \frac{1}{3} $ & 0 & $ \frac{1}{3} $ \\
+\hline 1 & $ \frac{1}{3} $ & $ \frac{1}{3} $ & $ \frac{2}{3} $ \\
+\hline$ \sum $ & $ \frac{2}{3} $ & $ \frac{1}{3} $ & 1 \\
+\hline
+\end{tabular}}
+ \end{table}
+$$
+\xi \sim\left(\begin{array}{cc}
+0 & 1 \\
+\frac{2}{3} & \frac{1}{3}
+\end{array}\right) \quad \eta \sim\left(\begin{array}{cc}
+0 & 1 \\
+\frac{1}{3} & \frac{2}{3}
+\end{array}\right)
+$$
+(1)
+$$
+\begin{aligned}
+H(\xi) & =\sum_{i=0}^{1} p_{i} \log \frac{1}{p_{i}}=\frac{2}{3} \log \frac{3}{2}+\frac{1}{3} \log 3 \\
+& =\frac{2}{3} \log 3-\frac{2}{3} \log 2+\frac{1}{3} \log 3 \\
+& =\log 3-\frac{2}{3}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+H(\eta) & =\sum_{i=0}^{1} p_{i} \log \frac{1}{p_{i}}=\frac{1}{3} \log 3+\frac{2}{3} \log \frac{3}{2} \\
+& =\frac{1}{3} \log 3+\frac{2}{3} \log 3-\frac{2}{3} \log 2 \\
+& =\log 3-\frac{2}{3}
+\end{aligned}
+$$
+(3)
+$$
+\begin{aligned}
+H(\xi, \eta) & =\sum_{x \in \mathscr{X}} \sum_{x \in \mathscr{Y}} p(x, y) \log \frac{1}{p(x, y)} \\
+& =3 \cdot \frac{1}{3} \log 3=\log 3
+\end{aligned}
+$$
+(2)
+$$
+\begin{aligned}
+H(\eta \mid \xi) & =H(\xi, \eta)-H(\xi) \\
+& =\log 3-\left(\log 3-\frac{2}{3}\right)=\frac{2}{3} \\
+H(\xi \mid \eta) & =H(\xi, \eta)-H(\eta) \\
+& =\log 3-\left(\log 3-\frac{2}{3}\right)=\frac{2}{3}
+\end{aligned}
+$$
+(4)
+$$
+\begin{aligned}
+H(\eta)-H(\eta \mid \xi) 
+= & \log 3-\frac{2}{3}-\frac{2}{3} \\
+= & \log 3-\frac{4}{3}
+\end{aligned}
+$$
+(5)
+$$
+\begin{aligned}
+I(\xi ; \eta) & =H(\xi)+H(\eta)-H(\xi, \eta) \\
+& =2\left(\log 3-\frac{2}{3}\right)-\log 3 \\
+& =\log 3-\frac{4}{3}
+\end{aligned}
+$$
+
+ \end{solution}
+
+  \begin{exercise}
+设 $ \left\{p_{1}, p_{2}, \cdots, p_{a}\right\} $ 是一个概率分布, 并令 $ q_{m}=p_{m+1}+\cdots+p_{a} $,证明: $ H\left(p_{1}, \cdots, p_{a}\right) \leqslant H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+q_{m} \log (a-m) $, 并指出等号何时成立.
+ \end{exercise}
+ \begin{solution}
+     证明:对于序列 $ p_{1}, \cdots, p_{m}, q_{m} $ ,有$ \sum\limits_{i=1}^{m} p_{i}+q_{m}=1$,其中$q_{m}=\sum\limits_{j=m+1}^{a} p_{j} $， 也即
+$$
+p_{1}, \cdots, p_{m}, p_{m+1}, \cdots, p_{a} \quad \sum_{i=1}^{a} p_{i}=1\left(i \leqslant m, q_{i}=p_{i}\right)
+$$
+
+由熵函数可加性知:
+$$
+\begin{aligned}
+& H\left(p_{1}, \cdots, p_{m}, p_{m+1}, \cdots, p_{a}\right) \\
+= & H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+\sum_{i=1}^{m} p_{i} H\left(\frac{p_{i}}{p_{i}}\right)+q_{m} \cdot H\left(\frac{p_{m+1}}{q_{m}}, \cdots, \frac{p_{a}}{q_{m}}\right) \\
+\leqslant & H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+q_{m} \log (a-m)(\text { 最大值定理 })
+\end{aligned}
+$$
+$$
+\frac{p_{m+1}}{q_{m}}=\cdots=\frac{p_{a}}{q_{m}} \Rightarrow p_{m+1}=\cdots=p_{a} \text { 时等号成立. }
+$$
+\hrule
+证明二: 首先证明 $ H\left(p_{1}, \cdots, p_{a}\right)=H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+q_{m} \cdot H\left(\frac{p_{m+1}}{q_{m}}, \frac{p_{m+2}}{q_{m}}, \cdots, \frac{p_{a}}{q_{m}}\right) $ .
+$$
+\begin{aligned}
+\text { 右边 } & =H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+q_{m} \cdot H\left(\frac{p_{m+1}}{q_{m}}, \frac{p_{m+2}}{q_{m}}, \cdots, \frac{p_{a}}{q_{m}}\right)\\&=\left(-\sum_{i=1}^{m} p_{i} \log p_{i}-q_{m} \log q_{m}\right)-q_{m} \cdot \sum_{i=m+1}^{n} \frac{p_{i}}{q_{m}} \log \frac{p_{i}}{q_{m}} \\
+& =-\sum_{i=1}^{m} p_{i} \log p_{i}-q_{m} \log q_{m}-\sum_{i=m+1}^{a} p_{i} \log p_{i}+\log q_{m} \cdot \sum_{i=m+1}^{a} p_{i}\\&=-\sum_{i=1}^{a} p_{i} \log p_{i}=\text { 左边 }
+\end{aligned}
+$$
+由离散最大熵定理有
+$$
+H\left(\frac{p_{m+1}}{q_{m}}, \frac{p_{m+2}}{q_{m}}, \cdots, \frac{p_{a}}{q_{m}}\right) \leqslant \log (a-m)
+$$
+因此有
+$$
+H\left(p_{1}, \cdots, p_{a}\right) \leqslant H\left(p_{1}, \cdots, p_{m}, q_{m}\right)+q_{m} \log (a-m)
+$$
+等式成立的条件是 $ p_{m+1}=p_{m+2}=\cdots=p_{a}=\dfrac{q_{m}}{a-m} $ 
+ \end{solution}
+
+  \begin{exercise}
+设 $ \xi $ 是取 $ m $ 个值 $ x_{1}, x_{2}, \cdots, x_{m} $ 的随机变量, $ p\left(\xi=x_{m}\right)=a $,证明: $ H(\xi)=a \log \frac{1}{a}+(1-a) \log \frac{1}{1-a}+(1-a) H(\eta) $, 其中 $ \eta $ 是取 $ m-1 $ 个值 $ x_{1}, x_{2}, \cdots, x_{m-1} $ 的随机变量,
+$$
+p\left(\eta=x_{j}\right) \stackrel{\text { def }}{=} p\left(\xi=x_{j}\right) /(1-a), 1 \leqslant j \leqslant m-1 .
+$$
+进一步证
+明: $ H(\xi) \leqslant a \log \frac{1}{a}+(1-a) \log \frac{1}{1-a}+(1-a) \log (m-1) $,并确定其中等号成立的条件.
+ \end{exercise}
+ \begin{solution}
+     证明: 由 $ p\left(\eta=x_{j}\right) \stackrel{\text { def }}{=} p\left(\xi=x_{j}\right) /(1-a)  \Rightarrow p\left(\xi=x_{j}\right)=(1-a) p\left(\eta=x_{j}\right), j=1, \cdots, m-1 . $
+$$
+\begin{aligned}
+\text { 故 } H(\xi)&=a \log \frac{1}{a}+\sum_{j=1}^{m-1} p\left(\xi=x_{j}\right) \log \frac{1}{p\left(\xi=x_{j}\right)} \\
+&=a \log \frac{1}{a}+\sum_{j=1}^{m-1}(1-a) p\left(\eta=x_{j}\right) \log \frac{1}{(1-a) p\left(\eta=x_{j}\right)}\\
+&=a \log \frac{1}{a}+\sum_{j=1}^{m-1}(1-a) p\left(\eta=x_{j}\right) \log \frac{1}{1-a} +\sum_{j=1}^{m-1}(1-a) p\left(\eta=x_{j}\right) \log \frac{1}{p\left(\eta=x_{j}\right)} \\
+&=a \log \frac{1}{a}+(1-a) \log \frac{1}{1-a} \sum_{j=1}^{m-1} p\left(\eta=x_{j}\right) +(1-a) \sum_{j=1}^{m-1} p\left(\eta=x_{j}\right) \log \frac{1}{p\left(\eta=x_{j}\right)} \\
+&=a \log \frac{1}{a}+(1-a) \log \frac{1}{1-a}+(1-a) H(\eta)
+\end{aligned}
+$$
+
+根据熵的最大值定理有 $ H(\eta) \leqslant \log (m-1) $等号成立的条件为 $ p\left(\eta=x_{j}\right) $ 为等概率分布 $ p\left(\eta=x_{j}\right)=p\left(\xi=x_{j}\right) /(1-a) $
+
+$$
+(m-1) p\left(\eta=x_{j}\right)=1 ,\quad p\left(\eta=x_{j}\right)=\frac{1}{m-1} 
+$$
+即$$
+ p\left(\xi=x_{j}\right)=\frac{1-a}{m-1}, \quad j=1,2, \cdots, m-1 .
+$$
+ \end{solution}
+
+  \begin{exercise}
+设 $ \widetilde{p}=\left\{p_{1}, p_{2}, \cdots, p_{a}\right\} $ 是一个概率分布, 满足 $ p_{1} \geqslant p_{2} $ $ \geqslant \cdots \geqslant p_{a} $, 假设 $ \varepsilon \geqslant 0 $, 使得 $ p_{1}-\varepsilon \geqslant p_{2}+\varepsilon $ 成立, 证明:
+$$
+H\left(p_{1}, p_{2}, \cdots, p_{a}\right) \leqslant H\left(p_{1}-\varepsilon, p_{2}+\varepsilon, p_{3}, \cdots, p_{a}\right)
+$$
+ \end{exercise}
+ \begin{solution}
+     证明: $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right)=-p_{1} \log p_{1}-p_{2} \log p_{2}-\sum\limits_{i=3}^{a} p_{i} \log p_{i} $
+$$
+\begin{aligned}
+& H\left(p_{1}-\varepsilon, p_{2}+\varepsilon, p_{3}, \cdots, p_{a}\right) \\
+= & -\left(p_{1}-\varepsilon\right) \log \left(p_{1}-\varepsilon\right)-\left(p_{2}+\varepsilon\right) \log \left(p_{2}+\varepsilon\right)-\sum_{i=3}^{a} p_{i} \log p_{i} \\
+= & -p_{1} \log \left(p_{1}-\varepsilon\right)-p_{2} \log \left(p_{2}+\varepsilon\right)-\sum_{i=3}^{a} p_{i} \log p_{i}+\varepsilon \log \frac{p_{1}-\varepsilon}{p_{2}+\varepsilon}
+\end{aligned}
+$$
+由引理\ref{lamma2}知: $ -p_{1} \log \left(p_{1}-\varepsilon\right)-p_{2} \log \left(p_{2}+\varepsilon\right)-\sum\limits_{i=3}^{a} p_{i} \log p_{i} $
+$$
+\geqslant-p_{1} \log p_{1}-p_{2} \log p_{2}-\sum_{i=3}^{a} p_{i} \log p_{i}
+$$
+而 $ \varepsilon \log \dfrac{p_{1}-\varepsilon}{p_{2}+\varepsilon} \geqslant 0 $,
+故 $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right) \leqslant H\left(p_{1}-\varepsilon, p_{2}+\varepsilon, p_{3}, \cdots, p_{a}\right) $
+ \end{solution}
+
+  \begin{exercise}
+    设 $ \xi_{1}, \xi_{2} $ 具有相同的分布，但它们不需要是独立的，令 $ \rho=1-\dfrac{H\left(\xi_{1} \mid \xi_{2}\right)}{H\left(\xi_{1}\right)} $\\
+(1) 证明: $ \rho=\dfrac{I\left(\xi_{1} ; \xi_{2}\right)}{H\left(\xi_{1}\right)} $;\\
+(2) 证明: $ 0 \leqslant \rho \leqslant 1 $;\\
+(3)何时 $ \rho=0 $ ?\\
+(4)何时 $ \rho=1 $ ?
+ \end{exercise}
+ \begin{solution}
+     证明:
+     
+(1) $ \rho=1-\dfrac{H\left(\xi_{1} \mid \xi_{2}\right)}{H\left(\xi_{1}\right)}=\dfrac{H\left(\xi_{1}\right)-H\left(\xi_{1} \mid \xi_{2}\right)}{H\left(\xi_{1}\right)}=\dfrac{I\left(\xi_{1} ; \xi_{2}\right)}{H\left(\xi_{1}\right)} $;
+
+(2) 因 $ I\left(\xi_{1} ; \xi_{2}\right) \geqslant 0 ,\quad H\left(\xi_{1}\right) \geqslant H\left(\xi_{1} \mid \xi_{2}\right) $.
+所以 $ 0 \leqslant \dfrac{H\left(\xi_{1} \mid \xi_{2}\right)}{H\left(\xi_{1}\right)} \leqslant 1 $
+因此 $ 0 \leqslant \rho \leqslant 1 $;
+
+(3) $ \rho=0 $ 即: $ H\left(\xi_{1} \mid \xi_{2}\right)=H\left(\xi_{1}\right) $, 即 $ \xi_{1} $ 与 $ \xi_{2} $ 相互独立;
+
+(4) $ \rho=1 $ 即: $ H\left(\xi_{1} \mid \xi_{2}\right)=0 $, 或 $ I\left(\xi_{1} ; \xi_{2}\right)=H\left(\xi_{1}\right) $.
+即 $ \xi_{1}=\xi_{2} $ .
+ \end{solution}
+
+  \begin{exercise}
+居住某地区的女孩子中有 $ 25 \% $ 是大学生，在女大学生中有 $ 75 \% $是身高为 1.6 米以上的, 而女孩中身高 1.6 米以上的占总数的一半，假如我们得知身高1.6 米以上的某女孩是大学生的消息，问获得多少信息量.
+ \end{exercise}
+ \begin{solution}
+     设事件 $ A $ 为女孩是大学生, 事件 $ B $ 为女孩子身高1.6米以上,知: $ p(A)=0.25, \quad p(B)=0.5, \quad p(B \mid A)=0.75 $.身高1.6米以上的某女孩是大学生这消息表明在事件 $ B $ 的条件下A事件发生, 可得:
+$$
+p(A \mid B)=\frac{p(A B)}{p(B)}=\frac{p(A) p(B \mid A)}{p(B)}=\frac{0.25 \times 0.75}{0.5}=0.375
+$$
+因而 $ I(A \mid B)=-\log p(A \mid B)=\log \frac{1}{0.375} $ 比特
+ \end{solution}
+ \begin{exercise}
+设某一彩色电视机分辨率为 $ 500 \times 1000 $, 灰度为 10 , 不同的色彩度为 30 , 求一幅电视画面所含信息量的大小.
+
+ \end{exercise}
+ \begin{solution}
+     $ \xi_{1} $ 为灰度信源的随机变量
+$$
+\xi_{1} \sim\left(\begin{array}{cccc}
+x_{1} & x_{2} & \cdots & x_{10} \\
+\frac{1}{10} & \frac{1}{10} & \cdots & \frac{1}{10}
+\end{array}\right)
+$$
+每个像素灰度含有的信息量为
+$ H\left(\xi_{1}\right)=10 \cdot \frac{1}{10} \log 10=\log 10 \approx 3.32 $ 比特则每副电视画面含信息量为
+$$
+5 \times 10^{5} \times \log 10 \approx 1.66 \times 10^{6} \text { 比特 }
+$$
+
+设 $ \xi_{2} $ 为色彩度信源的随机变量
+$$
+\xi_{2} \sim\left(\begin{array}{cccc}
+y_{1} & y_{2} & \cdots & y_{30} \\
+\frac{1}{30} & \frac{1}{30} & \cdots & \frac{1}{30}
+\end{array}\right)
+$$
+每个色彩度含有的信息量为 $ H\left(\xi_{2}\right)=\log 30 \approx 4.91 $ 像素亮度与色彩互相独立, 故每个像素含有的信息量为
+$$
+H\left(\xi_{1}, \xi_{2}\right)=H\left(\xi_{1}\right)+H\left(\xi_{2}\right)=(\log 10+\log 30) \times 5 \times 10^{5} \text { 比特. }
+$$
+ \end{solution}
+
+
+ 

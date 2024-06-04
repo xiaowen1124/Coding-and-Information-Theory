@@ -1,0 +1,192 @@
+\section{熵的基本性质}
+\subsection{对数函数的基本不等式}
+\begin{lemma}\label{lemma1}
+对任意实数 $ x>0 $, 有 $ 1-\frac{1}{x} \leqslant \ln x \leqslant x-1 $, 等号成立的条件为 $ x=1 $ .
+\end{lemma}
+
+\begin{lemma}\label{lamma2}
+对任意两组实数 $ p_{i}, q_{i}, i=1,2, \cdots, a $, 若满足:
+
+(1) $ p_{i} \geqslant 0, q_{i} \geqslant 0, i=1,2, \cdots, a $;
+
+(2) $ \sum\limits_{i=1}^{a} p_{i}=1, \sum\limits_{i=1}^{a} q_{i}=1 $, 则有:
+$$
+-\sum_{i=1}^{a} p_{i} \log p_{i} \leqslant-\sum_{i=1}^{a} p_{i} \log q_{i} \text { 或 } \sum_{i=1}^{a} p_{i} \log \frac{p_{i}}{q_{i}} \geqslant 0
+$$
+其中等号成立的条件（充要）为 $ \frac{p_{i}}{q_{i}}=1, i=1,2, \cdots, a $ .
+\end{lemma}
+\begin{proof}
+$$ \ln \frac{q_{i}}{p_{i}}=\frac{\log \frac{q_{i}}{p_{i}}}{\log e} \Rightarrow \log \frac{q_{i}}{p_{i}}=(\log e)\left(\ln \frac{q_{i}}{p_{i}}\right) $$
+由引理\ref{lemma1}可知: $ \log \frac{q_{i}}{p_{i}} \leqslant(\log e)\left(\frac{q_{i}}{p_{i}}-1\right) $
+两边同时乘以 $ p_{i} $ 得:
+$$
+p_{i} \log \frac{q_{i}}{p_{i}} \leqslant(\log e) p_{i}\left(\frac{q_{i}}{p_{i}}-1\right)=\log e\left(q_{i}-p_{i}\right)
+$$
+两边求和得:
+$$
+\begin{array}{c}
+\sum\limits_{i=1}^{a} p_{i} \log \frac{q_{i}}{p_{i}} \leqslant \log e \sum\limits_{i=1}^{a}\left(q_{i}-p_{i}\right)=0 \\
+\left(\sum\limits_{i=1}^{a} q_{i}=1, \sum\limits_{i=1}^{a} q_{i}=1\right)
+\end{array}
+$$
+于是有: $ \sum\limits_{i=1}^{a} p_{i} \log \frac{q_{i}}{p_{i}} \leqslant 0 \Rightarrow \sum\limits_{i=1}^{a} p_{i} \log \frac{p_{i}}{q_{i}} \geqslant 0 $
+由引理\ref{lemma1}知等号成立的条件为 $ x=1 $ . 故上述不等式成立的条件为：
+$$
+\frac{p_{i}}{q_{i}}=1 \Rightarrow p_{i}=q_{i}, \quad i=1,2, \cdots, a_{\circ}
+$$
+\end{proof}
+
+\begin{lemma}\label{lamma3}
+ 对任意两组实数 $ u_{i}>0, v_{i}>0, i=1,2, \cdots, a $, 有:
+$$
+\sum_{i=1}^{a} u_{i} \log \frac{u_{i}}{v_{i}} \geqslant\left(\sum_{i=1}^{a} u_{i}\right) \log \frac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}}
+$$
+其中等号成立的充要条件为: $ \dfrac{u_{k}}{v_{k}}=\dfrac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}}, i=1,2, \cdots, a $ .
+
+\end{lemma}
+\begin{proof}
+  令 $ p_{k}=\dfrac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}}, q_{k}=\dfrac{v_{k}}{\sum\limits_{i=1}^{a} v_{i}} $;
+$$
+\sum_{k=1}^{a} p_{k}=\sum_{k=1}^{a} \frac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}}=\frac{\sum\limits_{k=1}^{a} u_{k}}{\sum\limits_{i=1}^{a} u_{i}}=1 ; $$
+$$
+\sum_{k=1}^{a} q_{k}=1, p_{k} \geqslant 0, q_{k} \geqslant 0 
+$$
+
+由引理\ref{lamma2}有: $ \sum\limits_{k=1}^{a} p_{k} \log \frac{p_{k}}{q_{k}} \geqslant 0 $, 即:
+$$
+\sum_{k=1}^{a}\left(\frac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}} \log \dfrac{\frac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}}}{\frac{v_{k}}{\sum\limits_{i=1}^{a} v_{i}}}\right) \geqslant 0 \Rightarrow \sum_{k=1}^{a} \frac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}} \log \frac{u_{k}}{v_{k}} \cdot \frac{\sum\limits_{i=1}^{a} v_{i}}{\sum\limits_{i=1}^{a} u_{i}} \geqslant 0
+$$
+$$
+\begin{aligned}
+\text { 由 } \sum_{i=1}^{a} u_{i} \geqslant 0 \text { 得: } \sum_{k=1}^{a} u_{k} \log \frac{u_{k}}{v_{k}} \cdot \frac{\sum\limits_{i=1}^{a} v_{i}}{\sum\limits_{i=1}^{a} u_{i}} \geqslant 0 \\
+\Rightarrow \sum_{k=1}^{a} u_{k}\left[\log \frac{u_{k}}{v_{k}}-\log \frac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}}\right] \geqslant 0
+\end{aligned}
+$$
+即: $ \sum\limits_{k=1}^{a} u_{k} \log \dfrac{u_{k}}{v_{k}} \geqslant \sum\limits_{k=1}^{a} u_{k} \log \dfrac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}} $
+
+亦即: $ \sum\limits_{k=1}^{a} u_{k} \log \frac{u_{k}}{v_{k}} \geqslant\left(\sum\limits_{k=1}^{a} u_{k}\right) \log \frac{\sum\limits_{k=1}^{a} u_{k}}{\sum\limits_{k=1}^{a} v_{k}} $.
+等号成立的条件为 $ p_{k}=q_{k} $, 即:
+$$
+\frac{u_{k}}{\sum\limits_{i=1}^{a} u_{i}}=\frac{v_{k}}{\sum\limits_{i=1}^{a} v_{i}} \Rightarrow \frac{u_{k}}{v_{k}}=\frac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}}
+$$
+\end{proof}
+
+
+\subsection{熵函数的性质}
+\begin{theorem}[熵函数的最大值]\label{th1}
+    令 $ \xi $ 是一个离散随机变量, 它在 $ \mathscr{X}=\left\{x_{1}, x_{2}, \cdots, x_{a}\right\} $ 中取值，那么有: $ H(\xi) \leqslant \log a. $ 其中等号成立的充要条件为对所有的 $ i $ 都有 $ p\left(x_{i}\right)=\frac{1}{a}, i=1, \cdots, a_{0} $
+\end{theorem}
+
+\begin{proof}
+    由引理 \ref{lamma3} , 取 $ \left(u_{1}, \cdots, u_{a}\right)=\left(p_{1}, \cdots, p_{a}\right) $ 为 $ \xi $ 的概率分布,取 $ v_{i}=1, i=1,2, \cdots, a $ 可知:
+$$
+\begin{aligned}
+H(\xi) & =-\sum_{i=1}^{a} p_{i} \log p_{i} \quad\left(u_{i}=p_{i}, v_{i}=1\right) \\
+& =-\sum_{i=1}^{a} u_{i} \log \frac{u_{i}}{v_{i}} \\
+& \leqslant-\left(\sum_{i=1}^{a} u_{i}\right) \log \frac{\sum\limits_{i=1}^{a} u_{i}}{\sum\limits_{i=1}^{a} v_{i}} \\
+& =-\left(\sum\limits_{i=1}^{a} p_{i}\right) \log \frac{\sum\limits_{i=1}^{a} p_{i}}{a} \quad\left(\sum_{i=1}^{a} p_{i}=1\right) \\
+& =\log a
+\end{aligned}
+$$
+\end{proof}
+\begin{theorem}[熵函数的可加性]\label{th2}
+如果 $ q_{i j}, j=1,2, \cdots, k_{i}, i=1,2, \cdots, a $ 是一组非负数, 满足:
+$$
+q_{i j} \geqslant 0, p_{i}=\sum_{j=1}^{k_{i}} q_{i j}, \sum_{i=1}^{a} p_{i}=1
+$$
+对任何 $ j=1,2, \cdots, k_{i}, i=1,2, \cdots, a $ 成立，那么有:
+$$
+\begin{array}{l}
+H\left(q_{11}, q_{12}, \cdots, q_{1 k_{1}}, q_{21}, q_{22}, \cdots, q_{2 k_{2}}, \cdots, q_{a 1}, q_{a 2}, \cdots, q_{a k_{a}}\right) \\
+=H\left(p_{1}, p_{2}, \cdots, p_{a}\right)+\sum\limits_{i=1}^{a} p_{i} H\left(\frac{q_{i 1}}{p_{i}}, \cdots, \frac{q_{i k_{i}}}{p_{i}}\right) .
+\end{array}
+$$
+
+\end{theorem}
+\begin{proof}
+ 由熵的定义可知：
+$$
+\begin{aligned}
+&H\left(q_{11}, q_{12}, \cdots, q_{1 k_{1}}, q_{21}, q_{22}, \cdots, q_{2 k_{2}}, \cdots, q_{a 1}, q_{a 2}, \cdots, q_{a k_{a}}\right) \\
+&=-\sum_{i=1}^{a} \sum_{j=1}^{k_{i}} q_{i j} \log q_{i j}=-\sum_{i=1}^{a} \sum_{j=1}^{k_{i}} q_{i j} \log \frac{q_{i j}}{p_{i}} \cdot p_{i} \\
+&=-\sum_{i=1}^{a} \sum_{j=1}^{k_{i}} q_{i j}\left(\log \left(\frac{q_{i j}}{p_{i}}\right)+\log p_{i}\right) \\
+&=-\sum_{i=1}^{a} \sum_{j=1}^{k_{i}} q_{i j} \log p_{i}-\sum_{i=1}^{a} \sum_{j=1}^{k_{i}} q_{i j} \log \frac{q_{i j}}{p_{i}}\\
+&=-\sum_{i=1}^{a} \log p_{i} \sum_{j=1}^{k_{i}} q_{i j}-\sum_{i=1}^{a} p_{i} \sum_{j=1}^{k_{i}} \frac{q_{i j}}{p_{i}} \log \frac{q_{i j}}{p_{i}} \\
+&=-\sum_{i=1}^{a} p_{i} \log p_{i}-\sum_{i=1}^{a} p_{i} \sum_{j=1}^{k_{i}} \frac{q_{i j}}{p_{i}} \log \frac{q_{i j}}{p_{i}} \\
+&=H\left(p_{1}, p_{2}, \cdots, p_{a}\right)+\sum_{i=1}^{a} p_{i} H\left(\frac{q_{i 1}}{p_{i}}, \cdots, \frac{q_{i k_{j}}}{p_{i}}\right)
+\end{aligned}
+$$
+\end{proof}
+\begin{remark}
+若集合 $ \mathscr{X} $ 被划分为 $ a $ 个子集 $ \mathscr{S}_{i}(i=1,2, \cdots, a) $, 每个子集的概率为 $ p_{i}(i=1,2, \cdots, a) $ .其熵为 $ H\left(p_{1}, p_{2}, \cdots, p_{a}\right) $ ，对于这 $ a $ 个子集，我们把每一个子集 $ \mathscr{S}_{i} $ 又分成 $ k_{i} $ 个小子集 $ (i=1,2, \cdots, a) $,每个小子集的概率为 $ q_{i j} $ . 即有 $  \sum\limits_{j=1}^{k_{i}} q_{i j}=p_{i} $
+\end{remark}
+判断事件具体属于哪个子集的不确定性（在哪个子集中选取的不确定性 ) ，等于大子集的不确定性 $ H\left(p_{1}, \cdots, p_{a}\right) $ 与小子集不确定性的概率加权统计平均值之和.
+
+\begin{example}
+  一个班的同学的集合设为 $ X $, 把 $ X $ 分为 4 小组, 每个小组有若干排, 某一个同学在哪个座位上的不确定性为多少?
+我们可以分两种不同方法考虑这个问题:
+
+一种方法，从第一组开始，沿着每一个座位查找，直到找到有他名字的座位为止;
+
+第二种方法, 我先考虑它可能在哪个小组中, 然后再在这个小组中, 考虑他在哪一排哪个座位上, 去找他的座位.
+\end{example}
+\begin{example}
+电脑中文件的查找 $ \left\{\begin{array}{l}\text { 所有文件均列出来一一查找 } \\ \text { (提供的不确定性相同, 通常采用这种方法) } \\ \text { 找到文件所在的文件夹再查找 }\end{array}\right. $
+\end{example}
+
+\begin{theorem}\label{the3}
+  如果 $ f $ 是从 $ \mathscr{X} $ 到 $ \mathscr{Z} $ 的任意映射, 那么必有 $ H(\xi) \geqslant H(f(\xi)) $成立, 等号成立的充要条件为 $ f $ 是一个 $ 1-1 $ 变换, 也就是对任何 $ x, x^{\prime} \in \mathscr{X}, x \neq x^{\prime}, p(x) \neq 0, p\left(x^{\prime}\right) \neq 0 $, 必有 $ f(x) \neq f\left(x^{\prime}\right) $,即单射.
+\end{theorem}
+
+\begin{proof}
+记 $ \mathscr{Z}_{0}=\{f(x) \mid x \in \mathscr{X}\}(f $ 的像集 $ ) $, 令 $ \mathscr{Z}_{0}=\left\{z_{1}, z_{2}, \cdots, z_{b}\right\} $记 $ A_{i}=\left\{x \mid f(x)=z_{i}\right\}(i=1,2, \cdots, b) $, 则 $ A $ 是 $ z_{i} $ 的原像的集合.记 $ A_{i} $ 中 的元为 $ A_{i}=\left\{x_{i 1}, x_{i 2}, \cdots, x_{i k_{i}}\right\} \subseteq \mathscr{X},\left(z_{i}\right. $ 的原像有 $ k_{i} $ 个 $ ) $且记 $ q_{i j}=p\left(x_{i j}\right) ; j=1,2, \cdots, k_{i},  i=1,2, \cdots, b $ ,$ p_{i}=\sum\limits_{j=1}^{k_{i}} q_{i j} ; i=1,2, \cdots, b$, ($p_{1}, \cdots, p_{b} $ 是 $ \mathscr{Z}_{0} $ 的概率分布) , 那么 $ q_{i j}, p_{i} $ 满足定理\ref{th2}的条件, 而且:
+$$
+\begin{array}{l}
+H(\xi)=H\left(q_{11}, \cdots, q_{1 k_{1}}, \cdots, q_{b 1}, \cdots, q_{b k_{b}}\right)\left(\bigcup\limits_{i=1}^{b} A_{i}=\mathscr{X}\right) \\
+H(f(\xi))=H\left(p_{1}, p_{2}, \cdots, p_{b}\right)
+\end{array}
+$$
+由定理\ref{th2}知: $ H(\xi) \geqslant H(f(\xi)) $, 且等号成立的条件为:
+$$
+\sum_{i=1}^{b} p_{i} H\left(\frac{q_{i 1}}{p_{i}}, \frac{q_{i 2}}{p i}, \cdots, \frac{q_{i k_{i}}}{p i}\right)=0
+$$
+这时必须有 $ p_{i}=0 $ 或 $ \frac{q_{i j}}{p _i}=1 $ 或 0.
+因为 $ \sum\limits_{i=1}^{k_{i}} q_{i j}=p_{i} $, 所以有且只有一个 $ j $ 使得 $ \dfrac{q_{i j}}{p i}=1 $即 $ f $ 是一个 $ 1-1 $ 映射.
+\end{proof}
+
+\subsection{Fano不等式（不确定性的上界估计）}
+Fano不等式给出了两个随机变量的条件熵与误差之间的关系.
+\begin{theorem}[Fano不等式]
+     设 $ \xi $ 与 $ \eta $ 为两个离散随机变量，它们有相同的值域 $ \mathscr{X} $, 且联合分布是 $ p(x, y) $, 令 $ p_{e}=P_r\{\xi \neq \eta\} $, 则:
+$$
+H(\xi \mid \eta) \leqslant H\left(p_{e}\right)+p_{e} \log (|\mathscr{X}|-1)
+$$
+其中$|\mathscr{X}|$表示$\mathscr{X}$的元素个数.
+\end{theorem}
+\begin{proof}
+    因为 $ p_{e}=P_r\{\xi \neq \eta\}=\sum\limits_{x \neq y} p(x, y) $,
+所以由条件熵的定义有:
+$$
+\begin{aligned}
+H(\xi \mid \eta) & =-\sum_{x \neq y} p(x, y) \log p(x \mid y)-\sum_{x=y} p(x, y) \log p(x \mid y) \\
+& =-\sum_{x \neq y} p(x, y) \log \frac{p(x, y)}{p(y)}-\sum_{x=y} p(x, y) \log \frac{p(x, y)}{p(y)} \\
+& \leqslant\left(\sum\limits_{x \neq y} p(x, y)\right) \log \frac{\sum\limits_{x \neq y} p(y)}{\sum\limits_{x \neq y} p(x, y)}+\left(\sum_{x=y} p(x, y)\right) \log \frac{\sum\limits_{x=y} p(y)}{\sum\limits_{x=y} p(x, y)} \\
+& =\left(\sum\limits_{x \neq y} p(x, y)\right) \log \frac{(|\mathscr{X}|-1)}{\sum\limits_{x \neq y} p(x, y)}+\left(\sum_{x=y} p(x, y)\right) \log \frac{1}{\sum\limits_{x=y} p(x, y)} \\
+& =p_{e} \log \frac{(|\mathscr{X}|-1)}{p_{e}}+\left(1-p_{e}\right) \log \frac{1}{1-p_{e}} \\
+& =p_{e} \log \frac{1}{p_{e}}+\left(1-p_{e}\right) \log \frac{1}{1-p_{e}}+p_{e} \log (|\mathscr{X}|-1) \\
+& =H\left(p_{e}\right)+p_{e} \log (|\mathscr{X}|-1),
+\end{aligned}
+$$
+其中的不等号根据引理\ref{lamma3}得来.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,241 @@
+\section{无记忆信道的信道容量}
+\subsection*{信道容量的概念}
+
+设 $ \mathscr{C}=(\mathscr{U}, p(v \mid u), \mathscr{V}) $ 是已给信道, 当信道入口分布 $ p(u) $ 给定时, 信道的入口与出口联合分布 $ p(u, v)=p(u) p(v \mid u) $ 确定. 因此, 相应的入口与出口随机变量 $ (\xi, \eta) $ 也就确定. 因此它们的互信息由入口分布 $ p(u) $ 与转移概率 $ p(v \mid u) $ 决定, 因此互信息可写成
+$$
+I(\xi ; \eta)=I(p(u) ; p(v \mid u)) .
+$$
+
+因此当信道 $ \mathscr{C} $ 给定时(也就是信道转移概率 $ p(u \mid v) $ 确定), 互信息就是入口分布 $ p(u) $ 的函数. 以下记
+$$
+\mathscr{P}_{\mathscr{U}}=\left\{\overline{p} \mid p(u) \geq 0, \sum_{u \in \mathscr{U}} p(u)=1\right\}
+$$
+为入口分布全体.
+
+\subsection{信道容量的一般定义}
+
+\begin{definition}
+    设 $ \mathscr{C} $ 是一个固定信道, 那么定义它的信道容量为互信息 $ I(\xi ; \eta) $ 的最大值,对所有的入口分布 $ \mathscr{P}_{\mathscr{U}} $ 中. 即
+$$
+C=\max \left\{I=(p(u) ; p(v \mid u)) \mid p(u) \in \mathscr{P}_{\mathscr{U}}\right\} .
+$$
+如果入口分布 $ p_{0}(u) \in \mathscr{P}_{\mathscr{U}} $, 使 $ I\left(p_{0}(u) ; p(u \mid v)\right)=C $ 成立. 那么称 $ p_{0}(u) $ 为互信息的最大的入口分布,简称为最大入口分布.
+\end{definition}
+
+\begin{remark}
+
+    (1)在本章4.2节中，我们已给出了信道序列的最大可达速率的定义. 它与容量在一定条件下可能相等, 但是它们的最初定义的含义是不同的.
+    
+(2)对记号 $ C $, 我们已给出了三种定义, 即：码元集 $ C $, 信道 $ \mathscr{C} $ 与信道容量$C$. 注意它们的区别.
+
+(3)对 $ \mathscr{P}_{\mathscr{U}} $ 中的元, 我们分别用 $ \overline{p}, p(u), \xi $来表示, 它们都是 $ \mathscr{P}_{\mathscr{U}} $ 中的概率分布或相应的随机变量.
+\end{remark}
+\begin{example}
+ 对于二元对称信道,计算它的信道容量.
+ 
+ 解: 对于二元对称信道, 它的交叉概率为 $ p $.
+$$
+\begin{aligned}
+I(\xi ; \eta) & =H(\eta)-H(\eta \mid \xi) \\
+& =H(\eta)-\sum_{u \in \mathscr{U}} p(u) H(\eta \mid \xi=u) \\
+& =H(\eta)-\sum_{u \in \mathscr{U}} p(u) H(p) \\
+& =H(\eta)-\left(\sum_{u \in \mathscr{U}} p(u)\right) H(p) \\
+& =H(\eta)-H(p) \\
+& \leq 1-H(p)
+\end{aligned}
+$$
+注意
+$$
+\begin{aligned}
+H(\eta \mid \xi=0)&=p(0 \mid 0) \log \frac{1}{p(0 \mid 0)}+p(1 \mid 0) \log \frac{1}{p(1 \mid 0)} \\
+&=(1-p) \log \frac{1}{1-p}+p \log \frac{1}{p}=H(p), \\
+H(\eta \mid \xi=1)&=p(0 \mid 1) \log \frac{1}{p(0 \mid 1)}+p(1 \mid 1) \log \frac{1}{p(1 \mid 1)} \\
+&=p \log \frac{1}{p}+(1-p) \log \frac{1}{1-p}=H(p) .
+\end{aligned}
+$$
+如果我们取输入分布为等概分布: $ p_{0}(0)=p_{0}(1)=\frac{1}{2} $, 那么输出分布为 $ q_{0}(0)=q_{0}(1)=\frac{1}{2} $, 这时相应的输入、输出随机变量为 $ \left(\xi_{0}, \eta_{0}\right) $,
+$$
+I\left(\xi_{0}, \eta_{0}\right)=1-H(p) \geq H(\eta)-H(p)=I(\xi ; \eta)
+$$
+因此二元对称信道的信道容量为
+$$
+C=1-H(p)
+$$
+它的最优入口分布为等概分布.
+\end{example}
+
+\begin{example}
+ 对于 $ M $ 信道, 求它的信道容量.
+ 
+解:$$C=\max \left\{I(\xi ; \eta) \mid \xi \in \mathscr{P}_{\mathscr{U}}\right\}=\max \left\{H(\eta)-H(\eta \mid \xi) \mid \xi \in \mathscr{P}_{\mathscr{U}}\right\}$$
+$$
+\begin{aligned}
+H(\eta \mid \xi=0)&=p(0 \mid 0) \log \frac{1}{p(0 \mid 0)}+p(* \mid 0) \log \frac{1}{p(* \mid 0)}+p(1 \mid 0) \log \frac{1}{p(1 \mid 0)} \\
+&=(1-p) \log \frac{1}{1-p}+p \log \frac{1}{p}=H(p) \\
+H(\eta \mid \xi=1)&=p(0 \mid 1) \log \frac{1}{p(0 \mid 1)}+p(* \mid 1) \log \frac{1}{p(* \mid 1)}+p(1 \mid 1) \log \frac{1}{p(1 \mid 1)} \\
+&=p \log \frac{1}{p}+(1-p) \log \frac{1}{1-p}=H(p) .
+\end{aligned}
+$$
+因此
+$$
+H(\eta \mid \xi)=\sum_{u \in \mathscr{U}} p(u) H(\eta \mid \xi=u)=\left(\sum_{u \in \mathscr{U}} p(u)\right) H(p)=H(p) $$
+
+$$C=\max \left\{H(\eta)-H(p) \mid \xi \in \mathscr{P}_{\mathscr{U}}\right\} .
+$$
+现在计算 $ H(\eta) $ 的值, 如取 $ p(0)=\theta, 0 \leq \theta \leq 1 $, 那么我们得到
+$$
+\begin{aligned}
+(q(0), q(*), q(1)) & =(p(0), p(1))\left(\begin{array}{ccc}
+1-p & p & 0 \\
+0 & p & 1-p
+\end{array}\right) \\
+& =(\theta, 1-\theta)\left(\begin{array}{ccc}
+1-p & p & 0 \\
+0 & p & 1-p
+\end{array}\right) \\
+& =(\theta(1-p), p,(1-\theta)(1-p)) .
+\end{aligned}
+$$
+代入熵的定义计算可得
+$$
+H(\eta)=(1-p) H(\theta)+H(p) .
+$$
+因为 $ p $ 是固定常数, 所以 $ H(\eta) $ 的最大值是当 $ \theta=\frac{1}{2} $ 时取得
+$$
+H\left(\eta_{0}\right)=(1-p) H(\theta)+H(p)=1-p+H(p) .
+$$
+这时
+$$
+C=H\left(\eta_{0}\right)-H(p)=1-p .
+$$
+且当 $ \theta=\frac{1}{2} $ 时达到最大值, 它的最优入口分布为等概率分布.
+\end{example}
+
+
+对于前面定义的几种信道, 可计算它们的信道容量.
+\begin{theorem}
+(1) 无丢失信道的容量是 $ \log a $, 其中 $ a $ 是输入字母表的大小.
+
+(2) 决定信道的容量是 $ \log b $, 其中 $ b $ 是集合
+$ \left\{v_{j} \mid\right. $ 存在某个 $ u_{j} $, 使得 $ q\left(v_{j} \mid u_{i}\right)=1 $ 成立 $ \} $
+的元素个数.
+
+(3) 无噪声信道的容量是 $ \log a $, 其中 $ a $ 是输入字母表的大小.
+
+(4) 无用信道的容量是0.
+\end{theorem}
+\begin{proof}
+(1) 因  $\xi$  完全由  $\eta$决定,即 $ H(\xi \mid \eta)=0 $.
+$$
+\begin{aligned}
+I(\xi ; \eta)  =H(\xi)-H(\xi \mid \eta)  =H(\xi)-0  =H(\xi) \leq \log a
+\end{aligned}
+$$
+$ H(\xi) $ 的最大值 $ \log a $.
+
+(2) $ I(\xi ; \eta)=H(\eta)-H(\eta \mid \xi)=H(\eta) \leq \log b $.
+
+(3) 无噪声信道等价条件是, 存在一个 $ \mathscr{U} \rightarrow \mathscr{V} $ 的 $ 1-1 $ 映射 $ \phi $, 使得 $ p(\phi(u) \mid u)=1 $ 对所有 $ u $ 成立, 从而 $ a=b $. 因此 $ C=\log a=\log b $.
+
+(4) 无用信道意味着输出不依赖于输入，或者说输出对于输入的选择完全没有信息.在这种情况下，无论输入是什么，输出的分布都保持不变，因此 \(H(\eta | \xi) = H(\eta)\). $ I(\xi ; \eta)=H(\xi)-H(\xi \mid \eta)=H(\xi)-H(\xi)=0 $. (注意 $ \xi $ 与 $ \eta $ 是相互独立的.)
+\end{proof}
+
+下面计算对称信道的信道容量.
+\begin{theorem}
+ 对称信道的信道容量为
+$$
+C=\log b-\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)}
+$$
+对 $ \forall i=1,2, \cdots, a $ 都成立,而且它的最大入口分布为均匀分布 $ p\left(u_{i}\right)=\frac{1}{a} $
+\end{theorem}
+\begin{proof}
+    $$
+I(\xi ; \eta)=H(\eta)-H(\eta \mid \xi) \leq \log b-H(\eta \mid \xi),
+$$
+其中
+$$
+H(\eta \mid \xi)=\sum_{i=1}^{a} p\left(u_{i}\right)\left(\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)}\right)
+$$
+因为信道的对称性，括号里面的和与 $ i $ 无关,所以
+$$
+\begin{aligned}
+H(\eta \mid \xi) & =\left(\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)}\right)\left(\sum_{i=1}^{a} p\left(u_{i}\right)\right) \\
+& =\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)} .
+\end{aligned}
+$$
+可见 $ H(\eta \mid \xi) $ 与 $ \xi $ 的分布无关. 因此当我们取入口分布为均匀分布 $ p(u)=\frac{1}{a} $ 时, 相应的出口分布为
+$$
+q(v)=\sum_{u \in \mathscr{U}} p(u) p(v \mid u)=\frac{1}{a} \sum_{u \in \mathscr{U}} p(v \mid u) .
+$$
+由对称信道的定义可知, $ \sum\limits_{u \in \mathscr{U}} p(v \mid u) $ 与 $ v $ 无关, 因此 $ q(v) $ 与 $ v $ 无关,是个均匀分布. 这时 $ \log b $ 是 $ H(\eta) $ 的最大值. 于是,
+$$
+C=\log b-H(\eta \mid \xi)=\log b-\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)}
+$$
+为对称信道的信道容量, 它的最大入口分布为均匀分布.
+\end{proof}
+
+\begin{example}
+ 对于二元对称信道, 转移矩阵为 $ \left(\begin{array}{cc}1-p & p \\ p & 1-p\end{array}\right) $.
+于是 $$ C=\log 2-(1-p) \log \frac{1}{1-p}-p \log \frac{1}{p} =1-H(p) $$
+\end{example}
+\begin{example}
+    信道的转移概率矩阵为 $ P=\left(\begin{array}{cccc}\frac{1}{3} & \frac{1}{3} & \frac{1}{6} & \frac{1}{6} \\ \frac{1}{6} & \frac{1}{6} & \frac{1}{3} & \frac{1}{3}\end{array}\right) $, 求其信道容量. $ |\mathscr{U}|=2,|\mathscr{V}|=4 $
+
+解：该信道为对称信道,故
+$$
+\begin{aligned}
+C= & \log b-\sum_{j=1}^{b} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)}  =\log 4-\sum_{j=1}^{4} p\left(v_{j} \mid u_{i}\right) \log \frac{1}{p\left(v_{j} \mid u_{i}\right)} \\
+& =2-2 \times \frac{1}{3} \log 3-2 \times \frac{1}{6} \log 6  =2-\frac{2}{3} \log 3-\frac{1}{3} \log 6 \\
+& =2-\frac{2}{3} \log 3-\frac{1}{3} \log 3-\frac{1}{3}  =2-\log 3-\frac{1}{3}  \approx 0.082 \text { 比特/符号. }
+\end{aligned}
+$$
+\end{example}
+
+\subsection{无记忆信道序列的容量性质}
+设 $ \mathscr{C}^{n} $ 是离散无记忆信道序列,同样可以定义 $ \mathscr{U}^{n} $ 上的全体概率分布 $ \mathscr{P}_{\mathscr{U}^{n}} $, 那么对 $ p^{(n)}\left(u^{(n)}\right) $, 可以确定联合分布
+$$
+p^{(n)}\left(u^{(n)}, v^{(n)}\right)=p^{(n)}\left(u^{(n)}\right) p\left(v^{(n)} \mid u^{(n)}\right)=p^{(n)}\left(u^{(n)}\right) \prod_{j=1}^{n} p\left(v_{j} \mid u_{j}\right)
+$$
+及相应的入口与出口随机变量 $ \left(\xi^{(n)}, \eta^{(n)}\right) $, 于是可定义它们的互信息
+$$
+\begin{aligned}
+I\left(\xi^{(n)} ; \eta^{(n)}\right)&=I\left(p^{(n)}\left(u^{(n)}\right) ; p^{(n)}\left(v^{(n)} \mid u^{(n)}\right)\right) \\
+&=\sum_{\left(u^{(n)} \times v^{(n)}\right) \in \mathscr{U}^{n} \times \mathscr{V}^{n}} p^{(n)}\left(u^{(n)}, v^{(n)}\right) \log \left(\frac{p^{(n)}\left(u^{(n)}, v^{(n)}\right)}{p^{(n)}\left(u^{(n)}\right) q^{(n)}\left(v^{(n)}\right)}\right)
+\end{aligned}
+$$
+其中 $q^{(n)}\left(u^{(n)}\right)=\sum\limits_{u^{(n)} \in \mathscr{U}^{n}} p^{(n)}\left(u^{(n)}\right) p^{(n)}\left(v^{(n)} \mid u^{(n)}\right) $
+
+
+\begin{definition}
+    信道序列 $ \mathscr{C}_{n} $ 的信道容量定义为
+$$
+C_{n}=\max \left\{I\left(p^{(n)}\left(u^{(n)}\right) ; p^{(n)}\left(v^{(n)} \mid u^{(n)}\right)\right) \mid p^{(n)}\left(u^{(n)}\right) \in \mathscr{P}_{\mathscr{U}^{n}}\right\}
+$$
+\end{definition}
+
+无记忆信道序列容量的性质
+\begin{definition}
+    设 $ \mathscr{Z} n $ 是任一有限集合 $ \mathscr{Z} $ 上的 $ n $ 维乘积空间, $ p(z) $ 是 $ \mathscr{Z} $ 上的一个概率分布. 如果 $ p^{(n)}\left(z^{(n)}\right)=\prod\limits_{i=1}^{n} p\left(z_{i}\right) $, 则称概率分布 $ p^{(n)}\left(z^{(n)}\right) $ 为由 $ p(z) $ 确定的无记忆概率分布.
+\end{definition}
+
+\begin{theorem}
+    如果 $ \mathscr{C}^{n} $ 是由 $ \mathscr{C} $ 确定的无记忆信道,它们的信道容量分别为 $ C_{n} $ 与 $ C $, 那么必有 $ C_{n}=n C $ 成立, 且 $ \mathscr{C}^{n} $ 的最大入口分布为 $ p_{0}^{(n)}\left(u^{(n)}\right) $ 是 $ p_{0}(u) $ 确定的无记忆分布, 其中 $ p_{0}(u) $ 是信道 $ \mathscr{C} $ 的最大入口分布.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

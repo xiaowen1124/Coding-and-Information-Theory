@@ -1,0 +1,248 @@
+\section{习题课}
+\subsection{基本概念}
+
+(1) 码: $ (n, M) $ 码, 码率 $ R=\frac{\log _{q} M}{n} $.
+
+(2) Hamming距离
+$$
+d(x, y)=\sum_{j=1}^{n} d\left(x_{j}, y_{j}\right) \quad d\left(x_{j}, y_{j}\right)=\left\{\begin{array}{ll}
+1 & x_{j} \neq y_{j} \\
+0 & x_{j}=y_{j}
+\end{array}\right.
+$$
+
+(3)最小距离译码（极大似然译码）.
+
+(4) 码的最小距离: $ d(C)=\min \{d(x, y) \mid x, y \in C \quad x \neq y\} $.
+
+(5) $ (n, M, d) $ 码检错码, 纠错码, 完备码, 系统码.
+
+\subsection{基本结论}
+1. 码 $ C $ 至多可检查 $ t $ 个错误 $ \Leftrightarrow d(C)=t+1 $.
+
+2. 码 $ C $ 至多可纠正 $ t $ 个错误 $ \Leftrightarrow d(C)=2 t+1 $ 或 $ 2 t+2 $.
+
+3.Hamming界 若 $ C $ 是 $ q $ 元 $ (n, M, 2 t+1) $ 码, 则
+$$
+M \leq \frac{q^{n}}{\sum\limits_{i=0}^{t}\binom{n}{i}(q-i)^{i}}
+$$
+
+4. (G-V)界: 若存在 $ q $ 元 $ (n, M, d) $ 码, 则 $ A_{q}(n, d) \geq \frac{q^{n}}{\sum\limits_{i=0}^{d-1}\binom{n}{i}(q-i)^{i}} $
+
+5.(Singleton界) $ A_{q}(n, d) \leq q^{n-d+1} $.
+
+6. $ A_{q}(n, d) $ 的性质：设 $ d $ 为奇数, 则存在二元 $ (n, M, d) $ 码 $ \Leftrightarrow $ 存在二元 $ (n+1, M, d+1) $ 码, 从而 $ A_{2}(n, d)=A_{2}(n+1, d+1) $.
+
+\subsection{课后习题}
+\begin{exercise}
+     设 $ C=\{11100,01001,10010,00111\} $ 是一个二元 $ (5,4) $ 码.\\
+(1) 求码 $ C $ 的最小距离.\\
+(2)根据最小距离译码原则, 对接收到的字 10000，01100， 00100 分别进行译码.\\
+(3)计算码 $ C $ 的码率.
+\end{exercise}
+\begin{solution}
+    (1) 设 $ C $ 中的四个码字分别为 $ x_{1}, x_{2}, x_{3}, x_{4} $, 则
+$$
+\begin{array}{l}
+d\left(x_{1}, x_{2}\right)=\left(\begin{array}{lllll}
+\underline{1} & 1 & \underline{1} & 0 & \underline{0} \\
+0 & 1 & 0 & 0 & 1
+\end{array}\right)=3 \\
+d\left(x_{1}, x_{3}\right)=\left(\begin{array}{lllll}
+1 & \underline{1} & \underline{1} & \underline{0} & 0 \\
+1 & 0 & 0 & 1 & 0
+\end{array}\right)=3
+\end{array}
+$$
+$$
+\begin{array}{l}
+d\left(x_{1}, x_{4}\right)=\left(\begin{array}{ccccc}
+\underline{1} & \underline{1} & 1 & \underline{0} & \underline{0} \\
+0 & 0 & 1 & 1 & 1
+\end{array}\right)=4 \\
+d\left(x_{2}, x_{3}\right)=\left(\begin{array}{ccccc}
+\underline{0} & \underline{1} & 0 & \underline{0} & \underline{1} \\
+1 & 0 & 0 & 1 & 0
+\end{array}\right)=4 \\
+d\left(x_{2}, x_{4}\right)=\left(\begin{array}{ccccc}
+0 & \underline{1} & \underline{0} & \underline{0} & 1 \\
+0 & 0 & 1 & 1 & 1
+\end{array}\right)=3 \\
+d\left(x_{3}, x_{4}\right)=\left(\begin{array}{ccccc}
+\underline{1} & 0 & \underline{0} & 1 & \underline{0} \\
+0 & 0 & 1 & 1 & 1
+\end{array}\right)=3
+\end{array}
+$$
+于是 $ d(C)=3 $
+
+ (2) 设 $x=10000$ ,
+$$
+\begin{array}{l}
+d\left(x, x_{1}\right)=\left(\begin{array}{lllll}
+1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 1 & 0 & 0
+\end{array}\right)=2 \\
+d\left(x, x_{2}\right)=\left(\begin{array}{lllll}
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 1
+\end{array}\right)=3 \\
+d\left(x, x_{3}\right)=\left(\begin{array}{lllll}
+1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 & 0
+\end{array}\right)=1 \\
+d\left(x, x_{4}\right)=\left(\begin{array}{lllll}
+1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 1
+\end{array}\right)=4 \\
+\end{array}
+$$
+故将 $ x $ 译为 10010 , 同理可将 01100 译为 11100 , 将 00100 译为 11100 或 00111.
+
+(3) 码率 $ R(C)=\dfrac{\log _{q} M}{n}=\dfrac{\log _{2} 4}{5}=\frac{2}{5} $.
+\end{solution}
+
+
+\begin{exercise}
+设 $ C=\{00000000,00001111,00110011,00111100\} $ 是一个二元 $ (8,4) $ 码.\\
+(1) 计算码 $ C $ 中不同码字的Hamming 距离和码 $ C $ 的最小距离.\\
+(2) 在一个二元码中, 如果把某一个码字中的 0 和 1 互换, 即将 0 换为 1,1 换为 0 , 则我们将所得的字称为原码字的补. 一个二元码的所有码字的补构成的集合称为原码的补码. 求码 $ C $ 的补码, 并求补码中所有不同码字之间的Hamming距离和补码的最小距离. 它们与(1)中的结果有什么关系?\\
+(3) 将(2)中的结果推广到一般的二元码.
+\end{exercise}
+\begin{solution}
+ (1) 仍记码 $ C $ 中的四个码字为 $ x_{1}, x_{2}, x_{3}, x_{4} $, 则有
+$$
+\begin{array}{c}
+d\left(x_{1}, x_{2}\right)=d\left(x_{1}, x_{3}\right)=d\left(x_{1}, x_{4}\right)=4 \\
+d\left(x_{2}, x_{3}\right)=4 \quad d\left(x_{2}, x_{4}\right)=4 \\
+d\left(x_{3}, x_{4}\right)=4
+\end{array}
+$$
+于是 $ d(C)=4 $.
+
+(2)设码 $ C $ 为 $ (n, M, d) $ 码, 设 $ C_{\alpha} $ 为 $ C $ 的补码,则 $$ C_{\alpha}=\{11111111,11110000,11001100,11000011\} $$
+$ C $ 的补码中码字间的 Hamming 距离与 $ C $ 的相应码字之间Hamming距离是相等的, $ C $ 的补码和 $ C $ 的最小距离相等.
+
+(3) 设码 $ C $ 为 $ (n, M, d) $ 码, 码 $ C_{\alpha} $ 为 $ \left(n, M, d^{\prime}\right) $ 码, 则$ x+x_{\alpha}=(1,1, \cdots, 1), x^{\prime}+x_{\alpha}^{\prime}=(1,1, \cdots, 1)$.$\forall x \in C,  x_{\alpha} \in C_{\alpha},$
+$$
+\begin{aligned}
+d\left(x_{\alpha}, x_{\alpha}^{\prime}\right) & =\omega\left(x_{\alpha}+x_{\alpha}^{\prime}\right) \\
+& =\omega\left((1,1, \cdots, 1)+x+(1,1, \cdots, 1)+x^{\prime}\right) \\
+& =\omega\left(x+x^{\prime}\right)=d\left(x, x^{\prime}\right) .
+\end{aligned}
+$$
+
+第一步: 计算补码之间的汉明距离.
+$ d\left(x_{\alpha}, x_{\alpha}^{\prime}\right)=\omega\left(x_{\alpha}+x_{\alpha}^{\prime}\right) $.这一步说明补码 $ C_{\alpha} $ 中两个码字 $ x_{\alpha} $ 和 $ x_{\alpha}^{\prime} $ 之间的汉明距离等于它们相加后 (在二元码中相加等同于按位异或）的汉明重量（即非零位的数量）.
+
+第二步：考虑补码的定义.
+$ x_{\alpha} $ 和 $ x_{\alpha}^{\prime} $ 是原码 $ x $ 和 $ x^{\prime} $ 的补码，即它们是通过将 $ x $ 和 $ x^{\prime} $ 中的每一位取反得到的.
+
+第三步: 利用全1向量加法的性质. $ \omega\left((1,1, \cdots, 1)+x+(1,1, \cdots, 1)+x^{\prime}\right) $. 这一步展示了如何通过向量加法将补码转换回原码的操作.由于 $ x_{\alpha} $ 和 $ x_{\alpha}^{\prime} $ 是通过将 $ x $和 $ x^{\prime} $ 的每一位取反得到的，所以 $ x+(1,1, \cdots, 1) $ 等同于 $ x $ 的补码，即 $ x_{\alpha} $ .这里， $ (1,1, \cdots, 1) $ 表示全1向量，与任何码字相加（按位异或）都会得到该码字的补码.因此，通过两次加全1向量，我们实际上将 $ x_{\alpha} $ 和 $ x_{\alpha}^{\prime} $ 转换回了原码 $ x $ 和 $ x^{\prime} $ .
+
+第四步：汉明距离的等价性. $ \omega\left(x+x^{\prime}\right)=d\left(x, x^{\prime}\right) $. 通过上述转换后，我们实际上计算的是原码 $ x $ 和 $ x^{\prime} $ 相加（按位异或)的结果的汉明重量，这正是 $ x $ 和 $ x^{\prime} $ 之间的汉明距离.
+
+\end{solution}
+
+\begin{exercise}
+(1) 证明: 对任意三元 $ (3, M, 2) $ 码, 一定有 $ M \leq 9 $.\\
+(2) 证明: 三元 $ (3,9,2) $ 码一定存在.于是, $ A_{2}(3,2)=3^{2} $.\\
+(3) 证明: $ A_{q}(3,2)=q^{2} $, 其中 $ q \geq 2, q $ 是素数的幂次方.
+\end{exercise}
+\begin{solution}
+    (1)的证明. 由Singleton界
+$$
+A_{3}(3,2) \leq 3^{n-d+1}=3^{3-2+1}=3^{2}=9,
+$$
+ 故  $M \leq 9$.
+
+ (2)的证明. 可构造出码$C=\{000,110,011,220,022,121,201,102,212\}$为$(3,9,2)$ 码,故$ A_{3}(3,2)=3^{2}=9 .$
+
+(3)的证明. 由Singleton界可知
+$$
+A_{q}(3,2) \leq q^{n-d+1}=q^{3-2+1}=q^{2}
+$$
+另一方面, 令 $ C=\left\{(a, b, a+b) \mid a, b \in F_{q}\right\} $,则 $ |C|=q^{2} $, $ d(C)=2 $, 即 $ C $ 是一个 $ q $ 元 $ \left(3, q^{2}, 2\right) $ 码. 因此 $ A_{q}(3,2)=q^{2} $.
+\end{solution}
+
+\begin{exercise}
+证明: 如果存在一个二元 $ (n, M, d) $ 码, 则一定存在一个二元 $ \left(n-1, M^{\prime}, d\right) $ 码, 其中 $ M^{\prime} \geq M / 2 $. 于是, $ A_{2}(n, d) \leq 2 A_{2}(n-1, d) $.
+\end{exercise}
+\begin{solution}
+    证明：设 $ C $ 是一个二元 $ (n, M, d) $ 码, 记
+$$
+\begin{aligned}
+C_{0} & =\left\{x \in C \mid x=x_{1} x_{2} \cdots x_{n-1} 0\right\}, \\
+C_{1} & =\left\{x \in C \mid x=x_{1} x_{2} \cdots x_{n-1} 1\right\} .
+\end{aligned}
+$$
+则一定有 $ \left|C_{0}\right| \geq \frac{M}{2} $ 或 $ \left|C_{1}\right| \geq \frac{M}{2} $ (否则 $ \left|C_{1}\right|+\left|C_{2}\right|=|C|<M $ ).
+不妨设 $ \left|C_{0}\right| \geq \frac{M}{2} $,
+$$
+\text { 令 } C^{\prime}=\left\{x^{\prime}=x_{1} x_{2} \cdots x_{n-1} \mid x=x_{1} \cdots x_{n-1} 0 \in C_{0}\right\} \text {, }
+$$
+则 $ C^{\prime} $ 是 $ \left(n-1, M^{\prime}, d^{\prime}\right) $ 码, 其中 $ M^{\prime}=\left|C_{0}\right|, d^{\prime} \geq d $,则必存在 $ \left(n-1, M^{\prime}, d\right) $ 码, 事实上, 可适当改变 $ \left(n-1, M^{\prime}, d^{\prime}\right) $ 中的码字, 使其最小距离为 $ d $.
+令 $ |C|=A_{2}(n, d) $, 则有 $ M^{\prime} \geq \frac{1}{2} A_{2}(n, d) $,
+$$
+\begin{aligned}
+\text { 即 } A_{2}(n-1, d) & \geq M^{\prime} \geq \frac{1}{2} A_{2}(n, d) \\
+\Rightarrow A_{2}(n, d) & \leq 2 A_{2}(n-1, d) .
+\end{aligned}
+$$
+\end{solution}
+
+
+
+\begin{exercise}
+ 设 $ E_{n} $ 是 $ V(n, 2) $ 中所有具有偶数重量的向量的集合. 证明: $ E_{n} $ 是一个由 $ V(n-1,2) $ 中的向量增加一个奇偶校验位所得到的码. 于是, $ E_{n} $ 是一个二元 $ \left(n, 2^{n-1}, 2\right) $ 码.
+\end{exercise}
+\begin{solution}
+设$C_{1}=\left\{x=x_{1} x_{2} \cdots x_{n-1} x_{n} \in V(n, 2) \mid x_{n}=\left(\sum\limits_{i=1}^{n-1} x_{i}\right)(\bmod 2)\right\}$,
+$$
+\begin{array}{l}
+C_{2}=\left\{x=x_{1} x_{2} \cdots x_{n-1} x_{n} \in V(n, 2) \mid x_{n}=\left[\left(\sum\limits_{i=1}^{n-1} x_{i}\right)+1\right](\bmod 2)\right\} 
+\end{array}
+$$
+ 则 $C_{1} \cap C_{2}=\emptyset,\quad \left|C_{1}\right|=2^{n-1}, \quad\left|C_{2}\right|=2^{n-1}$.
+
+事实上 $ C_{1} $ 中的码字 $ x $ 满足 $ \left(x_{1}+\cdots+x_{n-1}+x_{n}\right) \equiv 0(\bmod 2) $, 共有 $ 2^{n-1} $ 个码字. 即 $ \left|C_{1}\right|=2^{n-1} $.
+同理 $ \left|C_{2}\right|=2^{n-1} $, 故 $ V(n, 2)=C_{1} \cup C_{2}, E_{n}=C_{1} $. 因此 $ E_{n} $ 是由 $ V(n-1,2) $ 增加 1 个奇偶校验位得到的码, 从而为二元 $ \left(n, 2^{n-1}, 2\right) $ 码.
+\end{solution}
+
+
+\begin{exercise}
+ 证明: 如果存在一个二元 $ (n, M, d) $ 码, 并且 $ d $ 是偶数, 则一定存在一个二元 $ (n, M, d) $, 其中每个码字都具有偶数重量.
+\end{exercise}
+\begin{solution}
+    证明: 设 $ C $ 是一个二元 $ (n, M, d) $ 码, $ d $ 是偶数, 则 $ d \geq 2 $.
+存在 $ x=x_{1} x_{2} \cdots x_{n-1} x_{n}, y=y_{1} y_{2} \cdots y_{n-1} y_{n} $, 使得 $ d(x, y)=d $,不妨设 $ x_{n} \neq y_{n} $, 将码 $ C $ 中每个码字的最后一个分量去掉, 得到
+$$
+C^{\prime}=\left\{x^{\prime}=x_{1} x_{2} \cdots x_{n-1} \in V(n-1,2) \mid x_{1} x_{2} \cdots x_{n-1} x_{n} \in C\right\} \text {, }
+$$
+则 $ C^{\prime} $ 是一个 $ (n-1, M, d-1) $ 码, $ d-1 $ 为奇数.
+令 $ C^{\prime \prime} $ 是 $ C^{\prime} $ 通过增加奇偶校验位得到的码, 则由定理可知 $ C^{\prime \prime} $ 是 $ (n, M, d) $ 码, 且 $ C^{\prime \prime} $ 的每个码字的重量为偶数.
+\end{solution}
+
+
+\begin{exercise}
+证明: 码长为 $ n $ 且只含两个码字的不等价的二元码的个数为 $ n $.
+\end{exercise}
+\begin{solution}
+    证明： $ C $ 是只含两个码字的 $ n $ 长码, 不妨设 $ 00 \cdots 0 \in C $, 可设另
+一个码字 $ x $ 的重量为 $ \omega(x)=i(1 \leq i \leq n) $, 显然 $ C $ 等价于$
+\{00 \cdots 0 \overbrace{11 \cdots 1}^{i \text { 个 }}, 0 \cdots 000 \cdots 0\}$, 
+若 $ C_{1}=\{00 \cdots 0,00 \cdots 0 \overbrace{11 \cdots 1}^{j \text { 个 }}\} $, 若 $ i \neq j $, 则 $ C $ 与 $ C_{1} $ 不等价, $ i $ 的个数决定了码 $ C $ 的类, $ 1 \leq i \leq n $, 共 $ n $ 类.
+\end{solution}
+
+
+\begin{exercise}
+证明:任何一个 $ q $ 元 $ (n, q, n) $ 码都等价于 $ q $ 元重复码.
+\end{exercise}
+\begin{solution}
+    证明: 设 $ C $ 是一个 $ q $ 元 $ (n, q, n) $ 码, 将 $ C $ 中码字构成一个 $ q \times n $ 矩
+阵 $ G $, 使得 $ C $ 中每个码字是 $ G $ 的行向量, 由于 $ d(C)=n, C $ 中任何两
+个码字同一位置分量不相同, 因此 $ G $ 中任意一列元素均
+是 $ 0,1, \cdots, q-1 $ 的排列, 对 $ G $ 进行换元置换,使得置换后 $ G $ 的每一
+列的顺序均为 $ 0,1, \cdots, q-1 $,
+此时 $ C $ 等价于 $ \left(\begin{array}{cccc}0 & 0 & \cdots & 0 \\ 1 & 1 & \cdots & 1 \\ \vdots & \vdots & & \vdots \\ q-1 & q-1 & \cdots & q-1\end{array}\right) $.
+\end{solution}

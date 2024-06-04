@@ -1,0 +1,202 @@
+\section{Hamming码的译码方法}
+
+
+
+$ \operatorname{Ham}(r, q) $ 是 $ q $ 元 $ [n, n-r, 3] $ 码, 其中$ n=\dfrac{q^{r}-1}{q-1} $, 码字个数 $ M=q^{n-r} $, 故 $ V(n, q) $ 中不同的 $ \operatorname{Ham}(r, q) $ 的陪集个数为 $ \frac{q^{n}}{M}=\frac{q^{n}}{q^{n-r}}=q^{r}(a+L $ 为陪集, $ |a+L|=|b+L|=|L| $, 无交 $ ) $,故非零陪集头的个数为 $ q^{r}-1 $.
+
+
+
+记  $$A=\left\{0 \cdots 0 x_{i} 0 \cdots 0 \in V(n, q) \mid 0 \neq x_{i}, 1 \leqslant i \leqslant n\right\} .$$
+对 $\forall x=0 \cdots 0 x_{i} 0 \cdots 0, \quad y=0 \cdots 0 x_{j} 0 \cdots 0 \in A, i \neq j$,  则 :
+$$
+\begin{aligned}
+x H^{T}&=x_{i} h_{i}^{T} \neq 0 \quad(\text { 域中非非零元乘积不等于零 }) \\
+y H^{T}&=x_{j} h_{j}^{T} \neq 0 \\
+(x-y) H^{T}&=x_{i} h_{i}^{T}-x_{j} h_{j}^{T} \neq 0
+\end{aligned}
+$$
+$ (\operatorname{Ham}(r, q) $ 的校验矩阵 $ \mathrm{H} $ 的任意两列线性无关)从而 $ A $ 中任意两个不同的向量属于不同的陪
+集,且 $ \forall x \in A, x \notin \operatorname{Ham}(r, q) $, 又
+$$
+|A|=n(q-1)=q^{r}-1
+$$
+故 $ A $ 中的向量就是 $ \operatorname{Ham}(r, q) $ 的标准阵的全部陪集头.
+
+
+$ q $ 元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, q) $ 的译码过程\\
+(1) 设 $ x $ 是接收到的字, 计算 $ x $ 的伴随式 $ S(x)=x H^{T} $;\\
+(2)如果 $ S(x)=0 $, 则 $ x $ 没有发生错误, $ x $ 即为信道发送端发送的码字;\\
+(3)如果 $ S(x) \neq 0 $, 则 $ S(x)=b h_{i}^{T},(0 \cdots 0 b 0 \cdots 0) \in A $, 其中 $ h_{i} $ 为 $ \operatorname{Ham}(r, q) $ 的校验矩阵 $ H $ 的第 $ i $ 列, $ 0 \neq b \in F_{q}, 1 \leqslant i \leqslant n $, 这时第 $ i $ 个位置发生错误, $ X $ 破译为码字 $ x-a_{i} $, 其中
+$$
+a_{i}=(0 \cdots 0 b 0 \cdots 0)
+$$
+
+
+\begin{example}
+设 $ \operatorname{Ham}(2,5) $ 校验矩阵为 $ H=\left(\begin{array}{llllll}0 & 1 & 1 & 1 & 1 & 1 \\ 1 & 0 & 1 & 2 & 3 & 4\end{array}\right) $, 设在信道接收端收到的字为 $ x=203031 $, 试将 $ x $ 译码.
+
+计算
+$$
+S(x)=x H^{T}=(203031)\left(\begin{array}{ll}
+0 & 1 \\
+1 & 0 \\
+1 & 1 \\
+1 & 2 \\
+1 & 3 \\
+1 & 4
+\end{array}\right)=\left(\begin{array}{ll}
+7 & 18
+\end{array}\right)=\left(\begin{array}{ll}
+2 & 3
+\end{array}\right)=2\left(\begin{array}{ll}
+1 & 4
+\end{array}\right)
+$$
+故 $ b=2 $, 将 $ x $ 译为 $ x-a_{i}=203031-000002=203034 $
+\end{example}
+\begin{remark}
+若 $ q=2, \operatorname{Ham}(r, 2) $ 是一个二元 $ \left[2^{r}-1,2^{r}-1-r, 3\right] $ 线性码, 其校验矩阵的列向量是 $ V(r, 2) $ 中所有非零向量, $ V(r, 2) $ 中所有非零向量是 1 到 $ 2^{r}-1 $ 之间的所有整数的二进制表示.
+\end{remark}
+
+\begin{example}
+ 设 $ \operatorname{Ham}(2,2) $ 校验矩阵为 $ H=\left(\begin{array}{lll}1 & 1 & 0 \\ 1 & 0 & 1\end{array}\right) $, 其生成矩阵为 $ G=\left(\begin{array}{lll}1 & 1 & 1\end{array}\right) $, 故 $ \operatorname{Ham}(2,2) $ 是码长为 3 的二元重复码.
+\end{example}
+
+\begin{example}
+ $ \operatorname{Ham}(3,2) $ 的校验矩阵为
+$
+H=\left(\begin{array}{lllllll}
+0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+1 & 0 & 1 & 0 & 1 & 0 & 1
+\end{array}\right),
+$
+其中 $ H $ 的第 $ i $ 列是整数 $ i $ 的二进制表示, $ 1 \leqslant i \leqslant 7 $. 如果将 $ H $ 的列重新排列, 可得 $ H $ 的标准型.
+$
+H^{\prime}=\left(\begin{array}{lllllll}
+0 & 1 & 1 & 1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 & 0 & 0 & 1
+\end{array}\right)
+$
+因此, $ \operatorname{Ham}(3,2) $ 的生成矩阵为 $ G=\left(\begin{array}{lllllll}1 & 0 & 0 & 0 & 0 & 1 & 1 \\ 0 & 1 & 0 & 0 & 1 & 0 & 1 \\ 0 & 0 & 1 & 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 1 & 1 & 1 & 1\end{array}\right) $
+\end{example}
+
+二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, 2) $ 的非零陪集头的集合为
+$$
+A=\{\underbrace{0 \cdots 0}_{i-1} 10 \cdots 0 \in V(n, 2) \mid 1 \leqslant i \leqslant n\} .
+$$
+每个陪集头的伴随为
+$$
+\begin{aligned}
+S(\underbrace{0 \cdots 0}_{i-1} 10 \cdots 0) & =(\underbrace{0 \cdots 0}_{i-1} 10 \cdots 0) H^{\mathrm{T}} \\
+& =h_{i}^{\mathrm{T}},
+\end{aligned}
+$$
+其中 $ h_{i}^{\mathrm{T}} $ 校验矩阵 $ H $ 的第 $ i $ 列的转置.
+如果校验矩阵 $ H $ 的第 $ i $ 列是整数 $ i $ 的二进制表示, $ 1 \leqslant i \leqslant n $, 则二元 Hamming 码的译码过程将非常简明有效. 下面列出二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, 2) $ 的译码过程.\\
+(1) 设 $ x $ 是在信道接收端接收到的向量, 计算其伴随式 $ S(x)=x H^{\mathrm{T}} $.\\
+(2) 如果 $ S(x)=0 $, 则没有发生错误, $ x $ 就是在信道发送端发送的码字.\\
+(3) 如果 $ S(x) \neq 0 $, 则有一个错误发生, $ S(x) $ 就是错误位置的二进制表示. 将错误位置上的 0 变为 1,1 变为 0 即可.
+
+\begin{example}
+设 $ \operatorname{Ham}(3,2) $ 校验矩阵为 $ H=\left(\begin{array}{lllllll}0 & 0 & 0 & 1 & 1 & 1 & 1 \\ 0 & 1 & 1 & 0 & 0 & 1 & 1 \\ 1 & 0 & 1 & 0 & 1 & 0 & 1\end{array}\right) $. 设收到字 $ x=0110110 $, 则
+$$
+S(x)=x H^{T}=010
+$$
+说明第2个位置发生错误, 将 $x$ 译为 0010110 .
+\end{example}
+
+
+\section{二元Hamming码的对偶码}
+\begin{definition}[极长码]
+    二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, 2) $ 的对偶码称为极长码, 记为 $ \sum_{r} $.
+\end{definition}
+\begin{remark}
+    $ \operatorname{Ham}(r, 2) $ 是一个 $ \left[2^{r}-1,2^{r}-1-r, 3\right] $ 线性码, 故极长码 $ \sum_{r} $ 是一个二元 $ \left[2^{r}-1, r\right] $ 线性码, 并且其生成矩阵 $ G_{r} $ 正好是二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, 2) $ 的校验矩阵.
+    
+\end{remark}
+\begin{example}
+    极长码 $ \sum_{2} $ 的生成矩阵为 $ G_{2}, \operatorname{Ham}(2,2) $ 的对偶码为 $ \sum_{2} $, $ \sum_{2} $ 的生成阵即为 $ \operatorname{Ham}(2,2) $ 的校验阵, 故
+$$
+G_{2}=\left(\begin{array}{lll}
+0 & 1 & 1 \\
+1 & 0 & 1
+\end{array}\right), \quad \sum_{2}=\{000,011,101,110\}
+$$
+\end{example}
+
+\begin{theorem}
+    极长码 $ \sum_{r} $ 具有下列性质：\\
+ (1) $ \sum_{r} $ 中任意一个非零码字的重量都是 $ 2^{r-1} $, 因此 $ \sum_{r} $ 是一个二元 $ \left[2^{r}-1, r, 2^{r-1}\right] $ 线性码;\\
+(2)） $ \sum_{r} $ 中任意两个码字的距离都是 $ 2^{r-1} $.
+\end{theorem}
+\begin{proof}
+    (1)设 $ \sum_{r} $ 的生成矩阵, 即二元 $ \operatorname{Hamming} $ 码 $ \operatorname{Ham}(r, 2) $ 的校验矩阵为
+$$
+H=\left(\begin{array}{cccc}
+h_{11} & h_{12} & \cdots & h_{1 n} \\
+h_{21} & h_{22} & \cdots & h_{2 n} \\
+\vdots & \vdots & \vdots & \vdots \\
+h_{r 1} & h_{r 2} & \cdots & h_{r n}
+\end{array}\right)=\left(\begin{array}{c}
+h_{1} \\
+h_{2} \\
+\vdots \\
+h_{r}
+\end{array}\right)
+$$
+其中 $ n=2^{r}-1, h_{1}, h_{2}, \cdots, h_{r} $ 表示 $ H $ 的 $ r $ 个行向量.
+
+任取一个非零码字 $ c \in \sum_{r} $, 则 $ c $ 一定是 $ h_{1}, h_{2}, \cdots, h_{r} $ 的非零线性组合, 即存在不全为零的 $ \lambda_{1}, \lambda_{2}, \cdots, \lambda_{r} \in F_{2} $, 使得
+$$
+c=\sum_{i=1}^{r} \lambda_{i} h_{i}
+$$
+因此,
+$$
+c \text { 的第 } j \text { 个坐标为 } 0 \Longleftrightarrow \sum_{i=1}^{r} \lambda_{i} h_{i}=0 \Longleftrightarrow \sum_{i=1}^{r} \lambda_{i} x_{i}=0,
+$$
+其中 $ \left(x_{1}, x_{2}, \cdots, x_{r}\right)^{T} $ 是 $ H $ 的第 $ j $ 列.
+设 $ C_{1} \subset V(r, 2) $ 是以 $ \left(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{r}\right) $ 为校验矩阵的线性码, 则 $ C_{1} $ 是一个二元 $ [r, r-1] $ 线性码, 并且
+
+$$
+C_{1}=\left\{x_{1} x_{2} \cdots x_{r} \in V(r, 2) \mid \sum_{i=1}^{r} \lambda_{i} x_{i}=0\right\} .
+$$
+因为 $ H $ 的列向量是 $ V(r, 2) $ 中所有的非零向量, 所以码字 $ c $ 中为零的分量个数 $ n_{0}(c) $ 就是 $ C_{1} $ 中所有非零向量的个数, 即
+$$
+n_{0}(c)=\left|C_{1}\right|-1 .
+$$
+由于 $ \left|C_{1}\right|=2^{r-1} $, 所以 $ n_{0}(c)=2^{r-1}-1 $. 因此,
+$$
+\omega(c)=n-n_{0}(c)=2^{r-1} .
+$$
+
+(2) 设 $ x, y \in \sum_{r} $, 并且 $ x \neq y $, 则 $ 0 \neq x-y \in \sum_{r} $,
+$$
+d(x, y)=\omega(x-y)=2^{r-1} .
+$$
+\end{proof}
+
+
+\begin{corollary}
+二元Hamming码Ham $ (r, 2) $ 的重量分布多项式为
+$$
+W_{L}(z)=\frac{1}{2^{r}}\left((1+z)^{n}+n\left(1-z^{2}\right)^{\frac{n-1}{2}}(1-z)\right)
+$$
+其中 $ n=2^{r}-1 $.
+\end{corollary}
+\begin{proof}
+    事实上, 因为 $ L $ 是一个二元 $ \left[2^{r}-1,2^{r}-1-r\right] $ 线性码, 所以 $ L^{\perp} $ 是一个二元 $ \left[2^{r}-1, r\right] $ 线性码. 由于 $ L^{\perp} $ 中非零码字的重量都是 $ 2^{r-1} $, 所以
+$$
+W_{L^{\perp}}(z)=\sum_{x \in L^{\perp}} z^{\omega(x)}=\left(2^{r}-1\right) z^{2^{r-1}}+1 .
+$$
+根据二元线性码的Mac Williams恒等式,我们有
+$$
+\begin{aligned}
+W_{L}(z) & =\frac{1}{2^{r}}(1+z)^{n} W_{L^{\perp}}\left(\frac{1-z}{1+z}\right) \\
+= & \frac{1}{2^{r}}(1+z)^{n}\left(1+n\left(\frac{1-z}{1+z}\right)^{\frac{n+1}{2}}\right)\\
+&=\frac{1}{2^{r}}\left((1+z)^{n}+n\left(1-z^{2}\right)^{\frac{n-1}{2}}(1-z)\right) .
+\end{aligned}
+$$
+\end{proof}
+

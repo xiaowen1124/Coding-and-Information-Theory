@@ -1,0 +1,569 @@
+\chapter{抽象代数的基本知识}
+\section{群}
+\subsection{群的概念}
+
+\begin{definition}
+    设 $ G \times G \rightarrow G $ 是 $ G $ 上的一个二元运算, 若"$\cdot$ "满足
+    
+(1) $ \forall a, b, c \in G,(a \cdot b) \cdot c=a \cdot(b \cdot c) $;
+
+(2) $ \exists e \in G $, 有 $ a \cdot e=e \cdot a=a $;
+
+(3) $ \forall a \in G, \exists a^{-1} \in G $, 有 $ a \cdot a^{-1}=a^{-1} \cdot a=e $.
+
+则称 $ G $ 关于二元运算“. "作成一个群. $ a \cdot b $ 简记作 $ a b $.
+\end{definition}
+\begin{example}
+    $ (\mathrm{Z},+) $, 单位元0, $ \forall a \in Z,-a=a^{-1} $.
+\end{example}
+
+\begin{example}
+ $ \left(\mathrm{Z}_{p}^{*}, \odot\right) $, 单位元 $ 1, \mathrm{Z}_{p}^{*}=\{1,2, \cdots, p-1\} $. $p$为素数.
+ 
+ $ a \odot b=a b(\bmod p) $, 若 $ (a, p)=1 $ 即 $ \exists s, t $, 使得 $ a s+p t=1 $ , 因此$ as\equiv 1(\bmod p) $,故 $ a^{-1}=s $. 则 $ \left(\mathrm{Z}_{p}, \odot\right) $ 是一个群.
+$$
+a \oplus b=(a+b)(\bmod p)
+$$
+$\mathrm{Z}_{p}=\{0,1,2, \cdots, p-1\}$, 根据上面的定义$(Z_p,\oplus)$构成一个含有$p$个元素的交换群.
+
+\begin{remark}
+    $ G $ 是一个群, 若对 $ \forall a, b \in G $, 有 $ a b=b a $, 则 $ G $ 为交换群 (Abel群,加法群)
+    
+此时: $ a \cdot b=a+b $, $a^{n}=a+a+\cdots+a=n a$, $ 0 \cdot a=0 $, 单位元用 0 表示
+\end{remark}
+\end{example}
+
+\subsection{子群及判定}
+\begin{definition}
+    设 $ G $ 是一个群, $ S \subseteq G, S \neq \emptyset $, 若 $ S $ 关于 $ G $ 的运算也构成一个群,则称 $ S $ 是 $ G $ 的子群.
+\end{definition}
+如: $ S=\{n k \mid \forall k \in Z, n $ 是固定的整数 $ \} $
+
+\textbf{ 判定1:} 设 $ G $ 是一个群, $ S \subseteq G, S \neq \emptyset $, 若 $ S $ 满足 :\\
+(1) $ \forall a, b \in S, a b \in S $;
+(2) $ \forall a \in S $, 有 $ a^{-1} \in S $;则称 $ S $ 是 $ G $ 的子群.
+
+\textbf{判定2: }设 $ G $ 是一个群, $ S \subseteq G, S \neq \emptyset $, 若对 $ \forall a, b \in S $,有 $ a b^{-1} \in S $, 则称 $ S $ 是 $ G $ 的一个子群.
+\subsection{群中元素的阶}
+\begin{definition}
+    设 $ G $ 是一个群, $ a \in G $, 使得 $ a^{m}=e $ 的最小正整数 $ m $ 称为 $ a $ 的阶, 记作 $ o(a)=m $ 或 $ |a|=m $, 若这样的正整数 $ m $ 不存在, 则称 $ a $ 的阶为无穷大 (无限的).
+\end{definition}
+\begin{example}
+ $ (\mathrm{Z},+), \forall a \in \mathrm{Z}, a \neq 0, a $ 的阶无限.
+$ G=\left\{A=\left(a_{i j}\right)_{2 \times 2} \mid A\right. $ 可逆, $ \left.a_{i j} \in \mathrm{R}\right\} $, 则 $ G $ 关于乘法构成群,
+$$
+T=\left(\begin{array}{ll}
+0 & 1 \\
+1 & 0
+\end{array}\right) \in G \quad T^{2}=E, \quad o(T)=2 .
+$$
+\end{example}
+性质:
+
+(1) 设 $ o(a)=m $, 则 $ a^{n}=e \Leftrightarrow m \mid n $;
+
+(2) $ o(a)=m, o(b)=n $, 且有 $ a b=b a $, 若 $ (m, n)=1 $,则 $ o(a b)=m n $;
+
+(3) $ o(a)=m $, 则 $ o\left(a^{k}\right)=\frac{m}{(m, k)} $,
+且 $ O\left(a^{k}\right)=m \Leftrightarrow(k, m)=1 $ ( $ k $ 为正整数).
+
+\subsection{循环群}
+\begin{definition}
+设 $ G $ 是一个群, $ o(a)=n $, 若 $ G=\left\{e, a, a^{2}, \cdots, a^{n-1}\right\} $,则称 $ G $ 为 $ n $ 阶循环群.
+ 若$o(a)  =\infty$,  则$G=\left\{e, a^{ \pm 1}, a^{ \pm 2}, \cdots, a^{ \pm n}, \cdots,\right\} =\left\{a^{n} \mid n \in Z\right\}$,  则称 $ G$ 为无限阶循环群, 记作$ G=\langle a\rangle$ .
+\end{definition}
+\begin{example}
+     $ (\mathrm{Z},+) $ 是无限循环群; $ \left(\mathrm{Z}_{n}, \oplus\right) $ 为 $ n $ 阶循环群.
+\end{example}
+\textbf{结论: 循环群的子群也是循环群.}
+
+\section{环与域}
+\subsection{环的概念}
+\begin{definition}
+    $ R \neq \emptyset,+ $, 满足\\
+(1) $ R $ 对加法构成一个交换群； 0 是零元;\\
+(2) $ \forall a, b, c \in R,(a b) c=a(b c) $;\\
+(3)
+$a(b+c)=a b+a c ,(b+c) a=b a+c a .$\\
+则称 $ R $ 关于二元运算,+ , 运算构成一个环, 记作 $ (R,+, \cdot) $.\\若对 $ \forall a, b \in R $, 有 $ a b=b a $,则称 $ R $ 为交换环.
+\end{definition}
+\begin{example}
+    $ (\mathrm{Z},+, \cdot),(\mathrm{Q},+, \cdot),(\mathrm{R},+, \cdot) $ 都是交换环.（无限）
+\end{example}
+ 
+\begin{example}
+    $ \left(\mathrm{Z}_{n}, \oplus, \odot\right) $ 构成一个交换环.(有限)
+$$
+a \oplus b=(a+b)(\bmod n) \quad
+a \odot b=a b(\bmod n)
+$$
+\end{example}
+
+\subsection{域}
+\begin{definition}
+    $ R $ 是一个交换环, $ R^{*}=\{a \in R \mid a \neq 0\} $, 若 $ R^{*} $ 关于环 $ R $ 的乘法运算作成一个交换群,则称 $ R $ 为一个域.加法的单位元称为零元 $ 0, R^{*} $ 乘法的单位元 1 .
+\end{definition}
+\begin{example}
+    $ (\mathrm{Q},+, \cdot),(\mathrm{R},+, \cdot) $ 都是域. $ \left(\mathrm{Z}_{n}, \oplus, \odot\right) $ 是域 $ \Leftrightarrow n=p(p $ 是素数 $ ) $
+\end{example}
+\begin{definition}
+    设 $ (R,+, \cdot) $ 是环, $ (F,+, \cdot) $ 是域,\\
+（1） $ R_{1} \subseteq R, R_{1} \neq \emptyset $, 若 $ R_{1} $ 构成一个环, 则称 $ R_{1} $ 为 $ R $ 的子环, $ R $ 称为 $ R_{1} $ 的扩环.\\
+（2） $ F_{1} \subseteq F, F_{1} \neq \emptyset $,若 $ F_{1} $ 构成一个域,则称 $ F_{1} $ 为 $ F $ 的子域, $ F $ 称为 $ F_{1} $ 的扩域.
+\end{definition}
+\begin{theorem}
+    设 $ (R,+, \cdot) $ 为环, $ (F,+, \cdot) $ 为域, 则\\
+(1) $ R_{1} $ 为 $ R $ 的子环 $ \Leftrightarrow \forall a, b \in R_{1}, a-b \in R_{1}, a \cdot b \in R_{1} $;\\
+(2) $ F_{1} $ 为 $ F $ 的子域 $ \Leftrightarrow \forall a, b \in F_{1}, a-b \in F_{1}, a b^{-1} \in F_{1} $.
+\end{theorem}
+
+\section{ 理想和商环}
+\subsection{理想}
+\begin{definition}
+    设 $ / $ 是环 $ R $ 的子环, 若对 $ \forall a \in I, x \in R $, 有 $ a \cdot x \in I $, $ x \cdot a \in I $, 则称 $ l $ 是 $ R $ 的理想.
+\end{definition}
+\begin{example}
+    $ (\mathbb{Z},+, \cdot) \quad I=\{n k \mid k \in \mathbb{Z}, n $ 是固定整数 $ \}, l $ 是 $ \mathbb{Z} $ 的理想.平凡理想： $ \{0\}, R $.
+\end{example}
+
+ \textbf{判定：}设 $ (R,+, \cdot) $ 是一个环 $ , I \subseteq R, I \neq \emptyset, I $ 是 $ R $ 的理想 $ \Leftrightarrow $\\
+(1) $ \forall a, b \in I, a-b \in l $;\\
+(2) $ \forall a \in I, x \in R $, 有 $ a \cdot x \in I, x \cdot a \in I $.
+\begin{definition}
+    设 $ (R,+, \cdot) $ 为环, $ a \in R, R $ 的包含 $ a $ 的最小理想称为由 $ a $ 生成的主理想, 记作 $ \langle a\rangle $.
+\end{definition}
+
+\begin{theorem}
+    若 $ (R,+, \cdot) $ 是有单位元的交换环, 则 $ \langle a\rangle=\{r a \mid \forall r \in R\} $.
+\end{theorem}
+
+\subsection{商环}
+\begin{definition}
+    设 $ (R,+, \cdot) $ 为一个环, $ l $ 是 $ R $ 的一个理想, 定义 $ a+I=\{a+i \mid \forall i \in I\} $,称为 $ / $ 的一个陪集, $ a $ 为代表元.记 $ R / I=\{a+I \mid \forall a \in R\} $
+\end{definition}
+\begin{remark}
+
+    (1) $ a+I=b+I \Leftrightarrow a-b \in I $;
+    
+(2) $ a+1 $ 与 $ b+1 $ 要么相等,要么交为 $ \emptyset $.
+\end{remark}
+\begin{definition}
+    在 $ R / I $ 上定义两个二元运算:\\
+(1) $ (a+I) \oplus(b+l)=(a+b)+l $;\\
+(2) $ (a+l) \odot(b+l)=a b+l $;\\
+则 $ R / I $ 关于定义的 $ \oplus, \odot $ 作成一个环,称为商环.
+\end{definition}
+
+\subsection{环（域）的同构}
+
+设 $ R, S $ 是两个环（或域）, 若存在一个 $ 1-1 $ 映射 $ f: R \rightarrow S $ 满足:\\
+(1) $ \forall a, b \in R $, 有 $ f(a+b)=f(a)+f(b) $;\\
+(2) $ \forall a, b \in R $, 有 $ f(a b)=f(a) f(b) $;则称 $ f $ 为同构映射,此时称 $ S $ 与 $ R $ 同构,记作 $ R \cong S $.
+\begin{example}
+    $ (\mathrm{Z},+, \cdot) $ 是环, $ I=\{n k \mid \forall k \in Z, n $ 为固定整数 $ \} $,则: $ \mathrm{Z} / I \cong\left(\mathrm{Z}_{n}, \oplus, \odot\right) $
+    $$
+\begin{aligned}
+f: \mathrm{Z}_{n} & \rightarrow \mathrm{Z} / I \\
+\quad x & \mapsto x+I \\
+f(x) & =f(y) \Rightarrow x+I=y+I \Rightarrow x-y \in I,
+\end{aligned}
+$$
+即 $ x-y=n k_{1}, n \mid x-y \Rightarrow x=y $
+$ f $ 是单射,显然 $ f $ 是满射.
+$$
+\begin{array}{l}
+f(x+y)=(x+y)+I=(x+I)+(y+I)=f(x)+f(y) \\
+f(x \cdot y)=(x \cdot y)+I=(x+I) \cdot(y+I)=f(x) \cdot f(y)
+\end{array}
+$$
+故 $ f $ 为同构映射.
+\end{example}
+
+\section{域上的产项式环}
+
+\subsection{域上的多项式环}
+
+\textbf{1.域上的多项式} 
+
+$ (F,+, \cdot) $ 是一个域, $ x $ 是一个文字(未定元), 称 $ a_{n} x^{n}+a_{n-1} x^{n-1}+\cdots+a_{1} x+a_{0} $,\\$\left(a_{i} \in F, i=0,1, \cdots, n\right) $为域 $ F $ 上的一元多项式, 若 $ a_{n} \neq 0 $, 定义 $ \operatorname{deg}(f(x))=n, a_{n} $ 为首项系数.
+
+\textbf{2. 域上的多项式环}
+
+记 $ F[x]=\left\{a_{n} x^{n}+a_{n-1} x^{n-1}+\cdots+a_{1} x+a_{0} \mid\left(a_{i} \in F, i=0, \cdots, n\right)\right\} $, 在 $ F $ 上定义,$ + \cdot $, 则 $ F[x] $ 构成一交换环（不是域）.
+
+\subsection{带余除法}
+\begin{theorem}
+    $ f(x), g(x) \in F[x], \exists $ 唯一的 $ q(x), r(x) $ 有
+$$
+f(x)=g(x) q(x)+r(x)
+$$
+其中 $ \partial(r(x))<\partial(g(x)) $ 或 $ r(x)=0 $, 记 $ r(x)=[f(x)]_{g(x)} $
+\end{theorem}
+\begin{definition}[同余]
+    $ a(x), b(x), p(x) \in F[x] $, 若 $ p(x) \mid a(x)-b(x) $, 则称 $ a(x) $ 与 $ b(x) $ 模 $ p(x) $ 同余,记作 $ a(x) \equiv b(x)(\bmod p(x)) $.
+\end{definition}
+\begin{example}
+    $ F=F_{2}=\{0,1\} $, 取 $ a(x)=x^{5}+x^{4}+x^{2}+1 $,$b(x)=x^{3}+x+1$,则 $ q(x)=x^{2}+x+1, r(x)=x^{2} $.
+\end{example}
+
+\subsection{最大公因式与最小公倍式}
+
+1.最大公因式；
+
+2. 求法: 辗转相除法;
+
+3.互素;
+
+4. 最小公倍式.
+\subsection{不可约多项式}
+\begin{definition}
+    $ p(x) \in F[x], \operatorname{deg}(p(x)) \geqslant 1 $, 若 $ p(x) $ 的因式只能为 $ a \in F $或 $ c p(x) $,则称 $ p(x) $ 为不可约多项式,否则称其为可约多项式.
+\end{definition}
+\textbf{性质:}
+
+(1) $ p(x) $ 不可约, $ p(x) \mid a(x) b(x) $, 则有 $ p(x) \mid a(x) $ 或 $ p(x) \mid b(x) $;
+
+(2) $ p(x) $ 不可约,则对 $ \forall a(x) \in F[x] $, 有 $ p(x) \mid a(x) $ 或 $ (p(x), a(x))=1 $;
+
+\textbf{标准分分解式:}
+$ f(x) \in F[x], \partial(f(x)) \geqslant 1 $,则 $ f(x) $ 可以唯一地表示成
+$$
+f(x)=b p_{1}(x)^{k_{1}} \cdots p_{s}(x)^{k_{s}}
+$$
+其中 $ p_{i}(x)(i=1, \cdots, s) $ 为不可约多项式, 且首项系数为 1 .
+
+
+
+\subsection{不可约多项式与有限域的构造}
+
+设 $ p(x) $ 为不可约多项式, $ \langle p(x)\rangle=\{p(x) a(x) \mid \forall a(x) \in F[x]\} $, $ \operatorname{deg}(p(x))=n, F[x] /\langle p(x)\rangle $ 是商环, $ \forall f(x) \in F[x] $, $ f(x)=g(x) p(x)+r(x)(\partial(r(x))<\partial(p(x)) $ 或 $ r(x)=0) $,记 $ F[x]_{p(x)}=\left\{a_{0}+a_{1} x+\cdots+a_{n-1} x^{n-1} \mid \forall a_{i} \in F, i=0, \cdots, n-1\right\} $,则 $ F[x]_{p(x)} $ 关于下述定义的加法和乘法作成一个交换环, $$ a(x) \oplus b(x)=a(x)+b(x) $$
+$$
+a(x) \odot b(x)=(a(x) \cdot b(x))_{p(x)}
+$$
+则 $ F[x] /\langle p(x)\rangle \cong F[x]_{p(x)} $
+\begin{proof}
+    $$ \begin{aligned} \varphi: & F[x] /\langle p(x)\rangle \rightarrow F[x]_{p(x)} \\ & f(x)+p(x) \mapsto(f(x))_{p(x)}\end{aligned} $$
+    $$
+\begin{array}{c}
+\varphi(f(x)+\langle p(x)\rangle+g(x)+\langle p(x)\rangle)=\varphi(f(x)+g(x)+\langle p(x)\rangle) \\
+=(f(x)+g(x))_{p(x)}=(f(x))_{p(x)}+(g(x))_{p(x)}
+\end{array}
+$$
+$ \varphi $ 是一个同构映射.
+
+$ F[x] /\langle p(x)\rangle $ 是域 $ \Leftrightarrow p(x) $ 不可约;
+$ F[x]_{p(x)} $ 是域 $ \Leftrightarrow p(x) $ 不可约;
+$ \forall a(x) \in F[x]_{p(x)}, a(x) \neq 0 $, 即 $ a(x) \nmid p(x),(a(x), p(x))=1 $.
+$ (a(x), p(x))=1 \Leftrightarrow \exists u(x), v(x) $ 有 $ a(x) u(x)+p(x) v(x)=1 $
+$ \Leftrightarrow $ 有 $ (a(x) u(x))_{p(x)}=1, a(x)^{-1}=u(x) $.
+故 $ F[x]_{p(x)} $ 是一个域, 即 $ F[x] /\langle p(x)\rangle $ 是一个域.
+\end{proof}
+
+$ F[x]_{p(x)}=\left\{a_{0}+a_{1} x+\cdots+a_{n-1} x^{n-1} \mid \forall a_{i} \in F, i=0, \cdots, n-1\right\} $,
+
+若 $ |F|=q $, 则 $ \left|F[x]_{p(x)}\right|=q^{n} $; 特别地 $ |F|=p $, 则 $ \left|F[x]_{p(x)}\right|=p^{n} $.
+\begin{example}
+    $ p(x)=x^{2}+x+1, p(x) $ 是 $ F_{2} $ 上的不可约多项式, $ F[x]_{p(x)}=\left\{a_{0}+a_{1} x \mid a_{0}, a_{1} \in F_{2}\right\} $ 是域. $ F[x]_{p(x)}=\{0,1,1+x, x\} $
+\end{example}
+
+\subsection{重因式及多项式的根}
+$ p(x)=x^{2}+x+1,0,1 $ 不是 $ p(x) $ 的根.
+
+\section{有限域}
+\subsection{有限域}
+\begin{definition}
+    设 $ F $ 是一个域,若 $ F $ 含有限个元素,则称 $ F $ 为有限域, 若 $ |F|=q $, 则记为 $ F_{q} $.
+\end{definition}
+\begin{example}
+    $ \left(\mathrm{Z}_{p}, \oplus, \odot\right), \mathrm{Z}_{p}=\{0,1,2, \cdots, p-1\}, p $ 为素数, 构成一个有限域.
+$$ a \oplus b=(a+b)(\bmod p) $$
+$$ a \odot b=a b(\bmod p) $$
+若 $ p $ 不是素数, 则 $ Z_{p} $ 不是域.
+\end{example}
+\subsection{域的特征}
+\begin{definition}
+    设 $ F $ 是一个域, $ e $ 为 $ F $ 的单位元, 若对任意的正整数 $ m $, 有 $ m e \neq 0 $, 则称 $ F $ 的特征为 0 ; 若存在正整数 $ m $, 有 $ m e=0 $, 则满足该条件的最小正整数称为 $ F $ 的特征.
+\end{definition}
+\begin{example}
+    $ \mathrm{Q}, \mathrm{R}, \mathrm{C} $ 的特征为 $ 0, \mathrm{Z}_{p} $ ( $ p $ 为素数)特征为 $ p $.
+\end{example}
+
+\textbf{性质 1 :}设 $ F $ 为有限域,则 $ F $ 的特征为素数.
+\begin{proof}
+    设 $ p $ 为 $ F $ 的特征,假设 $ p $ 不是素数，则$p=p_{1} p_{2}\left(p_{1}<p, p_{2}<p\right)$, 于是$ p e=p_{1} p_{2} e=\left(p_{1} e\right)\left(p_{2} e\right)=0 $ $\Rightarrow p_{1} e=0 \text { 或 } p_{2} e=0, \text { 而 } p_{1}<p, p_{2}<p$
+,与 $ p $ 是 $ F $ 的特征矛盾,故 $ p $ 为素数.
+\end{proof}
+
+
+\textbf{性质2: }设 $ F $ 为有限域, 若 $ F $ 的特征为 $ p $, 则对 $ \forall a \in F, a \neq 0 $,
+有 $ p a=0 $ 且 $ p $ 为 $ a $ 的加法阶.
+
+\begin{proof}
+    设 $ p $ 为 $ F $ 的特征,则有 $ p e=0 $ ，
+对 $ \forall a \in F, a \neq 0, a=a \cdot e=e \cdot a $
+则有 $ p a=p e \cdot a=0 \cdot a=0 $.
+假设 $ o(a)=m $, 则 $ m<p $, 有 $ m a=0 $, 
+$ 0=m a=m e a=(m e) a $, $ a \neq 0 \Rightarrow m e=0 $ ,而 $ m<p $ 与 $ p $ 是 $ e $ 的阶矛盾,
+故对 $ \forall a \in F, a \neq 0, p a=0 $.
+\end{proof}
+
+\subsection{素域}
+\begin{definition}
+    设 $ F $ 为有限域, 称 $ F $ 的最小子域为 $ F $ 的素域, 即 $ F $ 的素域是 $ F $ 的所有子域的交集.
+\end{definition}
+
+设 $ p $ 是有限域 $ F $ 的特征, 记 $ \pi=\{0, e, 2 e, \cdots,(p-1) e\} $则 $ \pi $ 是 $ F $ 的最小子域, 事实上, 对 $ \forall a, b \in \pi $,
+$$
+\begin{array}{l}
+\quad a=k e, b=\ell e, \ell \neq 0 \\
+a-b=k e-\ell e=(k-\ell) e=(k-\ell)(\bmod p) e \in \pi \\
+a b^{-1}=k \ell^{-1} e=k \ell^{-1}(\bmod p) e \in \pi
+\end{array}
+$$
+而 $ e $ 含于 $ F $ 的任意子域,故 $ \pi $ 含于 $ F $ 的任一子域中,即 $ \forall F_{1} $ 为 $ F $ 的子域, $ \pi \subseteq F_{1} $, 从而 $ \pi $ 是 $ F $ 的素域.
+
+事实上, 因 $ \pi $ 包含于 $ F $ 的任一子域, 不妨设为 $ F_{1}, F_{2}, \cdots, F_{n} $, 故 $ \pi \subseteq \bigcap\limits_{i=1}^{n} F_{i} $, 又 $ \pi \subseteq \bigcap\limits_{i=1}^{n} F_{i} $ 为 $ F $ 的最小子域, 而 $ \pi $ 是 $ F $ 的子域, 不妨设 $ \pi=F_{j} $, 故 $ \bigcap\limits_{i=1}^{n} F_{i} \subseteq \pi $, 故 $ \pi=\bigcap\limits_{i=1}^{n} F_{i} $.
+
+结论:
+$$
+\begin{aligned}
+\pi \cong \mathrm{Z}_{p}&=\{0,1,2, \cdots, p-1\}\\
+f: \mathrm{Z}_{p} & \rightarrow \pi \\
+k & \mapsto k e
+\end{aligned}
+$$
+
+\subsection{有限域 $ F_{q} $ 的性质}
+\textbf{运算性质：}
+
+(1) 设 $ p $ 是有限域 $ F $ 的特征, 则 $ (a \pm b)^{p}=a^{p} \pm b^{p} $.
+\begin{proof}
+    $$ (a+b)^{p}=a^{p}+b^{p}+\sum_{i=1}^{p-1} C_{p}^{i} a^{i} b^{p-i} $$
+下面证明 $ p \mid C_{p}^{i} ,\quad C_{p}^{i}=\frac{p !}{(p-i) ! i !} $.
+即 $ p !=C_{p}^{i}(p-i) ! i ! \quad p \nmid(p-i) ! , p \nmid i ! $,
+故 $ p \nmid(p-i) ! i !(p $ 是素数).
+而 $ p \mid p $ !,即 $ p \mid C_{p}^{i}(p-i) ! i ! $ , 故 $ p \mid C_{p}^{i} $.
+从而 $ C_{p}^{i} a^{i} b^{p-i}=0 $ 成立.
+\end{proof}
+
+(2)设 $ p $ 是有限域 $ F $ 的特征, 则 $ \left(\sum\limits_{i=1}^{m} a_{i}\right)^{p}=\sum\limits_{i=1}^{m} a_{i}^{p} $,$(a \pm b)^{p^{n}}=a^{p^{n}} \pm b^{p^{n}} .$
+
+\begin{lemma}
+    设 $ (G, \cdot) $ 有限交换群, $ n $ 是 $ G $ 中所有元素阶数的最大值, 则 $ G $ 中所有元素的阶数是 $ n $ 的因子.
+\end{lemma}
+\begin{proof}
+    设 $ a \in G, a $ 的阶为 $ n $, 即 $ a^{n}=e $,对 $ \forall b \in G $, 设 $ b $ 的阶为 $ m $, 证明 $ m \mid n $, 假设 $ m \nmid n $
+$$
+m=p_{1}^{e_{1}} p_{2}^{e_{2}} \cdots, p_{s}^{e_{s}}, n=p_{1}^{e_{1}^{\prime}} p_{2}^{e_{2}^{\prime}} \cdots, p_{s}^{e_{s}^{\prime}}
+$$
+$ m \nmid n $, 则一定存在 $ p_{i} $, 有 $ e_{i}>e_{i}^{\prime} $
+不妨设为 $ p_{1} $, 即 $ e_{1}>e_{1}^{\prime} $
+$$
+\text { 令 } m=p_{1}^{e_{1}} m_{1}, \quad n=p_{1}^{e_{1}^{\prime}} n_{1}
+$$
+$$
+e_{1}>e_{1}^{\prime} \quad\left(p_{1}, m_{1}\right)=1 \quad\left(p_{1}, n_{1}\right)=1
+$$
+$ a^{p_{1}^{e_{1}^{\prime}}} $ 的阶数为 $ \frac{n}{\left(n, p_{1}^{e_{1}^{\prime}}\right)}=\frac{n}{p_{1}^{e_{1}^{\prime}}}=n_{1} $, 又 $ \left(n_{1}, p_{1}^{e_{1}}\right)=1 $
+\end{proof}
+
+\begin{theorem}
+    设 $ F $ 为有限域, $ F^{*}=F \backslash\{0\} $, 则 $ \left(F^{*}, \cdot\right) $ 是一个循环群.
+\end{theorem}
+\begin{proof}
+设 $ n $ 是 $ F^{*} $ 中元素的最大阶,则对 $ \forall a \in F^{*}, o(a) \mid n $,故对 $ \forall a \in F^{*}, a^{n}=1 $.
+设 $ \alpha \in F^{*}, \alpha $ 的阶数为 $ n $, 令 $ \langle\alpha\rangle=G=\left\{1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1}\right\} $, 下面证明 $ G=F^{*}=\langle\alpha\rangle $. 设 $ |F|=q $,则 $ \left|F^{*}\right|=q-1, G \subseteq F^{*} $,故 $ q-1 \geqslant n $;又令 $ f(x)=x^{n}-1, f(x) $ 在 $ F $ 上至多有 $ n $ 个根,而 $ \forall a \in F^{*} $, 均有 $ a^{n}=1 $, 即 $ a^{n}-1=0 $,即 $ F^{*} $ 中的 $ q-1 $ 个元素均为 $ f(x) $ 的根, 故有 $ q-1 \leqslant n $,从而 $ q-1=n, F^{*}=G, F^{*} $ 为循环群.
+\end{proof}
+
+\begin{definition}
+    设 $ F $ 为有限域, 乘法群 $ F^{*} $ 的生成元称为 $ F $ 的本原元.
+\end{definition}
+
+\begin{theorem}
+    设 $ F_{1} $ 是有限域 $ F $ 的子域, 并且 $ \left|F_{1}\right|=q $, 则一定存在正整数 $ n $, 使得 $ |F|=q^{n} $.
+\end{theorem}
+\begin{proof}
+设 $ F_{1}=F $, 则结论显然成立.
+
+若 $ F_{1} \subset F, \exists e_{1} \in F $, 但 $ e_{1} \notin F_{1} $,$\text { 令 } F_{2}=\left\{a_{1}+a_{2} e_{1} \mid a_{1}, a_{2} \in F_{1}\right\},\left|F_{1}\right|=q \text {, 故 }\left|F_{2}\right|=q^{2} ,$
+事实上,只需说明 $ a_{1}+a_{2} e_{1}=b_{1}+b_{2} e_{1} $
+$\left(b_{1}, b_{2}, a_{1}, a_{2} \in F_{1}\right)\Leftrightarrow a_{1}=b_{1}, a_{2}=b_{2} \text { 即可. }$
+$$
+a_{1}+a_{2} e_{1}=b_{1}+b_{2} e_{1} \Rightarrow\left(a_{1}-b_{1}\right)+\left(a_{2}-b_{2}\right) e_{1}=0
+$$
+即 $ \left(a_{2}-b_{2}\right) e_{1}=b_{1}-a_{1} \Rightarrow $
+$ \left(b_{1}-a_{1}\right)\left(a_{2}-b_{2}\right)^{-1}=e_{1} \in F_{1} $ 矛盾;
+
+若 $ F_{2} \neq F, \exists e_{2} \in F $ 但 $ e_{2} \notin F_{2} $
+$\text { 令 } F_{3}=\left\{a_{1}+a_{2} e_{1}+a_{3} e_{2} \mid a_{1}, a_{2}, a_{3} \in F_{1}\right\} \text {, 则 }\left|F_{3}\right|=q^{3} \text {; }$
+依次下去,因 $ F $ 是有限域,故必存在 $ n $ 使得 $ |F|=q^{n} $.
+\end{proof}
+
+\begin{corollary}
+    设 $ p $ 为有限域 $ F $ 的特征, 则必存在正整数 $ n $, 使得 $ |F|=p^{n} $.
+\end{corollary}
+\begin{proof}
+     $ \pi=\{0, e, 2 e, \cdots,(p-1) e\} $ 为 $ F $ 的子域.
+\end{proof}
+
+\begin{theorem}
+    任意两个元素个数相同的有限域一定同构.
+    $$
+\begin{aligned}
+f: & \rightarrow F^{\prime} \\
+& 0 \mapsto 0^{\prime} \\
+& \alpha \mapsto \beta \text { (其中 } \alpha \text { 为 } F^{*} \text { 的本原元, } \beta \text { 为 } F^{* *} \text { 的本原元) }
+\end{aligned}
+$$
+\end{theorem}
+
+\begin{corollary}
+     设 $ F $ 是有限域, $ \mathrm{Z}_{p}=\{0,1, \cdots, p-1\}, p $ 为素数, $ p(x) $ 是 $ Z_{p} $ 上的不可约多项式，
+     
+(1) 如果 $ |F|=p^{n} $,则 $ F \cong Z_{p}[x] /\langle p(x)\rangle $;
+
+(2) 如果 $ |F|=p $, 则 $ F \cong Z_{p} $.
+\end{corollary}
+
+\subsection{极小多项式与本原多项式}
+\begin{definition}
+    设 $ F $ 为有限域, $ F_{q} $ 为 $ F $ 的含有 $ q $ 个元素的子域, $ \alpha \in F, F_{q} $上的以 $ \alpha $ 为根, 并且首项系数为 1 的次数最低的多项式称为 $ \alpha $ 在 $ F_{q} $ 上的极小多项式.
+\end{definition}
+
+\begin{theorem}
+    设 $ F $ 为有限域, $ F_{q} $ 为 $ F $ 的含有 $ q $ 个元素的子域, $ \alpha \in F $,则 $ \alpha $ 在 $ F_{q} $ 上的极小多项式存在, 是唯一的, 并且是 $ F_{q} $ 上的不可约多项式.
+\end{theorem}
+
+\begin{example}
+     $ f(x)=x^{2}+x+1 $\\
+$ f(x) $ 在 $ F_{2} $ 上不可约（无根）, 在 $ F_{4} $ 中有两个根.\\
+$ f(x) $ 在 $ \mathrm{R} $ 中不可约, $ \alpha=\frac{-1+\sqrt{3} i}{2} $\\
+$ f(\alpha)=0 \quad \alpha \in \mathrm{C} $ 但 $ \alpha \notin \mathrm{R}, f(x) $ 为 $ \alpha $ 在 $ \mathrm{R} $ 上的极小多项式.
+\end{example}
+
+\begin{definition}
+    
+定义：设 $ F $ 为有限域, $ F_{q} $ 为 $ F $ 的含有 $ q $ 个元素的子域, $ f(x) $ 为 $ F_{q} $ 上的不可约多项式. 如果 $ f(x) $ 的根都是 $ F $ 的本原元, 则称 $ f(x) $ 为本原多项式.
+\end{definition}
+
+\begin{example}
+    $ F_{2}[x] $ 中的4次本原多项式为 $ f(x)=x^{4}+x+1 $; $ F_{2}[x] $ 中的 $ f(x)=x^{3}+x+1 $ 是本原多项式, $ f(x) $ 的根在 $ F_{8} $ 中, 每个根的阶均为 7 .
+\end{example}
+
+\begin{theorem}
+    设 $ F $ 为有限域, $ F_{q} $ 为 $ F $ 的含有 $ q $ 个元素的子域, $ \alpha $ 是 $ F $ 的本原元, $ |F|=q^{n} $, 则 $ \alpha $ 在 $ F_{q} $ 上的极小多项式为 $ n $ 次多项式
+$$
+f(x)=(x-\alpha)\left(x-\alpha^{q}\right)\left(x-\alpha^{q^{2}}\right) \cdots\left(\left(x-\alpha^{q^{n-1}}\right)\right)
+$$
+进一步 $ \alpha, \alpha^{q}, \cdots, \alpha^{q^{n-1}} $ 均为 $ F $ 的本原元.
+\end{theorem}
+\begin{remark}
+    极小多项式不一定是本原多项式.
+\end{remark}
+
+\section{域上的线性代数}
+\subsection{域上的向量空间}
+\begin{definition}
+    设 $ F $ 是一个域, $ \mathrm{V} \neq \emptyset $,
+$$
+\begin{array}{c}
++: V \times V \rightarrow V \\
+\cdot: F \times V \rightarrow V
+\end{array}
+$$
+且满足:\\
+(1) $ (V,+) $ 是一个交换群;\\
+(2) 对 $ \forall a \in F, v_{1}, v_{2} \in V, a\left(v_{1}+v_{2}\right)=a v_{1}+a v_{2} $;\\
+(3) 对 $ \forall a_{1}, a_{2} \in F, v \in V,\left(a_{1}+a_{2}\right) v=a_{1} v+a_{2} v $;\\
+(4) 对 $ \forall v \in V $,有 $ 1 \cdot v=v $;\\
+则称 $ V $ 为 $ F $ 上的向量空间.
+\end{definition}
+
+\textbf{ 向量空间的基与维数:}
+
+$ V $ 是域 $ F $ 上的向量空间, $ e_{1}, e_{2}, \cdots, e_{n} \in V $, 若对 $ \forall v \in V $, $ v $ 可唯一地表示为 $ v=c_{1} e_{1}+c_{2} e_{2}+\cdots+c_{n} e_{n} $, 其中 $ c_{i} \in F $, $ i=1,2, \cdots, n $, 则称 $ e_{1}, e_{2}, \cdots, e_{n} $ 为 $ V $ 的一组基, $ V $ 称为 $ F $ 上的 $ n $ 维向量空间.
+
+\textbf{ 线性相关与线性无关:}
+
+设 $ V $ 是域 $ F $ 上的线性空间, $ v_{1}, v_{2}, \cdots, v_{r} \in V $, 如果存在不全为 0 的 $ c_{1}, c_{2}, \cdots, c_{r} $ 使得:
+$$
+c_{1} v_{1}+c_{2} v_{2}+\cdots+c_{r} v_{r}=0,
+$$
+则称 $ v_{1}, v_{2}, \cdots, v_{r} $ 为线性相关, 否则 $ v_{1}, v_{2}, \cdots, v_{r} $ 线性无关.
+\begin{theorem}
+    设 $ V $ 是域 $ F $ 上的 $ n $ 维向量空间,则 $ V $ 的任意一组基都是线性无关的.
+\end{theorem}
+\begin{proof}
+    设 $ e_{1}, \cdots, e_{n} $ 是 $ V $ 的一组基，假设 $ e_{1}, e_{2}, \cdots, e_{n} $ 线性相关，则存在不全为 0 的 $ c_{1}, c_{2}, \cdots, c_{n} $, 使得:
+$$
+c_{1} e_{1}+c_{2} e_{2}+\cdots+c_{n} e_{n}=0
+$$
+$ 0 e_{1}+0 e_{2}+\cdots+0 e_{n}=0 $ ( 0 向量有两种表达形式)与 $ e_{1}, e_{2}, \cdots, e_{n} $ 是基矛盾.
+\end{proof}
+
+\begin{example}
+    $ V(n, q)=\left\{\left(a_{1}, a_{2}, \cdots, a_{n}\right) \mid a_{i} \in F_{q}, i=1,2, \cdots, n\right\} $, $ F_{q} $ 为 $ q $ 元有限域.
+    
+$ a=\left(a_{1}, \cdots, a_{n}\right), b=\left(b_{1}, \cdots, b_{n}\right)  $ .定义:
+$ a+b=\left(a_{1}+b_{1}, \cdots, a_{n}+b_{n}\right) \in V(n, q) $\\
+$ \lambda \cdot a=\left(\lambda a_{1}, \cdots, \lambda a_{n}\right) \in V(n, q) \quad\left(\lambda \in F_{q}\right) $. 
+$ e_{i}=(0, \cdots, 0,1,0, \cdots, 0) i=1, \cdots, n $ 是它的一组基,
+$ \forall a \in V(n, q), a=\left(a_{1}, \cdots, a_{n}\right), a=\sum\limits_{i=1}^{n} a_{i} e_{i} $. 
+$ V(n, q) $ 为 $ F_{q} $ 上的 $ n $ 维向量空间.
+\end{example}
+
+\begin{theorem}
+    设 $ F_{q} $ 是有限域 $ F $ 的含 $ q $ 个元素的子域,且 $ |F|=q^{n} $,则 $ F $ 是 $ F_{q} $ 上的 $ n $ 维向量空间.
+\end{theorem}
+\begin{proof}
+    设 $ \alpha $ 是 $ F $ 的本原元, $ \alpha $ 在 $ F_{q} $ 上的极小多项式为 $ g(x) $ (不可约). $ |F|=q^{n} $, 所以 $ \operatorname{deg}(g(x))=n\left(F \cong F_{q}[x] /\langle g(x)\rangle\right) $. 下面证明 $ 1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1} $ 是 $ F $ 的一组基.首先证 $ 1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1} $ 线性无关;假设存在不全为 0 的 $ c_{0}, c_{1}, \cdots, c_{n-1} \in F_{q} $ 使得：
+    $$
+\begin{array}{c}
+c_{0}+c_{1} \alpha+c_{2} \alpha^{2}+\cdots+c_{n-1} \alpha^{n-1}=0 \\
+\text { 令 } f(x)=c_{0}+c_{1} x+c_{2} x^{2}+\cdots+c_{n-1} x^{n-1},
+\end{array}
+$$
+则 $ f(x) \in F_{q}[x] $ 并且有 $ f(\alpha)=0 $,
+因此 $ g(x) \mid f(x) $ (极小多项式必整除零化多项式), $ f(x) \neq 0 $且 $ \operatorname{deg}(f(x))=n-1<\operatorname{deg}(g(x))=n $与 $ g(x) $ 是极小多项式矛盾.
+
+下证 $ F $ 的任一元素可由其线性表示. $ \alpha $ 是 $ F $ 的本原元, 并且 $ |F|=q^{n} $, 则有:
+$$
+\begin{array}{l}
+\quad F=\left\{0,1, \alpha, \alpha_{2}, \cdots, \alpha^{q^{n}-2}\right\} \\
+\text { 设 } x^{i}=q(x) g(x)+r(x), \quad q(x), r(x) \in F_{q}[x], \\
+\operatorname{deg}(r(x))<\operatorname{deg}(g(x))=n, i=0,1, \cdots, q^{n}-2,
+\end{array}
+$$
+于是有 $ \alpha^{i}=r(\alpha) $
+$$
+\text { 设 } r(x)=r_{0}+r_{1} x+r_{2} x^{2}+\cdots+r_{n-1} x^{n-1} r_{j} \in F_{q}, j=0,1, \cdots, n-1
+$$
+则有:
+$$
+\alpha^{i}=r(\alpha)=r_{0}+r_{1} \alpha+r_{2} \alpha^{2}+\cdots+r_{n-1} \alpha^{n-1}\left(i=0,1, \cdots, q^{n}-2\right)
+$$
+即 $ F^{*} $ 中的每个元可由 $ 1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1} $ 线性表示,
+0 显然可由 $ 1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1} $ 线性表示,
+故 $ 1, \alpha, \alpha^{2}, \cdots, \alpha^{n-1} $ 是 $ F $ 的一组基, $ F $ 是 $ F_{q} $ 上的 $ n $ 维向量空间.
+\end{proof}
+
+
+\subsection{极大线性无关组}
+\subsection{域 $ F $ 上的 $ m \times n $ 矩阵}
+1. 定理: $ A_{m \times n} $ 的行秩,列秩,秩;
+
+2. 运算: $ A+B, A B, k A $
+
+3.初等行变换及性质;
+
+4. 可逆矩阵;
+
+5. 可逆充要条件: $ A $ 可逆 $ \Leftrightarrow \operatorname{rank}(A)=n $;
+
+6 . 线性方程组和行列式理论.
+
+
+
+
+
+
